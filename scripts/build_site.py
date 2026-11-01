@@ -11,7 +11,9 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from facial_pipeline import ROOT, PROFILE
+from facial_pipeline import ROOT, PROFILE, MIN_DIACRITICS, EXCLUDED_COLLECTION_IDS
+
+VERSION = json.loads((ROOT / 'package.json').read_text())['version']
 
 
 def page(title, prefix='', file_id=None):
@@ -25,7 +27,7 @@ def page(title, prefix='', file_id=None):
 <body{file_attr} data-prefix="{prefix}"><header class="masthead"><a class="brand" href="{prefix}index.html"><img src="{prefix}assets/icon.svg" width="32" height="32" alt="">Sutton SignWriting <span>/ Research tools</span></a>
 <nav aria-label="Main"><a href="{prefix}index.html">Datasets</a><a href="{prefix}methods.html">Methods &amp; provenance</a></nav></header>
 <main id="app" aria-busy="true"><p class="loading" role="status">Loading the corpus…</p></main>
-<footer><span>Facial diacritics analysis <b>v0.1</b></span><span>Source preserved. Transformations explicit.</span></footer>
+<footer><span>Facial diacritics analysis <b>v{VERSION}</b></span><span>Source preserved. Transformations explicit.</span></footer>
 <noscript>This browser needs JavaScript. Download the CSVs from the data directory to inspect the records directly.</noscript>
 <script type="module" src="{prefix}assets/app.js"></script></body></html>'''
 
@@ -53,10 +55,12 @@ def build(output: Path, public: bool = False):
             shutil.copyfile(path, output / 'assets/fonts' / path.name)
     included, held = [], []
     for info in report['files']:
-        if public and info['publication_review_required']:
+        if info['id'] in EXCLUDED_COLLECTION_IDS or info['publication_review_required']:
             held.append(info['id'])
             continue
         records = json.loads((ROOT / 'data/metadata' / f"{info['id']}.json").read_text())['records']
+        if any(record['diacritics'] < MIN_DIACRITICS for record in records):
+            raise ValueError('Dataset contains excluded zero/single-diacritic rows; rerun processing.')
         with (ROOT / 'data/raw' / f"{info['id']}.csv").open(encoding='utf-8', newline='') as stream:
             raw = list(csv.DictReader(stream))
         if len(raw) != len(records) or any(
@@ -75,9 +79,12 @@ def build(output: Path, public: bool = False):
     for info in included:
         histogram.update({int(k): v for k, v in info['diacritics'].items()})
     manifest = dict(profile=PROFILE, query=report['query'], public_build=public,
+                    version=VERSION, selection=report['selection'],
+                    excluded_collections=report['excluded_collections'],
                     files=included, held_for_review=held,
                     totals={key: sum(r[key] for r in included) for key in
-                            ('rows', 'signs_scanned', 'excluded_head_only', 'head_inserted', 'multiple_heads')},
+                            ('rows', 'signs_scanned', 'excluded_head_only', 'excluded_zero_diacritics',
+                             'excluded_single_diacritic', 'head_inserted', 'multiple_heads')},
                     histogram=dict(sorted(histogram.items())),
                     assets=json.loads((ROOT / 'assets/manifest.json').read_text()))
     revision = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True, text=True)

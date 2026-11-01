@@ -15,17 +15,23 @@ class PipelineTests(unittest.TestCase):
     def setUpClass(cls):
         cls.sizes = load_sizes()
 
-    def test_only_spatial_matches_and_head_only_exclusion(self):
+    def test_zero_and_single_diacritic_faces_are_excluded(self):
         text = ('AS30a00M515x515S10000485x485 '
                 'M518x518S2ff00482x482 '
-                'M518x518S2ff00482x482S30a00482x482')
+                'M530x530S2ff00482x482S2ff00510x510 '
+                'M518x518S30a00482x482 '
+                'M518x518S2ff00482x482S30a00482x482 '
+                'M530x530S2ff00482x482S30a00482x482S34410495x504')
         rows, audit = extract(text, self.sizes)
         self.assertEqual(len(rows), 1)
-        self.assertEqual(audit['matching_signs'], 2)
+        self.assertEqual(audit['matching_signs'], 5)
         self.assertEqual(audit['excluded_head_only'], 1)
+        self.assertEqual(audit['excluded_zero_diacritics'], 2)
+        self.assertEqual(audit['excluded_single_diacritic'], 2)
+        self.assertEqual(rows[0]['diacritics'], 2)
 
     def test_exact_range_edges_and_prefix(self):
-        text = 'AS10000M530x530S2fe00480x480S2ff00481x481S36c00482x482S36d00483x483'
+        text = 'AS10000M530x530S2fe00480x480S2ff00481x481S36c00482x482S30a00482x483S36d00483x483'
         rows, _ = extract(text, self.sizes)
         self.assertEqual(len(rows), 1)
         self.assertFalse(rows[0]['fsw'].startswith('A'))
@@ -58,20 +64,20 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual([ord(c) for c in uni], [0x1D9FF, 0x1DA0A, 0x1DA44, 0x1DA9B])
 
     def test_multiple_heads_are_not_silently_dropped(self):
-        text = 'M530x530S2ff00482x483S30a00482x483S2ff00520x500'
+        text = 'M530x530S2ff00482x483S30a00482x483S34410495x504S2ff00520x500'
         rows, _ = extract(text, self.sizes)
         self.assertEqual(rows[0]['head_count'], 2)
         self.assertIn('multiple-heads', rows[0]['flags'])
         self.assertEqual(rows[0]['uni-face'].count(chr(0x1D9FF)), 2)
 
     def test_duplicates_provenance_and_invalid_keys(self):
-        good = 'M520x520S30a00482x483'
+        good = 'M520x520S30a00482x483S34410495x504'
         text = f'<entry id="42"><term>{good} {good}</term></entry> {good} '
         rows, _ = extract(text, self.sizes)
         self.assertEqual(len(rows), 3)
         self.assertEqual([r['entry_id'] for r in rows], ['42', '42', None])
         self.assertNotEqual(rows[0]['source_offset'], rows[1]['source_offset'])
-        _, audit = extract('M520x520S30a5f482x483', self.sizes)
+        _, audit = extract('M520x520S30a5f482x483S34410495x504', self.sizes)
         self.assertEqual(len(audit['errors']), 1)
 
     def test_arbitrary_text_filename_and_zero_result_file(self):
@@ -79,8 +85,12 @@ class PipelineTests(unittest.TestCase):
             root = Path(tmp)
             source = root / 'source'
             source.mkdir()
-            (source / 'input.txt').write_text('M520x520S30a00482x483', encoding='utf-8')
+            (source / 'input.txt').write_text('M520x520S30a00482x483S34410495x504', encoding='utf-8')
             (source / 'empty.spml').write_text('ordinary text', encoding='utf-8')
+            (source / 'sgn105.spml').write_text('M520x520S30a00482x483S34410495x504', encoding='utf-8')
+            # A stale private output must disappear from regenerated data.
+            (root / 'raw').mkdir()
+            (root / 'raw/sgn105.csv').write_text('stale private data')
             process(source, root / 'raw', root / 'meta', root / 'report.json')
             with (root / 'raw/input.csv').open(encoding='utf-8', newline='') as stream:
                 reader = csv.DictReader(stream)
@@ -89,6 +99,9 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual((root / 'raw/empty.csv').read_text(), 'fsw,fsw-face,uni-face\n')
             report = json.loads((root / 'report.json').read_text())
             self.assertEqual(report['totals']['rows'], 1)
+            self.assertFalse((root / 'raw/sgn105.csv').exists())
+            self.assertFalse((root / 'meta/sgn105.json').exists())
+            self.assertEqual(report['excluded_collections'][0]['id'], 'sgn105')
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 import unicodedata
 
-from facial_pipeline import ROOT, PROFILE, extract, load_sizes, title_of
+from facial_pipeline import ROOT, PROFILE, MIN_DIACRITICS, EXCLUDED_COLLECTION_IDS, extract, load_sizes, title_of
 
 
 def process(source: Path, output: Path, metadata: Path, report: Path) -> dict:
@@ -21,18 +21,24 @@ def process(source: Path, output: Path, metadata: Path, report: Path) -> dict:
         raise ValueError("Input basenames collide; each file needs a distinct stem.")
     output.mkdir(parents=True, exist_ok=True)
     metadata.mkdir(parents=True, exist_ok=True)
-    sizes, reports = load_sizes(), []
+    sizes, reports, excluded = load_sizes(), [], []
     for path in files:
         data = path.read_bytes()
         text = data.decode('utf-8-sig')
-        rows, audit = extract(text, sizes)
         title = title_of(text)
+        if path.stem in EXCLUDED_COLLECTION_IDS or (title and 'private' in title.casefold()):
+            excluded.append(dict(id=path.stem, source_file=path.name, title=title,
+                                 reason='private-collection', source_sha256=sha256(data).hexdigest()))
+            (output / f'{path.stem}.csv').unlink(missing_ok=True)
+            (metadata / f'{path.stem}.json').unlink(missing_ok=True)
+            print(f'{path.name}: excluded private collection', flush=True)
+            continue
+        rows, audit = extract(text, sizes)
         with (output / f"{path.stem}.csv").open('w', encoding='utf-8', newline='') as stream:
             writer = csv.DictWriter(stream, fieldnames=['fsw', 'fsw-face', 'uni-face'],
                                     extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
             writer.writerows(rows)
-        review = bool(title and 'private' in title.casefold())
         info = dict(
             id=path.stem, source_file=path.name, title=title,
             source_sha256=sha256(data).hexdigest(), source_bytes=len(data),
@@ -41,7 +47,7 @@ def process(source: Path, output: Path, metadata: Path, report: Path) -> dict:
             multiple_heads=sum(r['head_count'] > 1 for r in rows),
             noncombining_resources=sum('noncombining-resource' in r['flags'] for r in rows),
             diacritics=dict(sorted(Counter(r['diacritics'] for r in rows).items())),
-            publication_review_required=review, **audit,
+            publication_review_required=False, **audit,
         )
         (metadata / f'{path.stem}.json').write_text(
             json.dumps({'file': info, 'records': rows}, ensure_ascii=False, separators=(',', ':')) + '\n',
@@ -49,8 +55,11 @@ def process(source: Path, output: Path, metadata: Path, report: Path) -> dict:
         reports.append(info)
         print(f"{path.name}: {len(rows):,} rows; {len(audit['errors'])} normalization errors", flush=True)
     result = dict(profile=PROFILE, query='QR2fft36c', unicode_database=unicodedata.unidata_version,
+                  selection={'min_diacritics': MIN_DIACRITICS, 'exclude_private_collections': True},
+                  excluded_collections=excluded,
                   files=reports, totals={key: sum(r[key] for r in reports) for key in
-                  ('rows', 'signs_scanned', 'matching_signs', 'excluded_head_only', 'head_inserted',
+                  ('rows', 'signs_scanned', 'matching_signs', 'excluded_head_only',
+                   'excluded_zero_diacritics', 'excluded_single_diacritic', 'head_inserted',
                    'multiple_heads', 'noncombining_resources')})
     result['totals']['errors'] = sum(len(r['errors']) for r in reports)
     report.parent.mkdir(parents=True, exist_ok=True)

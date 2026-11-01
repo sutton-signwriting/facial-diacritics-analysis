@@ -15,6 +15,9 @@ try {
   await page.goto(base + '/index.html');
   await page.waitForSelector('.collections tbody tr .file-link');
   const manifest = await (await fetch(base + '/data/manifest.json')).json();
+  assert.equal(manifest.selection.min_diacritics,2);
+  assert.ok(manifest.files.every(file=>!['sgn97','sgn103','sgn105'].includes(file.id)));
+  assert.ok(Object.keys(manifest.histogram).every(count=>Number(count)>=2));
   assert.equal(await page.locator('.collections tbody tr').count(), manifest.files.length);
   await page.screenshot({path:'artifacts/datasets-desktop.png',fullPage:false});
   await page.locator('#collection-search').fill('sgn105.spml');
@@ -31,10 +34,11 @@ try {
   assert.ok(await page.locator('.unicode-view').first().textContent());
   await page.screenshot({path:'artifacts/records-desktop.png',fullPage:false});
   const options = await page.locator('#diacritics option').allTextContents();
-  assert.ok(options.some(t=>t==='1 diacritic'));
-  await page.locator('#diacritics').selectOption('1');
-  assert.ok((await page.locator('.record-small').allTextContents()).every(t=>t==='1 diacritic'));
-  assert.ok(page.url().includes('diacritics=1'));
+  assert.ok(!options.some(t=>t==='0 diacritics' || t==='1 diacritic'));
+  assert.ok(options.some(t=>t==='2 diacritics'));
+  await page.locator('#diacritics').selectOption('2');
+  assert.ok((await page.locator('.record-small').allTextContents()).every(t=>t==='2 diacritics'));
+  assert.ok(page.url().includes('diacritics=2'));
   await page.locator('#heads').selectOption('inserted');
   assert.equal(await page.locator('.records tbody tr').count(),await page.locator('.records .tag').filter({hasText:'HEAD added'}).count());
   await page.locator('#heads').selectOption('all');

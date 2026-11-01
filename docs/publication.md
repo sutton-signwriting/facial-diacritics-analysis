@@ -5,7 +5,7 @@ Keep it distinct from the journal article's argument and conclusions.
 
 ## Recommended sequence
 
-1. Inspect the source snapshot, two invalid-resource failures, mapping flags,
+1. Inspect the source snapshot, invalid-resource failures, mapping flags,
    attribution/redistribution terms, and collections still labelled private.
 2. Stabilize and document the intended initial mapping. The baseline intentionally
    exposes unresolved decomposition and head-association questions.
@@ -38,10 +38,28 @@ selected journal.
 
 Publishing this baseline does not validate the Unicode mapping. Labeling it
 provisional is part of making the next investigation reproducible. In particular,
-344,803 retained occurrences are not 344,803 independent words, writers, or
-demonstrated orthographic contrasts.
+retained occurrences are not independent words, writers, or demonstrated
+orthographic contrasts.
 
-## First snapshot observations
+## Current subset (dataset v0.2.0)
+
+The November 1 selection excludes private collections and retains faces with at
+least two non-S2ff resources. HEADs and fill/rotation modifiers do not count.
+The Unicode mapping profile remains `direct-symbol-order-v0.1`.
+
+- 152 included collections; `sgn97`, `sgn103`, and `sgn105` are excluded.
+- 155,207 rows emitted.
+- 84,959 zero-diacritic and 185,004 single-diacritic candidates excluded.
+- One retained-scope candidate has an invalid ISWA key and is logged as a failure.
+- 143,140 rows require a default HEAD under the baseline mapping.
+- 1,590 rows retain multiple S2ff resources.
+- 897 rows contain a mapped spacing resource.
+
+All 155 original SPML snapshots remain intact. The current report and generated
+CSVs describe this narrower selection. The earlier v0.1.0 release candidates are
+historical baseline artifacts, separate from the current v0.2.0 candidates.
+
+## Initial baseline observations (v0.1.0; historical)
 
 - 155 sources; 174,251,204 downloaded bytes.
 - 933,548 signbox occurrences scanned.

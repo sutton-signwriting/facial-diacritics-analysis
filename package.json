@@ -1,6 +1,6 @@
 {
   "name": "facial-diacritics-analysis",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,6 +10,10 @@
     "preview": ".venv/bin/python -m http.server 9123 --bind 127.0.0.1 --directory dist",
     "test:browser": "node scripts/check_browser.mjs"
   },
-  "dependencies": {"@sutton-signwriting/font-ttf": "1.6.0"},
-  "devDependencies": {"playwright": "1.55.0"}
+  "dependencies": {
+    "@sutton-signwriting/font-ttf": "1.6.0"
+  },
+  "devDependencies": {
+    "playwright": "1.55.0"
+  }
 }

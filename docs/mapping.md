@@ -1,5 +1,10 @@
 # Mapping profile: direct-symbol-order-v0.1
 
+Private collections (`sgn97`, `sgn103`, `sgn105`, or a collection header labelled
+private) are excluded from both CSV outputs and the browser. Source snapshots
+remain intact. Dataset v0.2.0 requires at least two diacritics; the Unicode
+mapping profile itself is unchanged.
+
 This is a reproducible baseline for inspecting actual data. It does not claim
 to be a faithful or complete FSW-to-official-Unicode facial converter.
 
@@ -10,8 +15,10 @@ to be a faithful or complete FSW-to-official-Unicode facial converter.
    including any temporal prefix, in the provenance sidecar. Drop style suffixes
    from this structural analysis; no style is applied to the site renderings.
 3. Retain only selected facial resources, preserving their serialized order.
-   Exclude a candidate containing exactly one retained symbol of base `S2ff`.
-   Keep other single-resource faces and multi-head compositions.
+   Count retained non-S2ff resources and keep only candidates with at least two.
+   Exclude zero-diacritic and single-diacritic faces, including compositions
+   containing only multiple heads. HEADs and fill/rotation modifiers do not count.
+   Multi-head compositions with at least two diacritics remain flagged.
 4. Normalize `fsw-face` with the 37,811-entry ISWA size table: find min anchors
    and max glyph extents, subtract `trunc((min+max)/2)-500` on each axis from
    every anchor, and set the signbox maximum to the translated maximum extents.

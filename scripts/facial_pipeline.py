@@ -12,6 +12,8 @@ import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = "direct-symbol-order-v0.1"
+MIN_DIACRITICS = 2
+EXCLUDED_COLLECTION_IDS = frozenset({'sgn97', 'sgn103', 'sgn105'})
 KEY = r"S[123][0-9a-f]{2}[0-5][0-9a-f]"
 COORD = r"[0-9]{3}x[0-9]{3}"
 SIGN_RE = re.compile(rf"(?:A(?:{KEY})+)?[BLMR]{COORD}(?:{KEY}{COORD})+")
@@ -124,7 +126,8 @@ def extract(text: str, sizes: dict, query: str = "QR2fft36c") -> tuple[list, dic
     start_positions = [position for position, _ in starts]
     end_positions = [m.start() for m in ENTRY_END_RE.finditer(text)]
     rows, errors = [], []
-    stats = dict(signs_scanned=0, matching_signs=0, excluded_head_only=0)
+    stats = dict(signs_scanned=0, matching_signs=0, excluded_head_only=0,
+                 excluded_zero_diacritics=0, excluded_single_diacritic=0)
     for match in SIGN_RE.finditer(text):
         stats["signs_scanned"] += 1
         original = match[0]
@@ -133,8 +136,14 @@ def extract(text: str, sizes: dict, query: str = "QR2fft36c") -> tuple[list, dic
         if not selected:
             continue
         stats["matching_signs"] += 1
-        if len(selected) == 1 and selected[0].base == 0x2FF:
-            stats["excluded_head_only"] += 1
+        diacritics = sum(s.base != 0x2FF for s in selected)
+        if diacritics < MIN_DIACRITICS:
+            if diacritics == 0:
+                stats['excluded_zero_diacritics'] += 1
+                if len(selected) == 1:
+                    stats['excluded_head_only'] += 1
+            else:
+                stats['excluded_single_diacritic'] += 1
             continue
         index = bisect.bisect_right(start_positions, match.start()) - 1
         entry_id = None
@@ -159,7 +168,7 @@ def extract(text: str, sizes: dict, query: str = "QR2fft36c") -> tuple[list, dic
             flags.append("noncombining-resource")
         rows.append(dict(
             fsw=fsw, **{"fsw-face": face, "uni-face": uni}, **witness,
-            diacritics=sum(s.base != 0x2FF for s in selected),
+            diacritics=diacritics,
             head_count=head_count, head_inserted=inserted, flags=flags,
         ))
     return rows, {**stats, "errors": errors}

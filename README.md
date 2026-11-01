@@ -24,6 +24,28 @@ not rely on a runtime CDN. The browser has a collection index, individual file
 pages, three rendering columns, diacritic-count and HEAD filters, pagination,
 record provenance, copyable strings, and CSV downloads.
 
+## LAN service
+
+The read-only inspection site runs on **http://192.168.0.87:7094/** and is linked
+from Personal Office's **http://192.168.0.111:7001/** index. Archie owns the source,
+port reservation, and Compose service. The current subset excludes the three
+private collections and faces with fewer than two diacritics: 152 collections
+and 155,207 facial-sign occurrences remain.
+
+```bash
+docker compose up -d
+docker compose ps
+curl -f http://192.168.0.87:7094/health
+# Stop the LAN service:
+docker compose down
+```
+
+Nginx serves only generated `dist/`, mounted read-only, and restarts automatically
+unless deliberately stopped. Source SPML, scripts, and the virtual environment
+are outside its served directory. Rebuild `dist/` with the Python builder when
+updating the browser or processed data. Restart the service after replacing the
+generated directory to refresh its bind mount: `docker compose restart web`.
+
 ## Source inputs and outputs
 
 The source folder must already exist. Processing does not download anything.
@@ -31,7 +53,9 @@ It processes **every regular, non-hidden file** directly inside `data/source/`
 as UTF-8 text using regex, regardless of its extension. A source `input.txt`
 produces `data/raw/input.csv` and `data/metadata/input.json`. Duplicate stems
 are rejected before writing, so `input.txt` and `input.spml` cannot overwrite
-one another's results. There is no XML processor.
+one another's results. There is no XML processor. Private collections are skipped
+and their earlier generated CSVs/sidecars are removed. Only faces with at least
+two non-S2ff resources are emitted; HEAD, fill, and rotation modifiers do not count.
 
 ```bash
 .venv/bin/python scripts/process_sources.py \
@@ -71,9 +95,9 @@ widths, and normalization against the independent font-ttf implementation.
 
 ## GitHub Pages and archived data
 
-Use a public build to hold the three collections whose source headers contain
-“private”: `sgn97`, `sgn103`, and `sgn105`. Their local data remain intact.
-Public availability alone is not treated as a resolution of those labels.
+All builds exclude `sgn97`, `sgn103`, `sgn105`, and any other collection with a
+private-labelled header. Their source snapshots remain intact. Public release
+bundles use the same minimum of two diacritics as the LAN browser.
 
 ```bash
 .venv/bin/python scripts/build_site.py --public
@@ -87,7 +111,7 @@ source hashes/URLs, mapping assets, scripts, tests, and documentation. Preserve
 the original source snapshot separately for exact future reanalysis: live
 SignPuddle URLs can change after this download.
 
-Upload `facial-diacritics-site-v0.1.0.zip` as a GitHub Release asset, then run
+Upload `facial-diacritics-site-v0.2.0.zip` as a GitHub Release asset, then run
 the prepared `Deploy GitHub Pages` workflow with that release tag. Set the
 repository's Pages source to **GitHub Actions**. The workflow downloads the
 frozen site artifact from the same repository, validates its relative paths,
@@ -95,7 +119,7 @@ and deploys it. It never silently downloads a newer SignPuddle corpus.
 
 The separate [publication note](docs/publication.md) describes a dataset-first
 release and its relationship to *Standardizing the Record*. No DOI, release,
-submission, public repository, or deployment has been created by this setup.
+submission, public repository, or public deployment has been created by this setup.
 
 ## Layout
 
