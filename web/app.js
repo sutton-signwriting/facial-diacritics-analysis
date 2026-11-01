@@ -72,46 +72,96 @@ function details(label, text) {
 async function dataset(id) {
   const [{file, records}] = await Promise.all([getJSON(`data/files/${encodeURIComponent(id)}.json`), loadFonts()]);
   records.forEach((record, i) => { record.row = i + 1; });
-  const params = new URLSearchParams(location.search);
-  let selected = params.get('diacritics') || 'all';
-  let pageNumber = Math.max(1, Number(params.get('page')) || 1);
-  let pageSize = 25;
+  let selected, headFilter, pageNumber, pageSize;
+  let renderedURL;
+  let signObserver;
   const counts = Object.keys(file.diacritics).map(Number).sort((a,b)=>a-b);
-  if (selected !== 'all' && !counts.includes(Number(selected))) selected = 'all';
+  function readView() {
+    const params = new URLSearchParams(location.search);
+    selected = params.get('diacritics') || 'all';
+    if (selected !== 'all' && !counts.includes(Number(selected))) selected = 'all';
+    headFilter = params.get('heads') || 'all';
+    if (!['all','inserted','existing','multiple'].includes(headFilter)) headFilter = 'all';
+    const size = params.get('rows');
+    pageSize = size === 'all' ? 'all' : ['25','50','100'].includes(size) ? Number(size) : 25;
+    const number = Number(params.get('page'));
+    pageNumber = Number.isSafeInteger(number) && number > 0 ? number : 1;
+  }
+  function linkedRow() {
+    const match = /^#row-([1-9][0-9]*)$/.exec(location.hash);
+    const row = match ? Number(match[1]) : 0;
+    return Number.isSafeInteger(row) && row <= records.length ? row : 0;
+  }
+  function viewURL(row = 0) {
+    const url = new URL(location.href);
+    for (const key of ['page','rows','diacritics','heads']) url.searchParams.delete(key);
+    url.searchParams.set('rows', pageSize);
+    if (pageNumber > 1) url.searchParams.set('page', pageNumber);
+    if (selected !== 'all') url.searchParams.set('diacritics', selected);
+    if (headFilter !== 'all') url.searchParams.set('heads', headFilter);
+    url.hash = row ? `row-${row}` : '';
+    return url;
+  }
+  readView();
   app.innerHTML = `<a class="breadcrumb" href="../index.html">← All collections</a><section class="dataset-head"><p class="eyebrow">SOURCE COLLECTION</p><h1>${esc(file.source_file)}</h1><p class="dataset-title">${esc(file.title || 'Untitled collection')}</p><div class="dataset-meta"><span><b>${fmt(file.rows)}</b> facial occurrences</span><span><b>${fmt(file.unique_fsw)}</b> unique source signboxes</span><span><b>${fmt(file.head_inserted)}</b> prepended HEADs</span><a href="../data/raw/${encodeURIComponent(id)}.csv" download>Download CSV ↓</a></div></section>
     ${file.publication_review_required ? '<div class="notice amber">This publicly downloadable source is labelled private. This local inspection copy awaits a publication decision.</div>' : ''}
     <div class="mapping-note"><span class="status-dot"></span><p><strong>Provisional Unicode mapping.</strong> The first S2ff resource is moved to the front, or a default HEAD is prepended. Other resources retain source order. Geometry is not transferred.</p><a href="../methods.html">Mapping details ↗</a></div>
-    <section class="records-section"><div class="toolbar record-controls"><label>Number of diacritics<select id="diacritics"><option value="all">All counts (2+)</option>${counts.map(n=>`<option value="${n}">${n} ${n===1?'diacritic':'diacritics'}</option>`).join('')}</select></label><label>Unicode HEAD<select id="heads"><option value="all">All records</option><option value="inserted">Prepended HEAD</option><option value="existing">Existing HEAD</option><option value="multiple">Multiple HEADs</option></select></label><label>Rows per page<select id="page-size"><option>25</option><option>50</option><option>100</option></select></label><p id="record-status" role="status" aria-live="polite"></p></div>
+    <section class="records-section"><div class="toolbar record-controls"><label>Number of diacritics<select id="diacritics"><option value="all">All counts (2+)</option>${counts.map(n=>`<option value="${n}">${n} ${n===1?'diacritic':'diacritics'}</option>`).join('')}</select></label><label>Unicode HEAD<select id="heads"><option value="all">All records</option><option value="inserted">Prepended HEAD</option><option value="existing">Existing HEAD</option><option value="multiple">Multiple HEADs</option></select></label><label>Rows per page<select id="page-size"><option>25</option><option>50</option><option>100</option><option value="all">All rows</option></select></label><p id="record-status" role="status" aria-live="polite"></p></div>
     <div class="table-wrap record-table-wrap"><table class="records"><thead><tr><th scope="col">Record</th><th scope="col">Original sign <span>FSW source signbox</span></th><th scope="col">Facial composition <span>Filtered &amp; normalized FSW</span></th><th scope="col">Unicode face <span>Noto Sans SignWriting</span></th></tr></thead><tbody id="records"></tbody></table></div>
     <div class="pagination"><button id="previous" type="button">← Previous</button><span id="page-status"></span><button id="next" type="button">Next →</button></div><p class="fineprint">“Diacritics” counts retained non-S2ff resources, excluding fill and rotation modifiers. Some resources are spacing characters; those rows are flagged. Each FSW view fits its own cell. Unicode uses the bundled Noto font; display does not establish equivalence.</p></section>`;
   const select = document.querySelector('#diacritics');
   const heads = document.querySelector('#heads');
-  select.value = selected;
-  function render() {
-    const shown = records.filter(r => (selected === 'all' || r.diacritics === Number(selected)) &&
-      (heads.value === 'all' || (heads.value === 'inserted' ? r.head_inserted : heads.value === 'existing' ? !r.head_inserted : r.head_count > 1)));
-    const pages = Math.max(1, Math.ceil(shown.length / pageSize));
+  const sizeSelect = document.querySelector('#page-size');
+  function matches(r) {
+    return (selected === 'all' || r.diacritics === Number(selected)) &&
+      (headFilter === 'all' || (headFilter === 'inserted' ? r.head_inserted : headFilter === 'existing' ? !r.head_inserted : r.head_count > 1));
+  }
+  function signView(sign, label) {
+    return `<div class="sign-view" role="img" aria-label="${label}"${pageSize === 'all' ? ` data-fsw="${esc(sign)}"` : ''}>${pageSize === 'all' ? '' : svgFor(sign)}</div>`;
+  }
+  function render(targetRow = 0) {
+    // A record permalink takes precedence over stale page numbers or filters.
+    if (targetRow && !matches(records[targetRow - 1])) {
+      selected = headFilter = 'all';
+    }
+    const shown = records.filter(matches);
+    const size = pageSize === 'all' ? Math.max(1, shown.length) : pageSize;
+    if (targetRow) pageNumber = Math.floor(shown.findIndex(r => r.row === targetRow) / size) + 1;
+    const pages = Math.max(1, Math.ceil(shown.length / size));
     pageNumber = Math.min(Math.max(1, pageNumber), pages);
-    const start = (pageNumber-1)*pageSize;
-    const current = shown.slice(start, start + pageSize);
+    const start = (pageNumber-1)*size;
+    const current = shown.slice(start, start + size);
+    select.value = selected;
+    heads.value = headFilter;
+    sizeSelect.value = String(pageSize);
+    const url = viewURL(targetRow);
+    renderedURL = url.href;
+    history.replaceState(null, '', url);
+    signObserver?.disconnect();
     document.querySelector('#record-status').textContent = `${fmt(shown.length)} matching records`;
     document.querySelector('#records').innerHTML = current.length ? current.map(r => {
       const sourceLink = /^sgn\d+$/.test(id) && r.entry_id ? `http://signbank.org/signpuddle2.0/canvas.php?ui=1&sgn=${id.slice(3)}&sid=${encodeURIComponent(r.entry_id)}` : '';
       const codepoints = Array.from(r['uni-face'], c => 'U+' + c.codePointAt(0).toString(16).toUpperCase()).join(' ');
-      return `<tr id="row-${r.row}"><th scope="row"><a class="row-number" href="#row-${r.row}">${fmt(r.row)}</a><span class="record-small">${r.diacritics} ${r.diacritics===1?'diacritic':'diacritics'}</span>${r.head_inserted ? tag('HEAD added') : ''}${r.flags.map(f=>tag(f,'amber')).join('')}${sourceLink ? `<a class="source-link" href="${sourceLink}" target="_blank" rel="noopener">Entry ${esc(r.entry_id)} ↗</a>` : ''}</th><td><div class="sign-view" role="img" aria-label="Original SignWriting sign">${svgFor(r.fsw)}</div>${details('FSW source',r.fsw)}</td><td><div class="sign-view" role="img" aria-label="Filtered facial SignWriting">${svgFor(r['fsw-face'])}</div>${details('FSW face',r['fsw-face'])}</td><td><div class="unicode-view" dir="ltr" lang="und" role="img" aria-label="Provisional Unicode facial rendering">${esc(r['uni-face'])}</div>${details('Unicode code points',codepoints)}${details('Unicode text',r['uni-face'])}</td></tr>`;
+      return `<tr id="row-${r.row}"><th scope="row"><a class="row-number" href="${esc(viewURL(r.row).href)}">${fmt(r.row)}</a><span class="record-small">${r.diacritics} ${r.diacritics===1?'diacritic':'diacritics'}</span>${r.head_inserted ? tag('HEAD added') : ''}${r.flags.map(f=>tag(f,'amber')).join('')}${sourceLink ? `<a class="source-link" href="${sourceLink}" target="_blank" rel="noopener">Entry ${esc(r.entry_id)} ↗</a>` : ''}</th><td>${signView(r.fsw, 'Original SignWriting sign')}${details('FSW source',r.fsw)}</td><td>${signView(r['fsw-face'], 'Filtered facial SignWriting')}${details('FSW face',r['fsw-face'])}</td><td><div class="unicode-view" dir="ltr" lang="und" role="img" aria-label="Provisional Unicode facial rendering">${esc(r['uni-face'])}</div>${details('Unicode code points',codepoints)}${details('Unicode text',r['uni-face'])}</td></tr>`;
     }).join('') : '<tr><td class="empty" colspan="4">No records match these filters.</td></tr>';
     document.querySelector('#previous').disabled = pageNumber === 1;
     document.querySelector('#next').disabled = pageNumber >= pages;
-    document.querySelector('#page-status').textContent = `${fmt(current.length ? start+1 : 0)}–${fmt(start+current.length)} of ${fmt(shown.length)} · Page ${pageNumber} of ${pages}`;
-    const url = new URL(location.href);
-    url.searchParams.delete('page'); url.searchParams.delete('diacritics');
-    if (pageNumber > 1) url.searchParams.set('page',pageNumber);
-    if (selected !== 'all') url.searchParams.set('diacritics',selected);
-    history.replaceState(null,'',url);
+    document.querySelector('#page-status').textContent = `${fmt(current.length ? start+1 : 0)}–${fmt(start+current.length)} of ${fmt(shown.length)} · ${pageSize === 'all' ? 'All rows' : `Page ${pageNumber} of ${pages}`}`;
+    if (pageSize === 'all') {
+      // Keep every row present while rendering FSW images as they enter view.
+      signObserver = new IntersectionObserver(entries => {
+        for (const {target, isIntersecting} of entries) if (isIntersecting) {
+          target.innerHTML = svgFor(target.dataset.fsw);
+          signObserver.unobserve(target);
+        }
+      }, {rootMargin:'400px'});
+      document.querySelectorAll('[data-fsw]').forEach(view => signObserver.observe(view));
+    }
+    if (targetRow) requestAnimationFrame(() => document.getElementById(`row-${targetRow}`)?.scrollIntoView({block:'start'}));
   }
   select.addEventListener('change',()=>{selected=select.value;pageNumber=1;render();});
-  heads.addEventListener('change',()=>{pageNumber=1;render();});
-  document.querySelector('#page-size').addEventListener('change',e=>{pageSize=Number(e.target.value);pageNumber=1;render();});
+  heads.addEventListener('change',()=>{headFilter=heads.value;pageNumber=1;render();});
+  sizeSelect.addEventListener('change',()=>{pageSize=sizeSelect.value === 'all' ? 'all' : Number(sizeSelect.value);pageNumber=1;render(linkedRow());});
   document.querySelector('#previous').addEventListener('click',()=>{pageNumber--;render();});
   document.querySelector('#next').addEventListener('click',()=>{pageNumber++;render();});
   document.querySelector('#records').addEventListener('click', async e => {
@@ -120,7 +170,14 @@ async function dataset(id) {
     try { await navigator.clipboard.writeText(button.dataset.copy); button.textContent='Copied'; }
     catch { button.textContent='Select the text to copy'; }
   });
-  render();
+  function navigate() {
+    if (location.href === renderedURL) return;
+    readView();
+    render(linkedRow());
+  }
+  window.addEventListener('hashchange', navigate);
+  window.addEventListener('popstate', navigate);
+  render(linkedRow());
 }
 
 if (app) {

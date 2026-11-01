@@ -24,6 +24,11 @@ not rely on a runtime CDN. The browser has a collection index, individual file
 pages, three rendering columns, diacritic-count and HEAD filters, pagination,
 record provenance, copyable strings, and CSV downloads.
 
+Record links preserve rows per page (`rows=25`, `50`, `100`, or `all`), diacritic
+and HEAD filters. A `#row-N` target automatically selects its containing page,
+including for older links without a rows-per-page parameter. “All rows” keeps
+all matching records on one page and renders FSW images as they enter view.
+
 ## LAN service
 
 The read-only inspection site runs on **http://192.168.0.87:7094/** and is linked
@@ -84,6 +89,7 @@ npm test
 npm run build
 # In another terminal, with npm run preview running:
 npm run test:browser
+npm run test:links
 ```
 
 The browser check uses Playwright. If a browser is already installed, set
