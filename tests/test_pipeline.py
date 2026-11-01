@@ -40,6 +40,41 @@ class PipelineTests(unittest.TestCase):
         self.assertNotIn('S36d00', rows[0]['fsw-face'])
         self.assertIn('S36c00', rows[0]['fsw-face'])
 
+    def test_air_and_breath_variants_do_not_affect_face_or_normalization(self):
+        baseline = 'M518x518S2ff00482x482S30a00482x482S34410495x504'
+        expected = extract(baseline, self.sizes)[0][0]
+        originals = [baseline + f'S{base:03x}{fill:x}{rotation:x}700x700'
+                     for base in range(0x337, 0x33b)
+                     for fill in range(6) for rotation in range(16)]
+        rows, audit = extract(' '.join(originals), self.sizes)
+        self.assertFalse(audit['errors'])
+        self.assertEqual(len(rows), 384)
+        self.assertEqual(audit['excluded_face_symbols'], 384)
+        for row, original in zip(rows, originals):
+            self.assertEqual(row['fsw'], original)
+            self.assertEqual(row['source_fsw'], original)
+            self.assertEqual(row['fsw-face'], expected['fsw-face'])
+            self.assertEqual(row['uni-face'], expected['uni-face'])
+            self.assertEqual(row['diacritics'], 2)
+
+    def test_minimum_count_is_applied_after_air_and_breath_removal(self):
+        text = ('M518x518S33700482x482 '
+                'M518x518S2ff00482x482S33700482x482S33800482x482S33900482x482S33a00482x482 '
+                'M518x518S30a00482x482S33900482x482 '
+                'M518x518S33600482x482S33b00482x482S33a00482x482')
+        rows, audit = extract(text, self.sizes)
+        self.assertFalse(audit['errors'])
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(audit['matching_signs'], 4)
+        self.assertEqual(audit['excluded_zero_diacritics'], 2)
+        self.assertEqual(audit['excluded_single_diacritic'], 1)
+        self.assertEqual(audit['excluded_face_symbols'], 7)
+        self.assertEqual(rows[0]['diacritics'], 2)
+        # The bases immediately beside the excluded span remain facial marks.
+        self.assertIn('S33600', rows[0]['fsw-face'])
+        self.assertIn('S33b00', rows[0]['fsw-face'])
+        self.assertEqual(rows[0]['uni-face'], chr(0x1d9ff) + chr(0x1da36) + chr(0x1da3b))
+
     def test_normalization_uses_glyph_extents_preserves_relations(self):
         sizes = {'S2ff00': [36, 36], 'S30a00': [20, 10]}
         a = [Symbol('S2ff00', 700, 650), Symbol('S30a00', 710, 640)]

@@ -41,7 +41,27 @@ provisional is part of making the next investigation reproducible. In particular
 retained occurrences are not independent words, writers, or demonstrated
 orthographic contrasts.
 
-## Current subset (dataset v0.2.0)
+## Current subset (dataset v0.3.0)
+
+This selection removes every fill and rotation of S337–S33a (Air Blow Small
+Rotations, Air Suck Small Rotations, Breath Inhale, Breath Exhale) before counting
+diacritics or normalizing geometry. Original source signboxes retain them.
+Private collections and faces with fewer than two retained diacritics remain
+excluded. The symbol-to-Unicode mapping is still `direct-symbol-order-v0.1`.
+
+- 152 included collections; 154,755 rows emitted.
+- 1,394 air/breath symbol occurrences removed across broad-query candidates.
+- 84,996 zero-diacritic and 185,419 single-diacritic candidates excluded.
+- 142,713 rows require a default HEAD; 1,589 retain multiple S2ff resources.
+- No retained rows contain a mapped spacing resource.
+- One retained-scope candidate still has an invalid ISWA key and is logged.
+
+Compared with v0.2.0, 897 retained rows contained an air/breath symbol. After
+removal, 452 fail the two-diacritic threshold and 445 remain with revised faces.
+All 155 original SPML snapshots remain intact. The report and generated CSVs
+describe this selection; v0.1.0 and v0.2.0 artifacts are historical local candidates.
+
+## Previous subset (dataset v0.2.0; historical)
 
 The November 1 selection excludes private collections and retains faces with at
 least two non-S2ff resources. HEADs and fill/rotation modifiers do not count.
@@ -54,10 +74,6 @@ The Unicode mapping profile remains `direct-symbol-order-v0.1`.
 - 143,140 rows require a default HEAD under the baseline mapping.
 - 1,590 rows retain multiple S2ff resources.
 - 897 rows contain a mapped spacing resource.
-
-All 155 original SPML snapshots remain intact. The current report and generated
-CSVs describe this narrower selection. The earlier v0.1.0 release candidates are
-historical baseline artifacts, separate from the current v0.2.0 candidates.
 
 ## Initial baseline observations (v0.1.0; historical)
 

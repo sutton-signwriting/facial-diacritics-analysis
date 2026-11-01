@@ -11,7 +11,7 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from facial_pipeline import ROOT, PROFILE, MIN_DIACRITICS, EXCLUDED_COLLECTION_IDS
+from facial_pipeline import ROOT, PROFILE, MIN_DIACRITICS, EXCLUDED_FACE_BASES, EXCLUDED_COLLECTION_IDS
 
 VERSION = json.loads((ROOT / 'package.json').read_text())['version']
 
@@ -34,6 +34,9 @@ def page(title, prefix='', file_id=None):
 
 def build(output: Path, public: bool = False):
     report = json.loads((ROOT / 'data/report.json').read_text())
+    excluded_bases = [f'S{base:03x}' for base in sorted(EXCLUDED_FACE_BASES)]
+    if report['selection'].get('excluded_face_bases') != excluded_bases:
+        raise ValueError('Dataset uses outdated facial exclusions; rerun processing.')
     # Only remove the dedicated generated directory owned by this builder.
     if output.resolve() != (ROOT / 'dist').resolve():
         raise ValueError('The generated output directory must be this project\'s dist/.')
@@ -83,7 +86,7 @@ def build(output: Path, public: bool = False):
                     excluded_collections=report['excluded_collections'],
                     files=included, held_for_review=held,
                     totals={key: sum(r[key] for r in included) for key in
-                            ('rows', 'signs_scanned', 'excluded_head_only', 'excluded_zero_diacritics',
+                            ('rows', 'signs_scanned', 'excluded_face_symbols', 'excluded_head_only', 'excluded_zero_diacritics',
                              'excluded_single_diacritic', 'head_inserted', 'multiple_heads')},
                     histogram=dict(sorted(histogram.items())),
                     assets=json.loads((ROOT / 'assets/manifest.json').read_text()))

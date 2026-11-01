@@ -9,7 +9,8 @@ import json
 from pathlib import Path
 import unicodedata
 
-from facial_pipeline import ROOT, PROFILE, MIN_DIACRITICS, EXCLUDED_COLLECTION_IDS, extract, load_sizes, title_of
+from facial_pipeline import (ROOT, PROFILE, MIN_DIACRITICS, EXCLUDED_FACE_BASES,
+                             EXCLUDED_COLLECTION_IDS, extract, load_sizes, title_of)
 
 
 def process(source: Path, output: Path, metadata: Path, report: Path) -> dict:
@@ -55,10 +56,11 @@ def process(source: Path, output: Path, metadata: Path, report: Path) -> dict:
         reports.append(info)
         print(f"{path.name}: {len(rows):,} rows; {len(audit['errors'])} normalization errors", flush=True)
     result = dict(profile=PROFILE, query='QR2fft36c', unicode_database=unicodedata.unidata_version,
-                  selection={'min_diacritics': MIN_DIACRITICS, 'exclude_private_collections': True},
+                  selection={'min_diacritics': MIN_DIACRITICS, 'exclude_private_collections': True,
+                             'excluded_face_bases': [f'S{base:03x}' for base in sorted(EXCLUDED_FACE_BASES)]},
                   excluded_collections=excluded,
                   files=reports, totals={key: sum(r[key] for r in reports) for key in
-                  ('rows', 'signs_scanned', 'matching_signs', 'excluded_head_only',
+                  ('rows', 'signs_scanned', 'matching_signs', 'excluded_face_symbols', 'excluded_head_only',
                    'excluded_zero_diacritics', 'excluded_single_diacritic', 'head_inserted',
                    'multiple_heads', 'noncombining_resources')})
     result['totals']['errors'] = sum(len(r['errors']) for r in reports)

@@ -16,6 +16,7 @@ try {
   await page.waitForSelector('.collections tbody tr .file-link');
   const manifest = await (await fetch(base + '/data/manifest.json')).json();
   assert.equal(manifest.selection.min_diacritics,2);
+  assert.deepEqual(manifest.selection.excluded_face_bases,['S337','S338','S339','S33a']);
   assert.ok(manifest.files.every(file=>!['sgn97','sgn103','sgn105'].includes(file.id)));
   assert.ok(Object.keys(manifest.histogram).every(count=>Number(count)>=2));
   assert.equal(await page.locator('.collections tbody tr').count(), manifest.files.length);
@@ -57,7 +58,10 @@ try {
     const differences=[];
     for(const r of data.records.slice(0,500)) {
       const stripped = r.fsw.replace(/S([123][0-9a-f]{2})[0-5][0-9a-f][0-9]{3}x[0-9]{3}/g,
-        (s,b)=>parseInt(b,16)>=0x2ff && parseInt(b,16)<=0x36c ? s : '');
+        (s,b)=>{
+          const base = parseInt(b,16);
+          return base>=0x2ff && base<=0x36c && !(base>=0x337 && base<=0x33a) ? s : '';
+        });
       const expected=lib.signNormalize(stripped);
       if(expected!==r['fsw-face']) differences.push({source:r.fsw,expected,actual:r['fsw-face']});
     }

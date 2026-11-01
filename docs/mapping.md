@@ -2,8 +2,10 @@
 
 Private collections (`sgn97`, `sgn103`, `sgn105`, or a collection header labelled
 private) are excluded from both CSV outputs and the browser. Source snapshots
-remain intact. Dataset v0.2.0 requires at least two diacritics; the Unicode
-mapping profile itself is unchanged.
+remain intact. Dataset v0.3.0 excludes all fills and rotations of air/breath
+bases S337–S33a and then requires at least two diacritics; the symbol-to-Unicode
+mapping profile itself is unchanged. Selection rules are recorded separately
+in the report and site manifest.
 
 This is a reproducible baseline for inspecting actual data. It does not claim
 to be a faithful or complete FSW-to-official-Unicode facial converter.
@@ -14,7 +16,11 @@ to be a faithful or complete FSW-to-official-Unicode facial converter.
 2. Set `fsw` to the original spatial signbox. Preserve the complete match,
    including any temporal prefix, in the provenance sidecar. Drop style suffixes
    from this structural analysis; no style is applied to the site renderings.
-3. Retain only selected facial resources, preserving their serialized order.
+3. Remove bases S337, S338, S339, and S33a in every fill and rotation. These
+   are Air Blow Small Rotations, Air Suck Small Rotations, Breath Inhale, and
+   Breath Exhale (U+1DA37–U+1DA3A), not facial diacritics. Their symbols remain
+   in the original `fsw` field. Retain the other selected facial resources,
+   preserving their serialized order.
    Count retained non-S2ff resources and keep only candidates with at least two.
    Exclude zero-diacritic and single-diacritic faces, including compositions
    containing only multiple heads. HEADs and fill/rotation modifiers do not count.
@@ -32,9 +38,14 @@ to be a faithful or complete FSW-to-official-Unicode facial converter.
 6. Move the first complete S2ff block to the front of `uni-face`. Keep other
    resources in original relative order. If no S2ff exists, prepend the default
    `U+1D9FF SIGNWRITING HEAD`. Additional S2ff blocks remain and are flagged.
-7. Count non-S2ff source resources for the “diacritics” filter. Fill and rotation
-   modifiers do not increase that count. Flag mapped spacing resources because
-   the requested range includes more than Unicode nonspacing facial marks.
+7. Count retained non-S2ff resources for the “diacritics” filter, after the
+   four base exclusions. Fill and rotation modifiers do not increase that count.
+   Keep a diagnostic flag for any unexpected mapped spacing resource.
+
+The broad `matching_signs` audit count describes the initial QR2fft36c query,
+before the four base exclusions. `excluded_face_symbols` counts removed symbol
+occurrences across those candidates, including candidates later dropped by the
+minimum threshold. Zero/single-diacritic exclusions use the retained symbols.
 
 The baseline does not transfer positions, infer head-to-mark associations,
 decompose ISWA head-bearing glyphs, change source fill meanings, sort marks by

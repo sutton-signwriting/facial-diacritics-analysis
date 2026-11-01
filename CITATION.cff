@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Cite the exact released dataset/software version used in your analysis. This working version has no DOI."
 type: software
 title: "Facial Diacritics Analysis"
-version: 0.2.0
+version: 0.3.0
 authors:
   - family-names: Slevinski
     given-names: Steve

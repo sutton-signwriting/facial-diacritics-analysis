@@ -34,8 +34,8 @@ all matching records on one page and renders FSW images as they enter view.
 The read-only inspection site runs on **http://192.168.0.87:7094/** and is linked
 from Personal Office's **http://192.168.0.111:7001/** index. Archie owns the source,
 port reservation, and Compose service. The current subset excludes the three
-private collections and faces with fewer than two diacritics: 152 collections
-and 155,207 facial-sign occurrences remain.
+private collections and faces with fewer than two diacritics after removing
+air/breath bases S337–S33a: 152 collections and 154,755 facial-sign occurrences remain.
 
 ```bash
 docker compose up -d
@@ -60,7 +60,9 @@ produces `data/raw/input.csv` and `data/metadata/input.json`. Duplicate stems
 are rejected before writing, so `input.txt` and `input.spml` cannot overwrite
 one another's results. There is no XML processor. Private collections are skipped
 and their earlier generated CSVs/sidecars are removed. Only faces with at least
-two non-S2ff resources are emitted; HEAD, fill, and rotation modifiers do not count.
+two retained non-S2ff resources are emitted. All fills and rotations of S337,
+S338, S339, and S33a are excluded before counting and normalization, and remain
+in the original `fsw` column. HEAD, fill, and rotation modifiers do not count.
 
 ```bash
 .venv/bin/python scripts/process_sources.py \
@@ -117,7 +119,7 @@ source hashes/URLs, mapping assets, scripts, tests, and documentation. Preserve
 the original source snapshot separately for exact future reanalysis: live
 SignPuddle URLs can change after this download.
 
-Upload `facial-diacritics-site-v0.2.0.zip` as a GitHub Release asset, then run
+Upload `facial-diacritics-site-v0.3.0.zip` as a GitHub Release asset, then run
 the prepared `Deploy GitHub Pages` workflow with that release tag. Set the
 repository's Pages source to **GitHub Actions**. The workflow downloads the
 frozen site artifact from the same repository, validates its relative paths,

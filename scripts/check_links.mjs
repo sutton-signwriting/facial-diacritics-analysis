@@ -85,7 +85,8 @@ try {
   assert.equal(new URL(allLink).searchParams.get('rows'),'all');
 
   // Invalid view parameters safely fall back, with the record remaining authoritative.
-  await page.goto(`${dataset}?rows=invalid&page=Infinity&diacritics=2#row-199`);
+  const incompatibleCount = records.records[198].diacritics === 2 ? 3 : 2;
+  await page.goto(`${dataset}?rows=invalid&page=Infinity&diacritics=${incompatibleCount}#row-199`);
   await ready();
   await rowVisible(199);
   assert.equal(await page.locator('#page-size').inputValue(),'25');
