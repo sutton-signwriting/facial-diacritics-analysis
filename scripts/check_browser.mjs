@@ -57,9 +57,9 @@ try {
       const expected=lib.signNormalize(stripped);
       if(expected!==r['fsw-face']) differences.push({source:r.fsw,expected,actual:r['fsw-face']});
     }
-    return differences;
+    return {differences, tested:Math.min(500,data.records.length)};
   });
-  assert.deepEqual(checks,[],'Python/browser normalization differs');
+  assert.deepEqual(checks.differences,[],'Python/browser normalization differs');
   await page.setViewportSize({width:390,height:844});
   await page.evaluate(()=>scrollTo(0,0));
   await page.screenshot({path:'artifacts/records-mobile.png',fullPage:false});
@@ -76,7 +76,7 @@ try {
   await page.goto(base + '/methods.html');
   await page.waitForSelector('#methods');
   assert.equal(errors.length,0,errors.join('\n'));
-  console.log('PASS: dataset list, fonts, three views, counts, filters, pagination, CSV, empty dataset, methods, mobile widths; 500 normalization comparisons.');
+  console.log(`PASS: dataset list, fonts, three views, counts, filters, pagination, CSV, empty dataset, methods, mobile widths; ${checks.tested} normalization comparisons.`);
 } finally {
   await browser.close();
 }
