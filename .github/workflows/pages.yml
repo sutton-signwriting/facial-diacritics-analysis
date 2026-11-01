@@ -1,0 +1,57 @@
+name: Deploy GitHub Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Reviewed GitHub Release containing the frozen site ZIP
+        required: true
+        default: v0.1.0
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download reviewed site release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          mkdir -p release
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern 'facial-diacritics-site-v*.zip' --dir release
+      - name: Validate and unpack static site
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, zipfile
+          archives = list(Path('release').glob('*.zip'))
+          assert len(archives) == 1, 'Expected one site release'
+          output = Path('_site').resolve()
+          with zipfile.ZipFile(archives[0]) as archive:
+              for member in archive.infolist():
+                  path = output / member.filename
+                  assert path.resolve().is_relative_to(output), 'Unsafe archive path'
+              manifest = json.loads(archive.read('data/manifest.json'))
+              assert manifest['public_build'], 'Expected reviewed public-build artifact'
+              assert 'index.html' in archive.namelist()
+              archive.extractall(output)
+          PY
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

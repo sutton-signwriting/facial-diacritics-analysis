@@ -1,0 +1,15 @@
+{
+  "name": "facial-diacritics-analysis",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "process": ".venv/bin/python scripts/process_sources.py",
+    "build": ".venv/bin/python scripts/build_site.py",
+    "test": ".venv/bin/python -m unittest discover -s tests -v",
+    "preview": ".venv/bin/python -m http.server 9123 --bind 127.0.0.1 --directory dist",
+    "test:browser": "node scripts/check_browser.mjs"
+  },
+  "dependencies": {"@sutton-signwriting/font-ttf": "1.6.0"},
+  "devDependencies": {"playwright": "1.55.0"}
+}

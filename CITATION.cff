@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Cite the exact released dataset/software version used in your analysis. This working version has no DOI."
+type: software
+title: "Facial Diacritics Analysis"
+version: 0.1.0
+authors:
+  - family-names: Slevinski
+    given-names: Steve
+    orcid: "https://orcid.org/0009-0007-7051-1374"
+abstract: "Regex-based extraction and inspection of SignPuddle facial writing with an explicitly provisional official Unicode mapping."
+license: MIT

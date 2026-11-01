@@ -1,0 +1,10 @@
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+/data/source/
+/data/raw/
+/data/metadata/
+/data/report.json
+/dist/
+/artifacts/

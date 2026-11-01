@@ -1,0 +1,20 @@
+{
+  "symbol_sizes": {
+    "repository": "https://github.com/Slevinski/signwriting_2010_tools",
+    "commit": "d7081774bbc2d41cbfa0412ee61534a3b8a2c716",
+    "path": "tools/symsize.txt",
+    "entries": 37811,
+    "sha256": "08512fa52ebe954dc14f7bad8ca75e229961028d25d7a9374b8bd93de3369b39"
+  },
+  "noto": {
+    "url": "https://raw.githubusercontent.com/google/fonts/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/notosanssignwriting/NotoSansSignWriting-Regular.ttf",
+    "commit": "8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5",
+    "sha256": "1da27fe7b8e959efaf338818f2a6c1aa2c02ff97cf60c34c6d0825675ebc53fb",
+    "family": "Noto Sans SignWriting",
+    "version": "Version 2.005; ttfautohint (v1.8.4.7-5d5b)"
+  },
+  "font_ttf": {
+    "package": "@sutton-signwriting/font-ttf",
+    "version": "1.6.0"
+  }
+}
