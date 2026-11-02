@@ -6,5 +6,6 @@ __pycache__/
 /data/raw/
 /data/metadata/
 /data/report.json
+/data/eye-gaze/
 /dist/
 /artifacts/

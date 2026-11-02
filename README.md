@@ -13,6 +13,7 @@ These are proposed targets, not claims that the repository or site is published.
 python3 -m venv .venv
 npm install
 .venv/bin/python scripts/process_sources.py
+.venv/bin/python scripts/process_eye_gaze.py
 .venv/bin/python scripts/build_site.py
 npm run preview
 ```
@@ -28,6 +29,18 @@ Record links preserve rows per page (`rows=25`, `50`, `100`, or `all`), diacriti
 and HEAD filters. A `#row-N` target automatically selects its containing page,
 including for older links without a rows-per-page parameter. “All rows” keeps
 all matching records on one page and renders FSW images as they enter view.
+
+## Separate eye gaze listing
+
+[Eye gaze with nonzero fills](http://192.168.0.87:7094/eye-gaze/) selects source
+signs containing at least one positioned S321–S329 symbol with fill 1–5, at any
+rotation and any diacritic count. It has its own collection index, record pages,
+and combined CSV download. Exact matching keys and original coordinates appear
+beside each sign. Mixed-fill signs are flagged and can be filtered out.
+
+Run `npm run process:eye-gaze` to regenerate only this analysis. Its outputs live
+under `data/eye-gaze/`, separate from the original CSVs and metadata. `npm run process`
+regenerates both analyses. See [the eye-gaze method](docs/eye-gaze.md).
 
 ## LAN service
 
@@ -92,6 +105,7 @@ npm run build
 # In another terminal, with npm run preview running:
 npm run test:browser
 npm run test:links
+npm run test:eye-gaze
 ```
 
 The browser check uses Playwright. If a browser is already installed, set
@@ -105,7 +119,8 @@ widths, and normalization against the independent font-ttf implementation.
 
 All builds exclude `sgn97`, `sgn103`, `sgn105`, and any other collection with a
 private-labelled header. Their source snapshots remain intact. Public release
-bundles use the same minimum of two diacritics as the LAN browser.
+bundles retain the primary dataset's minimum of two diacritics and the separate
+eye-gaze analysis without that cutoff, matching the LAN browser.
 
 ```bash
 .venv/bin/python scripts/build_site.py --public
@@ -119,7 +134,7 @@ source hashes/URLs, mapping assets, scripts, tests, and documentation. Preserve
 the original source snapshot separately for exact future reanalysis: live
 SignPuddle URLs can change after this download.
 
-Upload `facial-diacritics-site-v0.3.0.zip` as a GitHub Release asset, then run
+Upload `facial-diacritics-site-v0.4.0.zip` as a GitHub Release asset, then run
 the prepared `Deploy GitHub Pages` workflow with that release tag. Set the
 repository's Pages source to **GitHub Actions**. The workflow downloads the
 frozen site artifact from the same repository, validates its relative paths,
@@ -137,6 +152,7 @@ submission, public repository, or public deployment has been created by this set
 | `data/source-manifest.json` | Download provenance and hashes |
 | `data/raw/` | Generated three-column CSVs; ignored by Git |
 | `data/metadata/`, `data/report.json` | Generated provenance, counts, and failures |
+| `data/eye-gaze/` | Separate generated eye-gaze CSVs, metadata, and report |
 | `assets/` | Pinned font and symbol-size assets with licenses and provenance |
 | `scripts/` | Python processing/build/package scripts and browser verification |
 | `web/` | Editable static website source |

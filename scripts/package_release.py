@@ -41,11 +41,21 @@ def package():
         report['held_for_review'] = manifest['held_for_review']
         archive.writestr('data/report.json', json.dumps(report, ensure_ascii=False, indent=2) + '\n')
         archive.writestr('data/source-manifest.json', json.dumps(manifest['source_snapshot'], indent=2) + '\n')
+        # Preserve the independent source selection as part of reproducibility.
+        gaze = json.loads((site / 'eye-gaze/data/manifest.json').read_text())
+        archive.writestr('data/eye-gaze/report.json', json.dumps(gaze, ensure_ascii=False, indent=2) + '\n')
+        archive.write(site / 'eye-gaze/data/all.csv', 'data/eye-gaze/all.csv')
+        for info in gaze['files']:
+            stem = info['id']
+            archive.write(site / f'eye-gaze/data/raw/{stem}.csv', f'data/eye-gaze/raw/{stem}.csv')
+            archive.write(site / f'eye-gaze/data/files/{stem}.json', f'data/eye-gaze/metadata/{stem}.json')
         archive.writestr('release.json', json.dumps(dict(
             version=version, software_commit=commit, mapping_profile=manifest['profile'],
             selection=manifest['selection'], excluded_collections=manifest['excluded_collections'],
             source_snapshot_included=False, public_build=True,
             held_for_review=manifest['held_for_review'],
+            additional_analyses=[{'analysis_id': gaze['analysis_id'], 'selection': gaze['selection'],
+                                  'rows': gaze['totals']['rows']}],
             note='Original SPML is preserved separately. Reproduction from archived CSVs is available; re-extraction requires the matching source snapshot.'
         ), indent=2) + '\n')
     lines = []

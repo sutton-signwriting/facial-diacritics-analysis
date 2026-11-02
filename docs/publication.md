@@ -61,6 +61,20 @@ removal, 452 fail the two-diacritic threshold and 445 remain with revised faces.
 All 155 original SPML snapshots remain intact. The report and generated CSVs
 describe this selection; v0.1.0 and v0.2.0 artifacts are historical local candidates.
 
+## Additional eye gaze analysis in software v0.4.0
+
+A separate source scan, `eye-gaze-nonzero-fill-v0.1`, selects any sign with a
+positioned S321–S329 symbol at fill 1–5, without a diacritic-count threshold.
+It adds 12,356 occurrences from 50 collections with results, including 454
+one-diacritic signs absent from the primary dataset. There are 835 mixed-fill
+signs; excluding them leaves 11,521 occurrences. The selection is recorded
+separately and its UI permits either view. Counts are source occurrences,
+including repeats, rather than a rendering success rate or a claim about eye
+association. See [the eye-gaze method](eye-gaze.md).
+
+The original facial CSVs, metadata, and report remain byte-for-byte unchanged
+from the v0.3.0 subset. Site/software v0.4.0 packages both analyses.
+
 ## Previous subset (dataset v0.2.0; historical)
 
 The November 1 selection excludes private collections and retains faces with at

@@ -2,6 +2,8 @@ import * as fsw from './font-ttf.mjs';
 
 const app = document.querySelector('#app');
 const prefix = document.body.dataset.prefix;
+const eyeGaze = document.body.dataset.analysis === 'eye-gaze';
+const analysisPath = eyeGaze ? 'eye-gaze/' : '';
 const fmt = n => Number(n).toLocaleString('en-US');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let manifest;
@@ -18,7 +20,7 @@ function loadFonts() {
 }
 
 async function getJSON(path) {
-  const response = await fetch(prefix + path);
+  const response = await fetch(prefix + analysisPath + path);
   if (!response.ok) throw new Error(`Could not load ${path} (${response.status}).`);
   return response.json();
 }
@@ -31,13 +33,16 @@ function errorPanel(error) {
 
 function home() {
   const {totals, files} = manifest;
+  const heading = eyeGaze ? 'Eye gaze<br><em>with nonzero fills.</em>' : 'Facial diacritics<br><em>in the record.</em>';
+  const introduction = eyeGaze ? 'Signs containing at least one positioned S321–S329 symbol with fill 1–5. Every diacritic count is included.' : 'Follow a written sign from its original composition to its facial symbols and a provisional Unicode sequence.';
+  const scope = eyeGaze ? 'Selection uses the original source signbox, without a minimum diacritic count. The full sign and facial context are retained. Signs with both zero-fill and nonzero-fill gaze are included and flagged.' : 'Only faces with at least two diacritics are included.';
   app.innerHTML = `<section class="hero"><p class="eyebrow">SIGNPUDDLE · FACIAL WRITING · EXPLORATORY DATA</p>
-    <div class="hero-grid"><h1>Facial diacritics<br><em>in the record.</em></h1><div class="hero-copy"><p>Follow a written sign from its original composition to its facial symbols and a provisional Unicode sequence.</p><p class="muted">An inspection tool for asking what a representation keeps.</p></div></div>
+    <div class="hero-grid"><h1>${heading}</h1><div class="hero-copy"><p>${introduction}</p><p class="muted">${eyeGaze ? '<a href="data/all.csv" download>Download all matching signs as CSV ↓</a>' : 'An inspection tool for asking what a representation keeps.'}</p></div></div>
     <div class="stats"><div><strong>${fmt(totals.rows)}</strong><span>facial sign occurrences</span></div><div><strong>${fmt(files.length)}</strong><span>source collections</span></div><div><strong>${fmt(totals.head_inserted)}</strong><span>HEADs prepended in Unicode</span></div><div><strong>3</strong><span>views of each record</span></div></div></section>
-    <section class="collection-section"><div class="section-title"><div><p class="eyebrow">THE COLLECTIONS</p><h2>Choose a source file</h2></div><a class="text-link" href="methods.html">Read the method <span aria-hidden="true">↗</span></a></div>
+    <section class="collection-section"><div class="section-title"><div><p class="eyebrow">THE COLLECTIONS</p><h2>Choose a source file</h2></div><a class="text-link" href="${prefix}methods.html${eyeGaze ? '#eye-gaze' : ''}">Read the method <span aria-hidden="true">↗</span></a></div>
     <div class="toolbar"><label class="search-label">Find a collection<input id="collection-search" type="search" placeholder="Search filename or collection title…"></label><label>Show<select id="collection-kind"><option value="all">All collections</option><option value="nonempty">With facial records</option></select></label><p id="collection-status" role="status"></p></div>
     <div class="table-wrap"><table class="collections"><thead><tr><th scope="col">Source file / collection</th><th scope="col">Facial signs</th><th scope="col">Diacritic counts</th><th scope="col"><span class="sr-only">Open</span></th></tr></thead><tbody id="collections"></tbody></table></div>
-    <p class="fineprint">Counts are occurrences, including repeats. Only faces with at least two diacritics are included. Private collections are excluded. Unicode mapping: <code>${esc(manifest.profile)}</code>.</p></section>`;
+    <p class="fineprint">Counts are occurrences, including repeats. ${scope} Private collections are excluded. Unicode mapping: <code>${esc(manifest.profile)}</code>.</p></section>`;
   const search = document.querySelector('#collection-search');
   const kind = document.querySelector('#collection-kind');
   const render = () => {
@@ -71,8 +76,11 @@ function details(label, text) {
 
 async function dataset(id) {
   const [{file, records}] = await Promise.all([getJSON(`data/files/${encodeURIComponent(id)}.json`), loadFonts()]);
+  if (eyeGaze && records.some(record => !/S32[1-9][1-5][0-9a-f][0-9]{3}x[0-9]{3}/.test(record.fsw))) {
+    throw new Error('The eye-gaze data contain a source sign without the required nonzero-fill symbol.');
+  }
   records.forEach((record, i) => { record.row = i + 1; });
-  let selected, headFilter, pageNumber, pageSize;
+  let selected, headFilter, gazeFilter, pageNumber, pageSize;
   let renderedURL;
   let signObserver;
   const counts = Object.keys(file.diacritics).map(Number).sort((a,b)=>a-b);
@@ -82,6 +90,8 @@ async function dataset(id) {
     if (selected !== 'all' && !counts.includes(Number(selected))) selected = 'all';
     headFilter = params.get('heads') || 'all';
     if (!['all','inserted','existing','multiple'].includes(headFilter)) headFilter = 'all';
+    gazeFilter = eyeGaze ? params.get('gaze') || 'any' : 'any';
+    if (!['any','nonzero','mixed'].includes(gazeFilter)) gazeFilter = 'any';
     const size = params.get('rows');
     pageSize = size === 'all' ? 'all' : ['25','50','100'].includes(size) ? Number(size) : 25;
     const number = Number(params.get('page'));
@@ -94,35 +104,43 @@ async function dataset(id) {
   }
   function viewURL(row = 0) {
     const url = new URL(location.href);
-    for (const key of ['page','rows','diacritics','heads']) url.searchParams.delete(key);
+    for (const key of ['page','rows','diacritics','heads','gaze']) url.searchParams.delete(key);
     url.searchParams.set('rows', pageSize);
     if (pageNumber > 1) url.searchParams.set('page', pageNumber);
     if (selected !== 'all') url.searchParams.set('diacritics', selected);
     if (headFilter !== 'all') url.searchParams.set('heads', headFilter);
+    if (gazeFilter !== 'any') url.searchParams.set('gaze', gazeFilter);
     url.hash = row ? `row-${row}` : '';
     return url;
   }
   readView();
-  app.innerHTML = `<a class="breadcrumb" href="../index.html">← All collections</a><section class="dataset-head"><p class="eyebrow">SOURCE COLLECTION</p><h1>${esc(file.source_file)}</h1><p class="dataset-title">${esc(file.title || 'Untitled collection')}</p><div class="dataset-meta"><span><b>${fmt(file.rows)}</b> facial occurrences</span><span><b>${fmt(file.unique_fsw)}</b> unique source signboxes</span><span><b>${fmt(file.head_inserted)}</b> prepended HEADs</span><a href="../data/raw/${encodeURIComponent(id)}.csv" download>Download CSV ↓</a></div></section>
+  app.innerHTML = `<a class="breadcrumb" href="../index.html">← ${eyeGaze ? 'Eye gaze collections' : 'All collections'}</a><section class="dataset-head"><p class="eyebrow">${eyeGaze ? 'EYE GAZE · S321–S329 · NONZERO FILLS' : 'SOURCE COLLECTION'}</p><h1>${esc(file.source_file)}</h1><p class="dataset-title">${esc(file.title || 'Untitled collection')}</p><div class="dataset-meta"><span><b>${fmt(file.rows)}</b> ${eyeGaze ? 'matching gaze occurrences' : 'facial occurrences'}</span><span><b>${fmt(file.unique_fsw)}</b> unique source signboxes</span><span><b>${fmt(file.head_inserted)}</b> prepended HEADs</span><a href="../data/raw/${encodeURIComponent(id)}.csv" download>Download CSV ↓</a></div></section>
     ${file.publication_review_required ? '<div class="notice amber">This publicly downloadable source is labelled private. This local inspection copy awaits a publication decision.</div>' : ''}
-    <div class="mapping-note"><span class="status-dot"></span><p><strong>Provisional Unicode mapping.</strong> The first S2ff resource is moved to the front, or a default HEAD is prepended. Other resources retain source order. Geometry is not transferred.</p><a href="../methods.html">Mapping details ↗</a></div>
-    <section class="records-section"><div class="toolbar record-controls"><label>Number of diacritics<select id="diacritics"><option value="all">All counts (2+)</option>${counts.map(n=>`<option value="${n}">${n} ${n===1?'diacritic':'diacritics'}</option>`).join('')}</select></label><label>Unicode HEAD<select id="heads"><option value="all">All records</option><option value="inserted">Prepended HEAD</option><option value="existing">Existing HEAD</option><option value="multiple">Multiple HEADs</option></select></label><label>Rows per page<select id="page-size"><option>25</option><option>50</option><option>100</option><option value="all">All rows</option></select></label><p id="record-status" role="status" aria-live="polite"></p></div>
+    <div class="mapping-note"><span class="status-dot"></span><p><strong>${eyeGaze ? 'Nonzero-fill eye gaze.' : 'Provisional Unicode mapping.'}</strong> ${eyeGaze ? 'Each record contains S321–S329 with fill 1–5, selected from the source without a diacritic-count cutoff. Matching keys and original coordinates are listed below. ' : ''}The first S2ff resource is moved to the front, or a default HEAD is prepended. Other resources retain source order. Geometry is not transferred.</p><a href="${prefix}methods.html${eyeGaze ? '#eye-gaze' : ''}">Mapping details ↗</a></div>
+    <section class="records-section"><div class="toolbar record-controls"><label>Number of diacritics<select id="diacritics"><option value="all">${eyeGaze ? 'All counts' : 'All counts (2+)'}</option>${counts.map(n=>`<option value="${n}">${n} ${n===1?'diacritic':'diacritics'}</option>`).join('')}</select></label><label>Unicode HEAD<select id="heads"><option value="all">All records</option><option value="inserted">Prepended HEAD</option><option value="existing">Existing HEAD</option><option value="multiple">Multiple HEADs</option></select></label><label>Rows per page<select id="page-size"><option>25</option><option>50</option><option>100</option><option value="all">All rows</option></select></label><p id="record-status" role="status" aria-live="polite"></p></div>
     <div class="table-wrap record-table-wrap"><table class="records"><thead><tr><th scope="col">Record</th><th scope="col">Original sign <span>FSW source signbox</span></th><th scope="col">Facial composition <span>Filtered &amp; normalized FSW</span></th><th scope="col">Unicode face <span>Noto Sans SignWriting</span></th></tr></thead><tbody id="records"></tbody></table></div>
     <div class="pagination"><button id="previous" type="button">← Previous</button><span id="page-status"></span><button id="next" type="button">Next →</button></div><p class="fineprint">“Diacritics” counts retained non-S2ff resources, excluding fill and rotation modifiers. Air and breath symbols S337–S33a are excluded before counting. Each FSW view fits its own cell. Unicode uses the bundled Noto font; display does not establish equivalence.</p></section>`;
   const select = document.querySelector('#diacritics');
   const heads = document.querySelector('#heads');
   const sizeSelect = document.querySelector('#page-size');
+  if (eyeGaze) {
+    sizeSelect.closest('label').insertAdjacentHTML('beforebegin', '<label>Gaze fills<select id="gaze-fills"><option value="any">Any nonzero gaze</option><option value="nonzero">Only nonzero gaze fills</option><option value="mixed">Also contains fill 0</option></select></label>');
+  }
+  const gazeSelect = document.querySelector('#gaze-fills');
   function matches(r) {
     return (selected === 'all' || r.diacritics === Number(selected)) &&
-      (headFilter === 'all' || (headFilter === 'inserted' ? r.head_inserted : headFilter === 'existing' ? !r.head_inserted : r.head_count > 1));
+      (headFilter === 'all' || (headFilter === 'inserted' ? r.head_inserted : headFilter === 'existing' ? !r.head_inserted : r.head_count > 1)) &&
+      (gazeFilter === 'any' || (gazeFilter === 'mixed') === r.flags.includes('also-fill-zero-gaze'));
   }
   function signView(sign, label) {
+    if (!sign) return '<p class="muted">Facial normalization unavailable; source retained.</p>';
     return `<div class="sign-view" role="img" aria-label="${label}"${pageSize === 'all' ? ` data-fsw="${esc(sign)}"` : ''}>${pageSize === 'all' ? '' : svgFor(sign)}</div>`;
   }
   function render(targetRow = 0) {
     // A record permalink takes precedence over stale page numbers or filters.
     if (targetRow && !matches(records[targetRow - 1])) {
       selected = headFilter = 'all';
+      gazeFilter = 'any';
     }
     const shown = records.filter(matches);
     const size = pageSize === 'all' ? Math.max(1, shown.length) : pageSize;
@@ -134,6 +152,7 @@ async function dataset(id) {
     select.value = selected;
     heads.value = headFilter;
     sizeSelect.value = String(pageSize);
+    if (gazeSelect) gazeSelect.value = gazeFilter;
     const url = viewURL(targetRow);
     renderedURL = url.href;
     history.replaceState(null, '', url);
@@ -142,7 +161,8 @@ async function dataset(id) {
     document.querySelector('#records').innerHTML = current.length ? current.map(r => {
       const sourceLink = /^sgn\d+$/.test(id) && r.entry_id ? `http://signbank.org/signpuddle2.0/canvas.php?ui=1&sgn=${id.slice(3)}&sid=${encodeURIComponent(r.entry_id)}` : '';
       const codepoints = Array.from(r['uni-face'], c => 'U+' + c.codePointAt(0).toString(16).toUpperCase()).join(' ');
-      return `<tr id="row-${r.row}"><th scope="row"><a class="row-number" href="${esc(viewURL(r.row).href)}">${fmt(r.row)}</a><span class="record-small">${r.diacritics} ${r.diacritics===1?'diacritic':'diacritics'}</span>${r.head_inserted ? tag('HEAD added') : ''}${r.flags.map(f=>tag(f,'amber')).join('')}${sourceLink ? `<a class="source-link" href="${sourceLink}" target="_blank" rel="noopener">Entry ${esc(r.entry_id)} ↗</a>` : ''}</th><td>${signView(r.fsw, 'Original SignWriting sign')}${details('FSW source',r.fsw)}</td><td>${signView(r['fsw-face'], 'Filtered facial SignWriting')}${details('FSW face',r['fsw-face'])}</td><td><div class="unicode-view" dir="ltr" lang="und" role="img" aria-label="Provisional Unicode facial rendering">${esc(r['uni-face'])}</div>${details('Unicode code points',codepoints)}${details('Unicode text',r['uni-face'])}</td></tr>`;
+      const gazeDetails = eyeGaze ? `<span class="record-small">Matched gaze</span>${r.gaze_matches.map(s=>`<code class="gaze-key">${esc(s.key)}<span>fill ${s.key[4]} · ${s.x}x${s.y}</span></code>`).join('')}${r.normalization_error ? details('Normalization error',r.normalization_error) : ''}` : '';
+      return `<tr id="row-${r.row}"><th scope="row"><a class="row-number" href="${esc(viewURL(r.row).href)}">${fmt(r.row)}</a><span class="record-small">${r.diacritics} ${r.diacritics===1?'diacritic':'diacritics'}</span>${gazeDetails}${r.head_inserted ? tag('HEAD added') : ''}${r.flags.map(f=>tag(f,'amber')).join('')}${sourceLink ? `<a class="source-link" href="${sourceLink}" target="_blank" rel="noopener">Entry ${esc(r.entry_id)} ↗</a>` : ''}</th><td>${signView(r.fsw, 'Original SignWriting sign')}${details('FSW source',r.fsw)}</td><td>${signView(r['fsw-face'], 'Filtered facial SignWriting')}${details('FSW face',r['fsw-face'])}</td><td><div class="unicode-view" dir="ltr" lang="und" role="img" aria-label="Provisional Unicode facial rendering">${esc(r['uni-face'])}</div>${details('Unicode code points',codepoints)}${details('Unicode text',r['uni-face'])}</td></tr>`;
     }).join('') : '<tr><td class="empty" colspan="4">No records match these filters.</td></tr>';
     document.querySelector('#previous').disabled = pageNumber === 1;
     document.querySelector('#next').disabled = pageNumber >= pages;
@@ -162,6 +182,7 @@ async function dataset(id) {
   select.addEventListener('change',()=>{selected=select.value;pageNumber=1;render();});
   heads.addEventListener('change',()=>{headFilter=heads.value;pageNumber=1;render();});
   sizeSelect.addEventListener('change',()=>{pageSize=sizeSelect.value === 'all' ? 'all' : Number(sizeSelect.value);pageNumber=1;render(linkedRow());});
+  gazeSelect?.addEventListener('change',()=>{gazeFilter=gazeSelect.value;pageNumber=1;render();});
   document.querySelector('#previous').addEventListener('click',()=>{pageNumber--;render();});
   document.querySelector('#next').addEventListener('click',()=>{pageNumber++;render();});
   document.querySelector('#records').addEventListener('click', async e => {
