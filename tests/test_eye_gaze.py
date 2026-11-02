@@ -18,29 +18,29 @@ class EyeGazeTests(unittest.TestCase):
     def test_source_selection_includes_singletons_and_preserves_other_symbols(self):
         text = ('AS32127M520x520S10000482x482 '
                 'M520x520S32010482x482 M520x520S32a10482x482 '
-                'M520x520S32107482x482 M520x520S32900482x482 '
+                'M520x520S32107482x482 M520x520S32900482x482 M520x520S32117482x482 '
                 'M520x520S32127482x482S33700450x450 '
-                'M520x520S32910482x482 '
-                'M520x520S32100482x482S32210505x482')
+                'M520x520S32920482x482 '
+                'M520x520S32100482x482S32220505x482S32310520x482')
         rows, audit = extract_eye_gaze(text, self.sizes)
         self.assertEqual(len(rows), 3)
-        self.assertEqual(audit['gaze_signs'], 5)
-        self.assertEqual(audit['excluded_fill_zero_only'], 2)
-        self.assertEqual([r['diacritics'] for r in rows], [1, 1, 2])
+        self.assertEqual(audit['gaze_signs'], 6)
+        self.assertEqual(audit['excluded_other_fills'], 3)
+        self.assertEqual([r['diacritics'] for r in rows], [1, 1, 3])
         self.assertIn('S33700', rows[0]['fsw'])
         self.assertNotIn('S33700', rows[0]['fsw-face'])
-        self.assertEqual(rows[-1]['gaze_matches'], [dict(key='S32210', x=505, y=482)])
-        self.assertEqual(len(rows[-1]['gaze_symbols']), 2)
-        self.assertIn('also-fill-zero-gaze', rows[-1]['flags'])
+        self.assertEqual(rows[-1]['gaze_matches'], [dict(key='S32220', x=505, y=482)])
+        self.assertEqual(len(rows[-1]['gaze_symbols']), 3)
+        self.assertIn('also-other-gaze-fills', rows[-1]['flags'])
 
     def test_every_requested_base_fill_and_rotation_is_examined(self):
         text = ' '.join(f'M520x520S{base:03x}{fill:x}{rotation:x}482x482'
                         for base in range(0x321, 0x32a)
                         for fill in range(6) for rotation in range(16))
         rows, audit = extract_eye_gaze(text, self.sizes)
-        self.assertEqual(len(rows), 9 * 5 * 16)
-        self.assertEqual(audit['excluded_fill_zero_only'], 9 * 16)
-        self.assertTrue(all(r['gaze_matches'][0]['key'][4] != '0' for r in rows))
+        self.assertEqual(len(rows), 9 * 2 * 16)
+        self.assertEqual(audit['excluded_other_fills'], 9 * 4 * 16)
+        self.assertTrue(all(r['gaze_matches'][0]['key'][4] in '23' for r in rows))
         # Invalid source variants are retained and flagged, not silently removed.
         self.assertGreater(audit['unknown_gaze_variants'], 0)
 

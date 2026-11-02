@@ -32,8 +32,8 @@ all matching records on one page and renders FSW images as they enter view.
 
 ## Separate eye gaze listing
 
-[Eye gaze with nonzero fills](http://192.168.0.87:7094/eye-gaze/) selects source
-signs containing at least one positioned S321–S329 symbol with fill 1–5, at any
+[Eye gaze with fills 2 and 3](http://192.168.0.87:7094/eye-gaze/) selects source
+signs containing at least one positioned S321–S329 symbol with fill 2 or 3, at any
 rotation and any diacritic count. It has its own collection index, record pages,
 and combined CSV download. Exact matching keys and original coordinates appear
 beside each sign. Mixed-fill signs are flagged and can be filtered out.
@@ -134,7 +134,7 @@ source hashes/URLs, mapping assets, scripts, tests, and documentation. Preserve
 the original source snapshot separately for exact future reanalysis: live
 SignPuddle URLs can change after this download.
 
-Upload `facial-diacritics-site-v0.4.0.zip` as a GitHub Release asset, then run
+Upload `facial-diacritics-site-v0.4.1.zip` as a GitHub Release asset, then run
 the prepared `Deploy GitHub Pages` workflow with that release tag. Set the
 repository's Pages source to **GitHub Actions**. The workflow downloads the
 frozen site artifact from the same repository, validates its relative paths,

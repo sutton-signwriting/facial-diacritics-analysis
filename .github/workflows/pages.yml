@@ -6,7 +6,7 @@ on:
       release_tag:
         description: Reviewed GitHub Release containing the frozen site ZIP
         required: true
-        default: v0.4.0
+        default: v0.4.1
 
 permissions:
   contents: read

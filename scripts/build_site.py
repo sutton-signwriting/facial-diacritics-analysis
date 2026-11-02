@@ -49,7 +49,7 @@ def build_eye_gaze(output, report, base_manifest):
         records = json.loads((source / 'metadata' / f"{info['id']}.json").read_text())['records']
         for record in records:
             if not record['gaze_matches'] or any(
-                not (0x321 <= int(s['key'][1:4], 16) <= 0x329 and s['key'][4] != '0')
+                not (0x321 <= int(s['key'][1:4], 16) <= 0x329 and s['key'][4] in '23')
                 for s in record['gaze_matches']
             ):
                 raise ValueError('Eye-gaze data do not satisfy the selection; rerun processing.')
@@ -74,7 +74,7 @@ def build_eye_gaze(output, report, base_manifest):
                 'files': included, 'held_for_review': held, 'totals': totals,
                 'histogram': dict(sorted(histogram.items()))}
     (target / 'data/manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
-    (target / 'index.html').write_text(page('Eye gaze with nonzero fills', '../', analysis='eye-gaze'))
+    (target / 'index.html').write_text(page('Eye gaze with fills 2 and 3', '../', analysis='eye-gaze'))
     # Assemble the combined download from the included files, with identical columns.
     with (target / 'data/all.csv').open('w', encoding='utf-8', newline='') as stream:
         for index, info in enumerate(included):

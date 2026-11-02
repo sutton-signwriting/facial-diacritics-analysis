@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""List source signboxes with S321..S329 at nonzero fill, without a count cutoff."""
+"""List source signboxes with S321..S329 at fill 2 or 3, without a count cutoff."""
 
 import argparse
 import bisect
@@ -15,9 +15,9 @@ from facial_pipeline import (
     unicode_face,
 )
 
-ANALYSIS_ID = 'eye-gaze-nonzero-fill-v0.1'
+ANALYSIS_ID = 'eye-gaze-fills-2-3-v0.1'
 SELECTION = {'gaze_bases': [f'S{base:03x}' for base in range(0x321, 0x32a)],
-             'gaze_fills': [1, 2, 3, 4, 5], 'match': 'at-least-one-positioned-symbol',
+             'gaze_fills': [2, 3], 'match': 'at-least-one-positioned-symbol',
              'min_diacritics': None, 'exclude_private_collections': True,
              'excluded_face_bases': [f'S{base:03x}' for base in sorted(EXCLUDED_FACE_BASES)]}
 FIELDS = ['fsw', 'fsw-face', 'uni-face', 'source_file', 'entry_id', 'source_offset',
@@ -29,7 +29,7 @@ def extract_eye_gaze(text, sizes):
     positions = [p for p, _ in starts]
     ends = [m.start() for m in ENTRY_END_RE.finditer(text)]
     rows = []
-    audit = dict(signs_scanned=0, gaze_signs=0, excluded_fill_zero_only=0,
+    audit = dict(signs_scanned=0, gaze_signs=0, excluded_other_fills=0,
                  matched_gaze_symbols=0, mixed_gaze_fills=0, normalization_errors=0,
                  unknown_gaze_variants=0)
     for match in SIGN_RE.finditer(text):
@@ -40,12 +40,12 @@ def extract_eye_gaze(text, sizes):
         if not gaze:
             continue
         audit['gaze_signs'] += 1
-        selected = [s for s in gaze if s.key[4] != '0']
+        selected = [s for s in gaze if s.key[4] in '23']
         if not selected:
-            audit['excluded_fill_zero_only'] += 1
+            audit['excluded_other_fills'] += 1
             continue
         audit['matched_gaze_symbols'] += len(selected)
-        mixed = any(s.key[4] == '0' for s in gaze)
+        mixed = any(s.key[4] not in '23' for s in gaze)
         audit['mixed_gaze_fills'] += mixed
         face_items = [s for s in spatial if 0x2ff <= s.base <= 0x36c
                       and s.base not in EXCLUDED_FACE_BASES]
@@ -68,7 +68,7 @@ def extract_eye_gaze(text, sizes):
         if heads > 1:
             flags.append('multiple-heads')
         if mixed:
-            flags.append('also-fill-zero-gaze')
+            flags.append('also-other-gaze-fills')
         index = bisect.bisect_right(positions, match.start()) - 1
         previous_end = bisect.bisect_right(ends, match.start()) - 1
         entry_id = None
@@ -136,14 +136,14 @@ def process(source: Path, output: Path):
             (output / 'metadata' / f'{path.stem}.json').write_text(
                 json.dumps({'file': info, 'records': records}, ensure_ascii=False, separators=(',', ':')) + '\n')
             files.append(info)
-            print(f'{path.name}: {len(records):,} nonzero-fill gaze occurrences', flush=True)
+            print(f'{path.name}: {len(records):,} fill-2/3 gaze occurrences', flush=True)
     fields = ('rows', 'unique_fsw', 'head_inserted', 'multiple_heads', 'signs_scanned',
-              'gaze_signs', 'excluded_fill_zero_only', 'matched_gaze_symbols',
+              'gaze_signs', 'excluded_other_fills', 'matched_gaze_symbols',
               'mixed_gaze_fills', 'normalization_errors', 'unknown_gaze_variants')
     # unique_fsw is reported per file; do not sum it into a corpus-wide unique count.
     totals = {key: sum(f[key] for f in files) for key in fields if key != 'unique_fsw'}
     report = dict(analysis_id=ANALYSIS_ID, profile=PROFILE, selection=SELECTION,
-                  query='S32[1-9][1-5][0-9a-f] at a spatial coordinate',
+                  query='S32[1-9][23][0-9a-f] at a spatial coordinate',
                   excluded_collections=excluded, files=files, totals=totals)
     (output / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(totals, indent=2))

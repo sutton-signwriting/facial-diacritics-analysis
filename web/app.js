@@ -33,9 +33,9 @@ function errorPanel(error) {
 
 function home() {
   const {totals, files} = manifest;
-  const heading = eyeGaze ? 'Eye gaze<br><em>with nonzero fills.</em>' : 'Facial diacritics<br><em>in the record.</em>';
-  const introduction = eyeGaze ? 'Signs containing at least one positioned S321–S329 symbol with fill 1–5. Every diacritic count is included.' : 'Follow a written sign from its original composition to its facial symbols and a provisional Unicode sequence.';
-  const scope = eyeGaze ? 'Selection uses the original source signbox, without a minimum diacritic count. The full sign and facial context are retained. Signs with both zero-fill and nonzero-fill gaze are included and flagged.' : 'Only faces with at least two diacritics are included.';
+  const heading = eyeGaze ? 'Eye gaze<br><em>with fills 2 and 3.</em>' : 'Facial diacritics<br><em>in the record.</em>';
+  const introduction = eyeGaze ? 'Signs containing at least one positioned S321–S329 symbol with fill 2 or 3. Every diacritic count is included.' : 'Follow a written sign from its original composition to its facial symbols and a provisional Unicode sequence.';
+  const scope = eyeGaze ? 'Selection uses the original source signbox, without a minimum diacritic count. The full sign and facial context are retained. Signs with both fill-2/3 gaze and other gaze fills are included and flagged.' : 'Only faces with at least two diacritics are included.';
   app.innerHTML = `<section class="hero"><p class="eyebrow">SIGNPUDDLE · FACIAL WRITING · EXPLORATORY DATA</p>
     <div class="hero-grid"><h1>${heading}</h1><div class="hero-copy"><p>${introduction}</p><p class="muted">${eyeGaze ? '<a href="data/all.csv" download>Download all matching signs as CSV ↓</a>' : 'An inspection tool for asking what a representation keeps.'}</p></div></div>
     <div class="stats"><div><strong>${fmt(totals.rows)}</strong><span>facial sign occurrences</span></div><div><strong>${fmt(files.length)}</strong><span>source collections</span></div><div><strong>${fmt(totals.head_inserted)}</strong><span>HEADs prepended in Unicode</span></div><div><strong>3</strong><span>views of each record</span></div></div></section>
@@ -76,8 +76,8 @@ function details(label, text) {
 
 async function dataset(id) {
   const [{file, records}] = await Promise.all([getJSON(`data/files/${encodeURIComponent(id)}.json`), loadFonts()]);
-  if (eyeGaze && records.some(record => !/S32[1-9][1-5][0-9a-f][0-9]{3}x[0-9]{3}/.test(record.fsw))) {
-    throw new Error('The eye-gaze data contain a source sign without the required nonzero-fill symbol.');
+  if (eyeGaze && records.some(record => !/S32[1-9][23][0-9a-f][0-9]{3}x[0-9]{3}/.test(record.fsw))) {
+    throw new Error('The eye-gaze data contain a source sign without the required fill-2/3 symbol.');
   }
   records.forEach((record, i) => { record.row = i + 1; });
   let selected, headFilter, gazeFilter, pageNumber, pageSize;
@@ -91,7 +91,8 @@ async function dataset(id) {
     headFilter = params.get('heads') || 'all';
     if (!['all','inserted','existing','multiple'].includes(headFilter)) headFilter = 'all';
     gazeFilter = eyeGaze ? params.get('gaze') || 'any' : 'any';
-    if (!['any','nonzero','mixed'].includes(gazeFilter)) gazeFilter = 'any';
+    if (gazeFilter === 'nonzero') gazeFilter = 'selected';
+    if (!['any','selected','mixed'].includes(gazeFilter)) gazeFilter = 'any';
     const size = params.get('rows');
     pageSize = size === 'all' ? 'all' : ['25','50','100'].includes(size) ? Number(size) : 25;
     const number = Number(params.get('page'));
@@ -114,9 +115,9 @@ async function dataset(id) {
     return url;
   }
   readView();
-  app.innerHTML = `<a class="breadcrumb" href="../index.html">← ${eyeGaze ? 'Eye gaze collections' : 'All collections'}</a><section class="dataset-head"><p class="eyebrow">${eyeGaze ? 'EYE GAZE · S321–S329 · NONZERO FILLS' : 'SOURCE COLLECTION'}</p><h1>${esc(file.source_file)}</h1><p class="dataset-title">${esc(file.title || 'Untitled collection')}</p><div class="dataset-meta"><span><b>${fmt(file.rows)}</b> ${eyeGaze ? 'matching gaze occurrences' : 'facial occurrences'}</span><span><b>${fmt(file.unique_fsw)}</b> unique source signboxes</span><span><b>${fmt(file.head_inserted)}</b> prepended HEADs</span><a href="../data/raw/${encodeURIComponent(id)}.csv" download>Download CSV ↓</a></div></section>
+  app.innerHTML = `<a class="breadcrumb" href="../index.html">← ${eyeGaze ? 'Eye gaze collections' : 'All collections'}</a><section class="dataset-head"><p class="eyebrow">${eyeGaze ? 'EYE GAZE · S321–S329 · FILLS 2 AND 3' : 'SOURCE COLLECTION'}</p><h1>${esc(file.source_file)}</h1><p class="dataset-title">${esc(file.title || 'Untitled collection')}</p><div class="dataset-meta"><span><b>${fmt(file.rows)}</b> ${eyeGaze ? 'matching gaze occurrences' : 'facial occurrences'}</span><span><b>${fmt(file.unique_fsw)}</b> unique source signboxes</span><span><b>${fmt(file.head_inserted)}</b> prepended HEADs</span><a href="../data/raw/${encodeURIComponent(id)}.csv" download>Download CSV ↓</a></div></section>
     ${file.publication_review_required ? '<div class="notice amber">This publicly downloadable source is labelled private. This local inspection copy awaits a publication decision.</div>' : ''}
-    <div class="mapping-note"><span class="status-dot"></span><p><strong>${eyeGaze ? 'Nonzero-fill eye gaze.' : 'Provisional Unicode mapping.'}</strong> ${eyeGaze ? 'Each record contains S321–S329 with fill 1–5, selected from the source without a diacritic-count cutoff. Matching keys and original coordinates are listed below. ' : ''}The first S2ff resource is moved to the front, or a default HEAD is prepended. Other resources retain source order. Geometry is not transferred.</p><a href="${prefix}methods.html${eyeGaze ? '#eye-gaze' : ''}">Mapping details ↗</a></div>
+    <div class="mapping-note"><span class="status-dot"></span><p><strong>${eyeGaze ? 'Eye gaze with fills 2 and 3.' : 'Provisional Unicode mapping.'}</strong> ${eyeGaze ? 'Each record contains S321–S329 with fill 2 or 3, selected from the source without a diacritic-count cutoff. Matching keys and original coordinates are listed below. ' : ''}The first S2ff resource is moved to the front, or a default HEAD is prepended. Other resources retain source order. Geometry is not transferred.</p><a href="${prefix}methods.html${eyeGaze ? '#eye-gaze' : ''}">Mapping details ↗</a></div>
     <section class="records-section"><div class="toolbar record-controls"><label>Number of diacritics<select id="diacritics"><option value="all">${eyeGaze ? 'All counts' : 'All counts (2+)'}</option>${counts.map(n=>`<option value="${n}">${n} ${n===1?'diacritic':'diacritics'}</option>`).join('')}</select></label><label>Unicode HEAD<select id="heads"><option value="all">All records</option><option value="inserted">Prepended HEAD</option><option value="existing">Existing HEAD</option><option value="multiple">Multiple HEADs</option></select></label><label>Rows per page<select id="page-size"><option>25</option><option>50</option><option>100</option><option value="all">All rows</option></select></label><p id="record-status" role="status" aria-live="polite"></p></div>
     <div class="table-wrap record-table-wrap"><table class="records"><thead><tr><th scope="col">Record</th><th scope="col">Original sign <span>FSW source signbox</span></th><th scope="col">Facial composition <span>Filtered &amp; normalized FSW</span></th><th scope="col">Unicode face <span>Noto Sans SignWriting</span></th></tr></thead><tbody id="records"></tbody></table></div>
     <div class="pagination"><button id="previous" type="button">← Previous</button><span id="page-status"></span><button id="next" type="button">Next →</button></div><p class="fineprint">“Diacritics” counts retained non-S2ff resources, excluding fill and rotation modifiers. Air and breath symbols S337–S33a are excluded before counting. Each FSW view fits its own cell. Unicode uses the bundled Noto font; display does not establish equivalence.</p></section>`;
@@ -124,13 +125,13 @@ async function dataset(id) {
   const heads = document.querySelector('#heads');
   const sizeSelect = document.querySelector('#page-size');
   if (eyeGaze) {
-    sizeSelect.closest('label').insertAdjacentHTML('beforebegin', '<label>Gaze fills<select id="gaze-fills"><option value="any">Any nonzero gaze</option><option value="nonzero">Only nonzero gaze fills</option><option value="mixed">Also contains fill 0</option></select></label>');
+    sizeSelect.closest('label').insertAdjacentHTML('beforebegin', '<label>Gaze fills<select id="gaze-fills"><option value="any">Any fill-2/3 gaze</option><option value="selected">Only gaze fills 2 and 3</option><option value="mixed">Also contains other fills</option></select></label>');
   }
   const gazeSelect = document.querySelector('#gaze-fills');
   function matches(r) {
     return (selected === 'all' || r.diacritics === Number(selected)) &&
       (headFilter === 'all' || (headFilter === 'inserted' ? r.head_inserted : headFilter === 'existing' ? !r.head_inserted : r.head_count > 1)) &&
-      (gazeFilter === 'any' || (gazeFilter === 'mixed') === r.flags.includes('also-fill-zero-gaze'));
+      (gazeFilter === 'any' || (gazeFilter === 'mixed') === r.flags.includes('also-other-gaze-fills'));
   }
   function signView(sign, label) {
     if (!sign) return '<p class="muted">Facial normalization unavailable; source retained.</p>';
