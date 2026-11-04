@@ -89,7 +89,8 @@
   },
   "verified_links": {
     "repository": "https://github.com/sutton-signwriting/facial-diacritics-analysis",
-    "website": "https://www.sutton-signwriting.io/facial-diacritics-analysis/"
+    "website": "https://www.sutton-signwriting.io/facial-diacritics-analysis/",
+    "article_examples": "https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/examples/"
   },
   "proposed_uploads": [
     "facial-diacritics-data-v0.6.0.zip",
@@ -112,8 +113,5 @@
     "collections": 10,
     "source": "data/eye-gaze/article-examples.json",
     "selection": "purposive, without a prevalence claim"
-  },
-  "proposed_links": {
-    "article_examples": "https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/examples/"
   }
 }

@@ -102,7 +102,13 @@ Version 0.6.0 adds the article's complete 24-case eye-gaze selection at
 source snapshot, 154,755 facial occurrences, 632 gaze occurrences, and mapping
 profile are unchanged. The hashes above identify the initial deployment for
 rollback; subsequent reviewed artifacts receive their own source and deployment
-commits.
+commits. The verified 0.6.0 deployment is recorded below:
+
+- [All 24 article examples](https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/examples/).
+- Frozen source commit: `cc530141f1aa40e15a58edf40676464c3a890c8d`.
+- Deployment commit: `5a5f1ba0b07cac17934419f526fd54f27e6eb553`.
+- Site ZIP SHA-256: `5dd01d669d01a4b74b69df34c26e115b92eee4fbbe36397284c7cf7795a8c899`.
+- [Successful deployment](https://github.com/sutton-signwriting/facial-diacritics-analysis/actions/runs/41919155630).
 
 Keep bulk processing outputs outside the `main` source branch, but include them
 explicitly in the data archive. The `gh-pages` distribution branch contains the
