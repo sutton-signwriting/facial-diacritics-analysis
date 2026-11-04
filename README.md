@@ -3,9 +3,10 @@
 An exploratory SignPuddle data pipeline and static browser for comparing original
 FSW signboxes, normalized facial subsets, and a direct mapping to official Unicode.
 
-Intended repository: `sutton-signwriting/facial-diacritics-analysis`.
-Intended Pages URL: `https://sutton-signwriting.github.io/facial-diacritics-analysis/`.
-These are proposed targets, not claims that the repository or site is published.
+Source repository: [sutton-signwriting/facial-diacritics-analysis](https://github.com/sutton-signwriting/facial-diacritics-analysis), public as of 4 November 2026.
+The public inspection website and archival dataset release are being prepared.
+The proposed Pages URL is `https://sutton-signwriting.github.io/facial-diacritics-analysis/`;
+the live address will be verified after deployment.
 
 ## Local use
 
@@ -148,8 +149,9 @@ and deploys it. It never silently downloads a newer SignPuddle corpus.
 The [Zenodo-first publication plan](docs/publication.md) and [prepared metadata](publication/README.md)
 describe the frozen data-and-method release and its relationship to *Standardizing
 the Record*. A separate peer-reviewed data/resource paper is deferred;
-[venue options](docs/data-publications.md) are retained for later consideration. No DOI, release,
-submission, public repository, or public deployment has been created by this setup.
+[venue options](docs/data-publications.md) are retained for later consideration. The source
+repository is public; no archival DOI, GitHub Release, journal submission, or public
+website deployment has been created yet.
 
 ## Layout
 

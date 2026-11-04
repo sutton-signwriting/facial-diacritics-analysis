@@ -1,13 +1,15 @@
 # Zenodo-first publication plan
 
-Status: local preparation, 4 November 2026. The intended output is a citable
+Status: source repository published; archival release preparation, 4 November
+2026. The intended output is a citable
 release of the **current exploratory research resource**. A separate data-paper
 submission is deferred. Comprehensive face curation, segmentation, alternative
 fill search, and converter validation are outside this bounded release.
 
 A Zenodo deposit is still a public archival release, with accurate files,
-provenance, license scope, and limitations. No DOI, public repository, Pages
-deployment, or journal submission has been created by this preparation.
+provenance, license scope, and limitations. The [source repository](https://github.com/sutton-signwriting/facial-diacritics-analysis)
+is public. No DOI, GitHub Release, Pages deployment, or journal submission has
+been created yet.
 
 ## Objects and versions
 
@@ -75,9 +77,9 @@ selection and counts.
 
 ## 3. Freeze data, source, and website packages
 
-Proposed repository: `sutton-signwriting/facial-diacritics-analysis`.
+Public source repository: [sutton-signwriting/facial-diacritics-analysis](https://github.com/sutton-signwriting/facial-diacritics-analysis).
 Proposed browser: `https://sutton-signwriting.github.io/facial-diacritics-analysis/`.
-These are targets, not claims that either has been published.
+The browser address remains a proposed target until deployment is verified.
 
 Keep bulk generated CSVs and sidecars outside Git history, but include them
 explicitly in the data archive. Source manifests, publication metadata,
@@ -133,7 +135,7 @@ material following the platform-record information pattern:
 | Publisher | Zenodo. |
 | Publication date | Actual public release date, not snapshot or draft date. Currently unset. |
 | DOI | Reserve only in an actual Zenodo draft. Currently unset; a reservation is not a published identifier. |
-| Related identifiers | Source directory as derived-from; Formal SignWriting and platform DOI as references. Verify repository/site links once public. |
+| Related identifiers | Source directory as derived-from; Formal SignWriting and platform DOI as references. Repository URL verified; verify the website link after deployment. |
 | Funding/contributors | Unset until supplied accurately; no affiliation or absence-of-funding assurance is invented. |
 | Files | The exact reviewed packages and checksums. |
 
@@ -145,8 +147,9 @@ Remove the description's local preparation note after resolving its open fields.
 
 ## 5. Publish only the reviewed release
 
-Once source scope and metadata are ready, obtain the user's direction for the
-concrete repository, release files, Pages target, and Zenodo record. Publish the
+The user authorized the public source repository, which is now published. Once
+source scope and metadata are ready, obtain direction for the concrete release
+files, Pages target, and Zenodo record. Publish the
 reviewed packages, deploy the same frozen site artifact, publish the dataset
 record, and verify returned public URLs and deposited files.
 
