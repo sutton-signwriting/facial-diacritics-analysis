@@ -8,6 +8,7 @@ ROOT_FILES = (
     'README.md', 'AGENTS.md', 'LICENSE', 'LICENSE-CC-BY-4.0.txt', 'LICENSING.md',
     'CITATION.cff', 'requirements.txt', 'package.json', 'package-lock.json',
     'docker-compose.yml', 'nginx.conf', '.gitignore', 'data/source-manifest.json',
+    'data/eye-gaze/article-examples.json',
 )
 SOURCE_FOLDERS = ('scripts', 'tests', 'web', 'docs', 'assets', 'publication', '.github')
 

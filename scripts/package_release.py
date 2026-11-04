@@ -49,6 +49,8 @@ def package():
         gaze = json.loads((site / 'eye-gaze/data/manifest.json').read_text())
         archive.writestr('data/eye-gaze/report.json', json.dumps(gaze, ensure_ascii=False, indent=2) + '\n')
         archive.write(site / 'eye-gaze/data/all.csv', 'data/eye-gaze/all.csv')
+        for name in ('examples.json', 'examples.csv'):
+            archive.write(site / 'eye-gaze/data' / name, 'data/eye-gaze/' + name)
         for info in gaze['files']:
             stem = info['id']
             archive.write(site / f'eye-gaze/data/raw/{stem}.csv', f'data/eye-gaze/raw/{stem}.csv')

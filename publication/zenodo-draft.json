@@ -18,7 +18,7 @@
       }
     ],
     "publisher": "Zenodo",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "publication_date": null,
     "doi": null,
     "description_file": "publication/zenodo-description.html",
@@ -92,8 +92,8 @@
     "website": "https://www.sutton-signwriting.io/facial-diacritics-analysis/"
   },
   "proposed_uploads": [
-    "facial-diacritics-data-v0.5.0.zip",
-    "facial-diacritics-site-v0.5.0.zip",
+    "facial-diacritics-data-v0.6.0.zip",
+    "facial-diacritics-site-v0.6.0.zip",
     "SHA256SUMS.txt"
   ],
   "remaining_decisions": [
@@ -103,5 +103,17 @@
     "Finalize and commit the reviewed release; record the actual commit and final archive checksums.",
     "Remove the local preparation note from the description and review the final license scope before publication."
   ],
-  "deferred": "A peer-reviewed data/resource paper is optional and is not part of the current release work."
+  "deferred": "A peer-reviewed data/resource paper is optional and is not part of the current release work.",
+  "article_examples": {
+    "id": "article-eye-gaze-examples-v1",
+    "selected_signs": 24,
+    "single_gaze": 21,
+    "two_gazes": 3,
+    "collections": 10,
+    "source": "data/eye-gaze/article-examples.json",
+    "selection": "purposive, without a prevalence claim"
+  },
+  "proposed_links": {
+    "article_examples": "https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/examples/"
+  }
 }

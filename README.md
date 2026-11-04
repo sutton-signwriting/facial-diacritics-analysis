@@ -5,7 +5,7 @@ FSW signboxes, normalized facial subsets, and a direct mapping to official Unico
 
 Source repository: [sutton-signwriting/facial-diacritics-analysis](https://github.com/sutton-signwriting/facial-diacritics-analysis), public as of 4 November 2026.
 Public website: [Facial Diacritics Analysis](https://www.sutton-signwriting.io/facial-diacritics-analysis/),
-version **0.5.0**, published on 4 November 2026. The archival dataset deposit is
+version **0.6.0**, updated on 4 November 2026. The archival dataset deposit is
 being prepared separately.
 
 ## Local use
@@ -45,6 +45,22 @@ beside each sign. Mixed-fill signs are flagged and can be filtered out.
 Run `npm run process:eye-gaze` to regenerate only this analysis. Its outputs live
 under `data/eye-gaze/`, separate from the original CSVs and metadata. `npm run process`
 regenerates both analyses. See [the eye-gaze method](docs/eye-gaze.md).
+
+## Article examples
+
+[All 24 selected eye-gaze examples](https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/examples/)
+appear in one uniform table, with no featured pair or pagination. Every example
+has its own link, original FSW sign, normalized facial subset, Noto comparison,
+full-dataset record link, and original SignPuddle entry. CSV and JSON downloads
+retain the complete selection and provenance. The selection contains 21 signs
+with one gaze (ten page-left and eleven page-right) and three with two gazes,
+across ten collections. It is a purposive selection, not a frequency estimate;
+the page links to the full 632-occurrence eye-gaze listing.
+
+`data/eye-gaze/article-examples.json` is the curated source input. The build
+checks every selected FSW string, entry ID, gaze key and source snapshot hash
+against the included public eye-gaze records before resolving its direct link.
+It does not depend on a local manuscript checkout or change the corpus.
 
 ## LAN service
 
@@ -110,6 +126,7 @@ npm run build
 npm run test:browser
 npm run test:links
 npm run test:eye-gaze
+npm run test:examples
 ```
 
 The browser check uses Playwright. If a browser is already installed, set

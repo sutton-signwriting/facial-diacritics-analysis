@@ -49,7 +49,7 @@ to the writing rather than attributing its authorship to the dataset compiler.
 
 Example credit:
 
-> Slevinski, Steve. Facial Diacritics Analysis, version 0.5.0. Source writing:
+> Slevinski, Steve. Facial Diacritics Analysis, version 0.6.0. Source writing:
 > SignPuddle contributors and the Sutton SignWriting community. Source snapshot:
 > 1 November 2026. Mapping: direct-symbol-order-v0.1. Original research
 > documentation and publisher-created contributions: CC BY 4.0; code: MIT.

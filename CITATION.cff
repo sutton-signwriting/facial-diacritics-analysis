@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Cite this software version and the exact dataset release used. The local publication draft has no assigned DOI. Data licensing is described separately in LICENSING.md."
 type: software
 title: "Facial Diacritics Analysis"
-version: 0.5.0
+version: 0.6.0
 authors:
   - family-names: Slevinski
     given-names: Steve

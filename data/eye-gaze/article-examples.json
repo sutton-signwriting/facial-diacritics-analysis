@@ -1,0 +1,299 @@
+{
+  "id": "article-eye-gaze-examples-v1",
+  "selection": "The article's 24 selected source compositions; a purposive selection, not a frequency sample.",
+  "source_register_sha256": "83fd6f856ee3e9de4333b54d30e8091c393ad0600e2f68b9a6ae67479f1f1907",
+  "annotation": "Page-side positions from the article's recorded visual annotations; these labels do not assign anatomical laterality.",
+  "cases": [
+    {
+      "id": "A01",
+      "collection": "sgn114",
+      "entry_id": "1920",
+      "fsw": "M584x560S34200482x483S32127501x491S15a1a478x548S15d40565x479S31520482x483",
+      "source_sha256": "f23f2c4211914d6cd34a743e889f3036b67e536393535e9ba673fae7d5514b38",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32127"
+      ]
+    },
+    {
+      "id": "A02",
+      "collection": "sgn114",
+      "entry_id": "1920",
+      "fsw": "M541x559S34200482x483S32127501x491S15a1a482x547S15d40522x481S31520482x483",
+      "source_sha256": "f23f2c4211914d6cd34a743e889f3036b67e536393535e9ba673fae7d5514b38",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32127"
+      ]
+    },
+    {
+      "id": "A03",
+      "collection": "sgn114",
+      "entry_id": "1920",
+      "fsw": "M584x560S34200482x483S31920482x483S15a1a480x548S15d40565x479S32127501x491",
+      "source_sha256": "f23f2c4211914d6cd34a743e889f3036b67e536393535e9ba673fae7d5514b38",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32127"
+      ]
+    },
+    {
+      "id": "A04",
+      "collection": "sgn155",
+      "entry_id": "43758",
+      "fsw": "M550x540S30302482x477S11810529x494S26a00523x526S31b40501x501S32422489x501",
+      "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+      "eye_position": "page-left",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32422"
+      ]
+    },
+    {
+      "id": "A05",
+      "collection": "sgn155",
+      "entry_id": "45950",
+      "fsw": "M559x521S2ff00482x483S31b40503x496S32422488x495S11817520x496S27000519x471",
+      "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+      "eye_position": "page-left",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32422"
+      ]
+    },
+    {
+      "id": "A06",
+      "collection": "sgn16",
+      "entry_id": "2526",
+      "fsw": "M540x523S35a03482x477S36a00482x477S19202521x492S22b00524x458S20500508x508S31520482x477S32120502x484",
+      "source_sha256": "f0a64ecf8a67719c64f7c0967efa00ac551d576b7d880cd0dea291f2c5a4da6d",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32120"
+      ]
+    },
+    {
+      "id": "A07",
+      "collection": "sgn44",
+      "entry_id": "9068",
+      "fsw": "M535x562S1f901506x531S21b00511x520S31620482x483S32430502x490S26500521x547",
+      "source_sha256": "8e0e156148a8c0a73503968ecd3b3936ed0b10719e14a0d717e5196c38c0fefc",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32430"
+      ]
+    },
+    {
+      "id": "A08",
+      "collection": "sgn46",
+      "entry_id": "37000",
+      "fsw": "M523x534S31a20477x487S10009461x503S36d01481x523S30156493x478S32126499x496",
+      "source_sha256": "0d273dad7e0a559b538ce18526cbc739bbb68b9e334ea097a90526ced41fbebe",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32126"
+      ]
+    },
+    {
+      "id": "A10",
+      "collection": "sgn5",
+      "entry_id": "695",
+      "fsw": "M518x598S31520482x482S30d40501x487S32137502x495S18d20491x528S1f720491x559S19a20489x578",
+      "source_sha256": "dc853fcda4e12340307701ebe78ed6f5a55adaee5f496e9d692bf3f704380d7d",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32137"
+      ]
+    },
+    {
+      "id": "A11",
+      "collection": "sgn78",
+      "entry_id": "7023",
+      "fsw": "M544x579S30305486x477S32422506x499S31540493x502S34110498x511S20500515x509S10a10522x513S37d06536x530S2e230524x547S36d03478x524",
+      "source_sha256": "a294c644ca7e03cb9960b664d220dbe1567ff5633f6b75601732e1da92b41c9a",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32422"
+      ]
+    },
+    {
+      "id": "A12",
+      "collection": "sgn78",
+      "entry_id": "7024",
+      "fsw": "M521x578S36d03479x534S30106482x477S31540486x502S32422501x500S34110490x510S20800488x568S1eb02494x546",
+      "source_sha256": "a294c644ca7e03cb9960b664d220dbe1567ff5633f6b75601732e1da92b41c9a",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32422"
+      ]
+    },
+    {
+      "id": "A13",
+      "collection": "sgn78",
+      "entry_id": "7025",
+      "fsw": "M529x606S30106486x477S31540493x502S32422507x500S34110498x510S1f54a478x539S1f542506x538S36d00479x531S37601469x537S37609515x535S28804508x570S2881c479x571S2fd00492x600",
+      "source_sha256": "a294c644ca7e03cb9960b664d220dbe1567ff5633f6b75601732e1da92b41c9a",
+      "eye_position": "page-right",
+      "context": "gaze-with-eye-state",
+      "gaze_keys": [
+        "S32422"
+      ]
+    },
+    {
+      "id": "B01",
+      "collection": "sgn116",
+      "entry_id": "3344",
+      "fsw": "M518x518S2ff00482x483S32125489x491S32123502x491S33b00482x483",
+      "source_sha256": "18b70d3cc4d96473667c7967c13c52f0e6a032d76c35240846bd618966c8975f",
+      "eye_position": "both eye positions",
+      "context": "two-gazes",
+      "gaze_keys": [
+        "S32125",
+        "S32123"
+      ]
+    },
+    {
+      "id": "B02",
+      "collection": "sgn116",
+      "entry_id": "3345",
+      "fsw": "M518x518S2ff00482x483S32425489x492S32423502x492S33b00482x483",
+      "source_sha256": "18b70d3cc4d96473667c7967c13c52f0e6a032d76c35240846bd618966c8975f",
+      "eye_position": "both eye positions",
+      "context": "two-gazes",
+      "gaze_keys": [
+        "S32425",
+        "S32423"
+      ]
+    },
+    {
+      "id": "B03",
+      "collection": "sgn4",
+      "entry_id": "9506",
+      "fsw": "M518x518S2ff10482x489S30c30489x482S32422501x495S32426490x495",
+      "source_sha256": "bfb1bbc99fa878669f2ac5c5560f9ad7474f80a173ba35d47c4ce188d4bcbd52",
+      "eye_position": "both eye positions",
+      "context": "two-gazes",
+      "gaze_keys": [
+        "S32422",
+        "S32426"
+      ]
+    },
+    {
+      "id": "C01",
+      "collection": "sgn151",
+      "entry_id": "4059",
+      "fsw": "R564x530S2ff00485x483S22a07531x482S16d10510x488S16d10547x461S36d03479x519S32127493x491",
+      "source_sha256": "65e4e3cdad156576b6ab511667099982a3a575e37a789ca6f966bc16cd4e3540",
+      "eye_position": "page-left",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32127"
+      ]
+    },
+    {
+      "id": "C02",
+      "collection": "sgn151",
+      "entry_id": "4059",
+      "fsw": "M518x518S2ff00482x483S1ed18435x442S22a11451x468S1ed18462x482S32121501x491",
+      "source_sha256": "65e4e3cdad156576b6ab511667099982a3a575e37a789ca6f966bc16cd4e3540",
+      "eye_position": "page-right",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32121"
+      ]
+    },
+    {
+      "id": "D01",
+      "collection": "sgn155",
+      "entry_id": "7658",
+      "fsw": "M530x518S2ff00482x483S1ed10504x488S37d03521x485S20500501x492S32126489x493",
+      "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+      "eye_position": "page-left",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32126"
+      ]
+    },
+    {
+      "id": "D02",
+      "collection": "sgn155",
+      "entry_id": "8759",
+      "fsw": "M532x518S32122488x497S2ff00482x483S37c03522x486S20500501x495S1ed10506x490",
+      "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+      "eye_position": "page-left",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32122"
+      ]
+    },
+    {
+      "id": "D03",
+      "collection": "sgn155",
+      "entry_id": "29796",
+      "fsw": "M528x523S2f800478x471S32424490x496S30400482x478S20500503x499S34d10497x512S1ce02498x501",
+      "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+      "eye_position": "page-left",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32424"
+      ]
+    },
+    {
+      "id": "D04",
+      "collection": "sgn155",
+      "entry_id": "59305",
+      "fsw": "M539x532S30156494x476S2ff00482x490S1bb40517x504S27709521x485S21c00528x508S20500504x498S32126491x500S36520497x512",
+      "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+      "eye_position": "page-left",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32126"
+      ]
+    },
+    {
+      "id": "D05",
+      "collection": "sgn155",
+      "entry_id": "61233",
+      "fsw": "M529x530S26500515x476S20350505x496S36d01479x519S34400480x483S20500502x489S32123488x489",
+      "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+      "eye_position": "page-left",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32123"
+      ]
+    },
+    {
+      "id": "D06",
+      "collection": "sgn46",
+      "entry_id": "36505",
+      "fsw": "M544x524S30007482x489S15a11521x494S20600513x482S30150496x477S32421492x496S34810489x508",
+      "source_sha256": "0d273dad7e0a559b538ce18526cbc739bbb68b9e334ea097a90526ced41fbebe",
+      "eye_position": "page-left",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32421"
+      ]
+    },
+    {
+      "id": "D07",
+      "collection": "sgn46",
+      "entry_id": "47734",
+      "fsw": "M543x518S2ff00482x483S17610506x486S32427492x493S26c03523x497",
+      "source_sha256": "0d273dad7e0a559b538ce18526cbc739bbb68b9e334ea097a90526ced41fbebe",
+      "eye_position": "page-left",
+      "context": "gaze-without-eye-state",
+      "gaze_keys": [
+        "S32427"
+      ]
+    }
+  ]
+}

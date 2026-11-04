@@ -15,7 +15,7 @@ are public. No DOI, GitHub Release, or journal submission has been created yet.
 
 | Object | Role and current version |
 | --- | --- |
-| Software/browser | **0.5.0**, with the frozen inspection website published on GitHub Pages. |
+| Software/browser | **0.6.0**, with the frozen inspection website published on GitHub Pages. |
 | Primary facial selection | **facial-subset-v0.3.0**: 154,755 occurrences, 152 included collections, at least two retained diacritics. |
 | Eye-gaze selection | **eye-gaze-fills-2-3-v0.1**: 632 occurrences, 30 collections with results, no diacritic threshold. |
 | Unicode mapping | **direct-symbol-order-v0.1**, unchanged. |
@@ -81,7 +81,7 @@ Public source repository: [sutton-signwriting/facial-diacritics-analysis](https:
 Public browser: [Facial Diacritics Analysis](https://www.sutton-signwriting.io/facial-diacritics-analysis/).
 The GitHub-hosted address redirects to the organization's existing Pages domain.
 
-The 4 November 2026 deployment publishes the exact 935 files in the reviewed
+The initial 0.5.0 deployment on 4 November 2026 published the exact 935 files in the reviewed
 `facial-diacritics-site-v0.5.0.zip`, including `.nojekyll`, on `gh-pages` at `/`:
 
 - Frozen site source commit: `73b6b65aeb1d7a53a9821b69103a79576d9c7d18`.
@@ -96,6 +96,13 @@ reviewed artifact as a new commit; do not rewrite branch history. Disabling Page
 is the available rollback for this first deployment, which has no earlier site.
 The release-asset workflow in `main` remains an alternative requiring a future
 GitHub Release and a deliberate change of Pages source to GitHub Actions.
+
+Version 0.6.0 adds the article's complete 24-case eye-gaze selection at
+`eye-gaze/examples/`, presented uniformly with direct links and downloads. The
+source snapshot, 154,755 facial occurrences, 632 gaze occurrences, and mapping
+profile are unchanged. The hashes above identify the initial deployment for
+rollback; subsequent reviewed artifacts receive their own source and deployment
+commits.
 
 Keep bulk processing outputs outside the `main` source branch, but include them
 explicitly in the data archive. The `gh-pages` distribution branch contains the
@@ -116,10 +123,10 @@ local candidate is not the unmodified base commit.
 
 Prepare these files under `artifacts/`:
 
-- `facial-diacritics-data-v0.5.0.zip`: CSVs, row provenance, reports, original
+- `facial-diacritics-data-v0.6.0.zip`: CSVs, row provenance, reports, original
   source-manifest bytes, code/tests/docs, assets and licenses, publication
   metadata, rights scope, and source-file checksums.
-- `facial-diacritics-site-v0.5.0.zip`: the exact static browser, included data,
+- `facial-diacritics-site-v0.6.0.zip`: the exact static browser, included data,
   bundled fonts, methods, and licensing page.
 - `SHA256SUMS.txt`: hashes identifying both frozen packages.
 
@@ -145,7 +152,7 @@ material following the platform-record information pattern:
 | Title | Facial Diacritics Analysis: Source-linked SignPuddle Compositions and Single-Eye Gaze |
 | Creator | Steve Slevinski; ORCID copied from the existing project citation file. Confirm final creator/contributor roles. |
 | Resource type | Dataset. |
-| Version | 0.5.0 for the coordinated package; retain separate analysis and mapping identifiers. |
+| Version | 0.6.0 for the coordinated package; retain separate analysis and mapping identifiers. |
 | Description | Source snapshot, counts, methods, limitations, reuse, attribution, and license layers. |
 | License | CC BY 4.0 for publisher-held compilation contributions, with applicable source terms explicitly retained. Document final source coverage. |
 | Keywords | SignWriting, SignPuddle, facial composition, gaze, Unicode, provenance, writing systems, research data. |

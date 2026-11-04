@@ -79,6 +79,44 @@ function details(label, text) {
   return `<details class="code-details"><summary>${esc(label)}</summary><code>${esc(text)}</code><button class="copy" type="button" data-copy="${esc(text)}">Copy</button></details>`;
 }
 
+async function articleExamples() {
+  const [data] = await Promise.all([getJSON('data/examples.json'), loadFonts()]);
+  const counts = data.counts;
+  const contexts = {'gaze-with-eye-state':'One gaze + other eye-state mark',
+    'gaze-without-eye-state':'One gaze, no other eye-state mark', 'two-gazes':'Two gaze marks'};
+  const positions = {'page-left':'Page-left eye', 'page-right':'Page-right eye',
+    'both eye positions':'Both eye positions'};
+  app.innerHTML = `<a class="breadcrumb" href="../">← All ${fmt(data.corpus_occurrences)} eye-gaze records</a>
+    <section class="hero examples-head"><p class="eyebrow">THE ARTICLE'S COMPLETE SELECTED EXAMPLE SET</p>
+    <div class="hero-grid"><h1>Eye-gaze<br><em>examples.</em></h1><div class="hero-copy"><p>All ${counts.total} selected source compositions, shown with their facial subsets and direct Unicode mappings.</p><p class="muted">How can a writer specify which eye receives a single-eye gaze?</p></div></div>
+    <div class="stats"><div><strong>${counts.total}</strong><span>selected signs</span></div><div><strong>${counts.single_gaze}</strong><span>with one gaze mark</span></div><div><strong>${counts.two_gazes}</strong><span>with two gaze marks</span></div><div><strong>${counts.collections}</strong><span>source collections</span></div></div></section>
+    <section class="collection-section"><div class="section-title"><div><p class="eyebrow">ALL EXAMPLES · ONE LIST</p><h2>Inspect each composition</h2></div><a class="text-link" href="../data/examples.csv" download>Download ${counts.total} examples as CSV ↓</a></div>
+    <p class="examples-intro">The ${counts.single_gaze} single-gaze signs include ${counts.page_left} page-left and ${counts.page_right} page-right assignments. These are selected examples, not a frequency estimate. <a href="../">Inspect the full ${fmt(data.corpus_occurrences)}-record selection ↗</a></p>
+    <div class="mapping-note"><span class="status-dot"></span><p>The Unicode column uses the source symbol variants and the bundled Noto font. A display difference alone does not identify a mapping, font, or encoding limitation.</p><a href="${prefix}methods.html#mapping-limits">Mapping details ↗</a></div>
+    <div class="table-wrap record-table-wrap"><table class="records examples"><thead><tr><th scope="col">Example / source</th><th scope="col">Original sign <span>FSW source signbox</span></th><th scope="col">Facial composition <span>Filtered &amp; normalized FSW</span></th><th scope="col">Direct Unicode mapping <span>Noto Sans SignWriting · source variants</span></th></tr></thead><tbody>
+    ${data.cases.map(c => {
+      const points = Array.from(c['uni-face'], x=>'U+'+x.codePointAt(0).toString(16).toUpperCase()).join(' ');
+      return `<tr id="${esc(c.case_id)}"><th scope="row"><a class="row-number" href="#${esc(c.case_id)}" aria-label="Link to example ${esc(c.case_id)}">${esc(c.case_id)}</a><span class="record-small">${esc(c.collection)} · entry ${esc(c.entry_id)}</span>${tag(positions[c.eye_position])}<span class="record-small">${esc(contexts[c.context])}</span>${c.gaze_matches.map(g=>`<code class="gaze-key">${esc(g.key)}</code>`).join('')}${c.head_inserted ? tag('Default HEAD prepended') : ''}${c.flags.map(mappingFlag).join('')}<a class="source-link" href="${esc(c.dataset_url)}">Full dataset record ↗</a><a class="source-link" href="${esc(c.source_url)}" target="_blank" rel="noopener">Original SignPuddle entry ↗</a></th>
+      <td><div class="sign-view" role="img" aria-label="Original sign for example ${esc(c.case_id)}">${svgFor(c.fsw)}</div>${details('FSW source', c.fsw)}</td>
+      <td><div class="sign-view" role="img" aria-label="Facial composition for example ${esc(c.case_id)}">${svgFor(c['fsw-face'])}</div>${details('FSW face', c['fsw-face'])}</td>
+      <td><div class="unicode-view" dir="ltr" lang="und" role="img" aria-label="Direct Unicode mapping for example ${esc(c.case_id)}">${esc(c['uni-face'])}</div>${details('Unicode code points', points)}${details('Unicode text', c['uni-face'])}</td></tr>`;
+    }).join('')}</tbody></table></div>
+    <p class="fineprint">Every example has a link for sharing. Page-left and page-right describe the written face as displayed, without assigning anatomical laterality. <a href="../data/examples.json">Download the examples and source provenance as JSON</a>. <a href="../data/all.csv" download>Download the full eye-gaze CSV</a>.</p></section>`;
+  app.addEventListener('click', async event => {
+    const button = event.target.closest('[data-copy]');
+    if (!button) return;
+    try { await navigator.clipboard.writeText(button.dataset.copy); button.textContent = 'Copied'; }
+    catch { button.textContent = 'Select the text to copy'; }
+  });
+  function scrollToExample() {
+    const id = location.hash.slice(1);
+    document.querySelectorAll('.examples tbody tr').forEach(row=>row.classList.toggle('linked-record', row.id===id));
+    if (/^[A-Z][0-9]{2}$/.test(id)) requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({block:'start'}));
+  }
+  window.addEventListener('hashchange', scrollToExample);
+  scrollToExample();
+}
+
 async function dataset(id) {
   const [{file, records}] = await Promise.all([getJSON(`data/files/${encodeURIComponent(id)}.json`), loadFonts()]);
   if (eyeGaze && records.some(record => !/S32[1-9][23][0-9a-f][0-9]{3}x[0-9]{3}/.test(record.fsw))) {
@@ -183,7 +221,10 @@ async function dataset(id) {
       }, {rootMargin:'400px'});
       document.querySelectorAll('[data-fsw]').forEach(view => signObserver.observe(view));
     }
-    if (targetRow) requestAnimationFrame(() => document.getElementById(`row-${targetRow}`)?.scrollIntoView({block:'start'}));
+    if (targetRow) {
+      document.getElementById(`row-${targetRow}`)?.classList.add('linked-record');
+      requestAnimationFrame(() => document.getElementById(`row-${targetRow}`)?.scrollIntoView({block:'start'}));
+    }
   }
   select.addEventListener('change',()=>{selected=select.value;pageNumber=1;render();});
   heads.addEventListener('change',()=>{headFilter=heads.value;pageNumber=1;render();});
@@ -210,7 +251,8 @@ async function dataset(id) {
 if (app) {
   try {
     manifest = await getJSON('data/manifest.json');
-    if (document.body.dataset.file) await dataset(document.body.dataset.file);
+    if (document.body.dataset.view === 'examples') await articleExamples();
+    else if (document.body.dataset.file) await dataset(document.body.dataset.file);
     else home();
     app.setAttribute('aria-busy','false');
   } catch(error) { errorPanel(error); }

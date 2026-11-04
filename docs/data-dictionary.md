@@ -1,5 +1,16 @@
 # Data dictionary
 
+## Article example selection
+
+The tracked `data/eye-gaze/article-examples.json` supplies the article's 24
+selected source compositions and recorded page-side annotations. The static
+build joins each to the existing public records using collection, entry ID,
+exact FSW string and source snapshot hash. It generates
+`eye-gaze/data/examples.json` and `examples.csv`, including the original dataset
+row number and source link. This adds an inspection view, without modifying
+either extraction or the Unicode mapping profile. The 21 one-gaze and three
+two-gaze cases describe the selection; they do not estimate corpus prevalence.
+
 ## Primary facial CSVs
 
 Each file has exactly `fsw,fsw-face,uni-face`. A row is a source occurrence;

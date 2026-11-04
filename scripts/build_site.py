@@ -14,21 +14,23 @@ import subprocess
 from facial_pipeline import ROOT, PROFILE, MIN_DIACRITICS, EXCLUDED_FACE_BASES, EXCLUDED_COLLECTION_IDS
 from process_eye_gaze import ANALYSIS_ID, SELECTION, csv_record
 from release_inputs import source_checksums
+from build_examples import build_examples
 
 VERSION = json.loads((ROOT / 'package.json').read_text())['version']
 
 
-def page(title, prefix='', file_id=None, analysis=None):
+def page(title, prefix='', file_id=None, analysis=None, view=None):
     file_attr = f' data-file="{escape(file_id, quote=True)}"' if file_id else ''
     analysis_attr = f' data-analysis="{analysis}"' if analysis else ''
+    view_attr = f' data-view="{view}"' if view else ''
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)} · Facial diacritics analysis</title>
 <meta name="description" content="Inspect SignPuddle source signs, normalized facial compositions, and provisional official Unicode sequences side by side.">
 <link rel="icon" href="{prefix}assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{prefix}assets/style.css"></head>
-<body{file_attr}{analysis_attr} data-prefix="{prefix}"><header class="masthead"><a class="brand" href="{prefix}index.html"><img src="{prefix}assets/icon.svg" width="32" height="32" alt="">Sutton SignWriting <span>/ Research tools</span></a>
-<nav aria-label="Main"><a href="{prefix}index.html">Datasets</a><a href="{prefix}eye-gaze/">Eye gaze</a><a href="{prefix}methods.html">Methods &amp; provenance</a></nav></header>
+<body{file_attr}{analysis_attr}{view_attr} data-prefix="{prefix}"><header class="masthead"><a class="brand" href="{prefix}index.html"><img src="{prefix}assets/icon.svg" width="32" height="32" alt="">Sutton SignWriting <span>/ Research tools</span></a>
+<nav aria-label="Main"><a href="{prefix}index.html">Datasets</a><a href="{prefix}eye-gaze/">Eye gaze</a><a href="{prefix}eye-gaze/examples/">Article examples</a><a href="{prefix}methods.html">Methods &amp; provenance</a></nav></header>
 <main id="app" aria-busy="true"><p class="loading" role="status">Loading the corpus…</p></main>
 <footer><span>Facial diacritics analysis <b>v{VERSION}</b></span><span><a href="{prefix}licensing.html">Data &amp; licenses</a> · Source preserved. Transformations explicit.</span></footer>
 <noscript>This browser needs JavaScript. Download the CSVs from the data directory to inspect the records directly.</noscript>
@@ -87,7 +89,12 @@ def build_eye_gaze(output, report, base_manifest):
     checksums = {str(p.relative_to(target)): sha256(p.read_bytes()).hexdigest()
                  for p in sorted((target / 'data').rglob('*.csv'))}
     (target / 'data/checksums.json').write_text(json.dumps(checksums, indent=2) + '\n')
+    examples = build_examples(target, manifest)
+    (target / 'examples').mkdir()
+    (target / 'examples/index.html').write_text(
+        page('Eye-gaze article examples', '../../', analysis='eye-gaze', view='examples'))
     print(f"Built eye-gaze listing / {totals['rows']:,} rows across {len(included)} collections")
+    print(f"Verified {examples['counts']['total']} article examples against public source records")
 
 
 def build(output: Path, public: bool = False):
