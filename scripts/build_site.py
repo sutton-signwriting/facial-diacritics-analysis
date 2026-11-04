@@ -28,13 +28,13 @@ def page(title, prefix='', file_id=None, analysis=None, view=None):
 <title>{escape(title)} · Facial diacritics analysis</title>
 <meta name="description" content="Inspect SignPuddle source signs, normalized facial compositions, and provisional official Unicode sequences side by side.">
 <link rel="icon" href="{prefix}assets/icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="{prefix}assets/style.css"></head>
+<link rel="stylesheet" href="{prefix}assets/style.css?v={VERSION}"></head>
 <body{file_attr}{analysis_attr}{view_attr} data-prefix="{prefix}"><header class="masthead"><a class="brand" href="{prefix}index.html"><img src="{prefix}assets/icon.svg" width="32" height="32" alt="">Sutton SignWriting <span>/ Research tools</span></a>
 <nav aria-label="Main"><a href="{prefix}index.html">Datasets</a><a href="{prefix}eye-gaze/">Eye gaze</a><a href="{prefix}eye-gaze/examples/">Article examples</a><a href="{prefix}methods.html">Methods &amp; provenance</a></nav></header>
 <main id="app" aria-busy="true"><p class="loading" role="status">Loading the corpus…</p></main>
 <footer><span>Facial diacritics analysis <b>v{VERSION}</b></span><span><a href="{prefix}licensing.html">Data &amp; licenses</a> · Source preserved. Transformations explicit.</span></footer>
 <noscript>This browser needs JavaScript. Download the CSVs from the data directory to inspect the records directly.</noscript>
-<script type="module" src="{prefix}assets/app.js"></script></body></html>'''
+<script type="module" src="{prefix}assets/app.js?v={VERSION}"></script></body></html>'''
 
 
 def build_eye_gaze(output, report, base_manifest):
