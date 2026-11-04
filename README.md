@@ -5,9 +5,11 @@ FSW signboxes, normalized facial subsets, and a direct mapping to official Unico
 
 Source repository: [sutton-signwriting/facial-diacritics-analysis](https://github.com/sutton-signwriting/facial-diacritics-analysis), public as of 4 November 2026.
 Public website: [Facial Diacritics Analysis](https://www.sutton-signwriting.io/facial-diacritics-analysis/),
-version **0.6.0**, updated on 4 November 2026. The archival dataset deposit is
-optional and deferred. The current release candidate is **0.6.1**, which removes
-local deployment details without changing the research data or examples.
+version **0.6.1**, updated on 4 November 2026.
+[Download release 0.6.1](https://github.com/sutton-signwriting/facial-diacritics-analysis/releases/tag/v0.6.1),
+including the data, code, website and checksums. This patch removes host-specific
+deployment documentation without changing the research data or examples. A
+Zenodo deposit is optional and deferred.
 
 ## Local use
 

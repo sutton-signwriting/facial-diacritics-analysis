@@ -90,7 +90,8 @@
   "verified_links": {
     "repository": "https://github.com/sutton-signwriting/facial-diacritics-analysis",
     "website": "https://www.sutton-signwriting.io/facial-diacritics-analysis/",
-    "article_examples": "https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/examples/"
+    "article_examples": "https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/examples/",
+    "release": "https://github.com/sutton-signwriting/facial-diacritics-analysis/releases/tag/v0.6.1"
   },
   "proposed_uploads": [
     "facial-diacritics-data-v0.6.1.zip",

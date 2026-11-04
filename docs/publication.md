@@ -1,7 +1,7 @@
 # Versioned research release
 
-Status: source repository and inspection website published; archival release preparation, 4 November
-2026. Version 0.6.0 is available as a GitHub release; 0.6.1 removes host-specific
+Status: source repository, inspection website and GitHub release 0.6.1 published
+and verified, 4 November 2026. Version 0.6.1 removes host-specific
 deployment documentation without changing the research selection. The chosen
 publication route is a versioned GitHub release with explicit data, website and
 checksum assets. A Zenodo deposit is optional and deferred. A separate data-paper
@@ -17,7 +17,7 @@ are public. No archival DOI or journal submission has been created.
 
 | Object | Role and current version |
 | --- | --- |
-| Software/package | **0.6.1** release candidate; the public inspection website remains at **0.6.0** with the same research data. |
+| Software/package and inspection website | **0.6.1**, published with the same research data as 0.6.0. |
 | Primary facial selection | **facial-subset-v0.3.0**: 154,755 occurrences, 152 included collections, at least two retained diacritics. |
 | Eye-gaze selection | **eye-gaze-fills-2-3-v0.1**: 632 occurrences, 30 collections with results, no diacritic threshold. |
 | Unicode mapping | **direct-symbol-order-v0.1**, unchanged. |
@@ -28,7 +28,7 @@ The source-derived CSVs, provenance sidecars, normalization, and mapping remain
 unchanged by this cleanup. [Historical candidates](release-history.md) are
 separate from the active publication plan.
 
-## 1. Finish the local candidate
+## 1. Build and verify release candidates
 
 The browser defaults to **With facial records** on both indexes, retains All
 collections, and keeps zero-result pages directly accessible. The third view is
@@ -111,6 +111,23 @@ commits. The verified 0.6.0 deployment is recorded below:
 - Deployment commit: `5a5f1ba0b07cac17934419f526fd54f27e6eb553`.
 - Site ZIP SHA-256: `5dd01d669d01a4b74b69df34c26e115b92eee4fbbe36397284c7cf7795a8c899`.
 - [Successful deployment](https://github.com/sutton-signwriting/facial-diacritics-analysis/actions/runs/41919155630).
+
+Version 0.6.1 removes host-specific deployment documentation and replaces the
+fixed preview interface with a configurable local setting. It changes no source
+snapshot, derived research record, mapping rule or selected example. The reviewed
+packages and matching website are published:
+
+- [GitHub release 0.6.1](https://github.com/sutton-signwriting/facial-diacritics-analysis/releases/tag/v0.6.1).
+- Frozen source commit: `6dbaa450a9afd3ad144ae705864885c26fe59805`.
+- Deployment commit: `b554f5499cff908bffae4359849a0135c98cc3d5`.
+- Data ZIP SHA-256: `598b8409a7ef759b931aa3d4a0c14a87c1fb512422e85f84dbfd6a38da604d41`.
+- Site ZIP SHA-256: `f2fa9cb50d567efdd2136dc2adbb169f38f3b7f85301c573af1dc60d87f0737d`.
+- [Successful release workflow](https://github.com/sutton-signwriting/facial-diacritics-analysis/actions/runs/41928276108).
+- [Successful Pages deployment](https://github.com/sutton-signwriting/facial-diacritics-analysis/actions/runs/41928153630).
+
+The release workflow checks every packaged file against the reviewed contents,
+reproduces both reviewed ZIP checksums, uploads them as a draft release, downloads
+the uploaded assets to verify their checksums, and then publishes the release.
 
 Keep bulk processing outputs outside the `main` source branch, but include them
 explicitly in the data archive. The `gh-pages` distribution branch contains the
