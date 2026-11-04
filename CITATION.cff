@@ -1,8 +1,10 @@
 cff-version: 1.2.0
-message: "Cite this software version and the exact dataset release used. The local publication draft has no assigned DOI. Data licensing is described separately in LICENSING.md."
+message: "Cite this software version and the exact dataset release used. Versioned data and website packages are attached to the GitHub release. Data licensing is described separately in LICENSING.md."
 type: software
 title: "Facial Diacritics Analysis"
-version: 0.6.0
+version: 0.6.1
+repository-code: "https://github.com/sutton-signwriting/facial-diacritics-analysis"
+url: "https://github.com/sutton-signwriting/facial-diacritics-analysis/releases/tag/v0.6.1"
 authors:
   - family-names: Slevinski
     given-names: Steve

@@ -3,6 +3,8 @@
 node_modules/
 __pycache__/
 *.pyc
+# Host-specific preview configuration.
+.env
 # Original SPML includes source prose and account metadata; retain locally.
 /data/source/
 # Keep bulk processing outputs out of the source branch.

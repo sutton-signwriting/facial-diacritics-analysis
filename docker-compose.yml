@@ -5,7 +5,7 @@ services:
     image: nginx:1.28-alpine
     container_name: facial-diacritics-analysis
     ports:
-      - "192.168.0.87:7094:8080"
+      - "${FACIAL_BIND_ADDRESS:-127.0.0.1}:7094:8080"
     volumes:
       - ./dist:/usr/share/nginx/html:ro
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro

@@ -6,7 +6,8 @@ FSW signboxes, normalized facial subsets, and a direct mapping to official Unico
 Source repository: [sutton-signwriting/facial-diacritics-analysis](https://github.com/sutton-signwriting/facial-diacritics-analysis), public as of 4 November 2026.
 Public website: [Facial Diacritics Analysis](https://www.sutton-signwriting.io/facial-diacritics-analysis/),
 version **0.6.0**, updated on 4 November 2026. The archival dataset deposit is
-being prepared separately.
+optional and deferred. The current release candidate is **0.6.1**, which removes
+local deployment details without changing the research data or examples.
 
 ## Local use
 
@@ -62,19 +63,17 @@ checks every selected FSW string, entry ID, gaze key and source snapshot hash
 against the included public eye-gaze records before resolving its direct link.
 It does not depend on a local manuscript checkout or change the corpus.
 
-## LAN service
+## Container preview
 
-The read-only inspection site runs on **http://192.168.0.87:7094/** and is linked
-from Personal Office's **http://192.168.0.111:7001/** index. Archie owns the source,
-port reservation, and Compose service. The current subset excludes the three
-private collections and faces with fewer than two diacritics after removing
-air/breath bases S337–S33a: 152 collections and 154,755 facial-sign occurrences remain.
+The optional read-only container serves the generated site at
+`http://127.0.0.1:7094/` by default. Set `FACIAL_BIND_ADDRESS` in an untracked `.env`
+file to use a different local interface.
 
 ```bash
 docker compose up -d
 docker compose ps
-curl -f http://192.168.0.87:7094/health
-# Stop the LAN service:
+curl -f http://127.0.0.1:7094/health
+# Stop the preview:
 docker compose down
 ```
 
@@ -143,7 +142,8 @@ archives; it is not a face-equivalence assessment.
 All builds exclude `sgn97`, `sgn103`, `sgn105`, and any other collection with a
 private-labelled header. Their source snapshots remain intact. Public release
 bundles retain the primary dataset's minimum of two diacritics and the separate
-eye-gaze analysis without that cutoff, matching the LAN browser.
+eye-gaze analysis without that cutoff, matching the inspection website. The
+primary selection contains 154,755 occurrences across 152 included collections.
 
 ```bash
 .venv/bin/python scripts/build_site.py --public
@@ -170,12 +170,14 @@ GitHub Release assets. Using it requires a matching site ZIP on a release and
 switching the Pages source to GitHub Actions; it is not the active branch-based
 publication method.
 
-The [Zenodo-first publication plan](docs/publication.md) and [prepared metadata](publication/README.md)
+The [publication plan](docs/publication.md) and [prepared metadata](publication/README.md)
 describe the frozen data-and-method release and its relationship to *Standardizing
 the Record*. A separate peer-reviewed data/resource paper is deferred;
 [venue options](docs/data-publications.md) are retained for later consideration. The source
-repository and inspection website are public. No archival DOI, GitHub Release,
-or journal submission has been created yet.
+repository, inspection website, and [GitHub releases](https://github.com/sutton-signwriting/facial-diacritics-analysis/releases)
+are public. The release assets include the generated data excluded from the
+automatic source archives. A Zenodo deposit is deferred; no archival DOI or
+journal submission has been created.
 
 ## Layout
 

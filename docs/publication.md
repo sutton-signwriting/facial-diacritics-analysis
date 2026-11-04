@@ -1,21 +1,23 @@
-# Zenodo-first publication plan
+# Versioned research release
 
 Status: source repository and inspection website published; archival release preparation, 4 November
-2026. The intended output is a citable
-release of the **current exploratory research resource**. A separate data-paper
+2026. Version 0.6.0 is available as a GitHub release; 0.6.1 removes host-specific
+deployment documentation without changing the research selection. The chosen
+publication route is a versioned GitHub release with explicit data, website and
+checksum assets. A Zenodo deposit is optional and deferred. A separate data-paper
 submission is deferred. Comprehensive face curation, segmentation, alternative
 fill search, and converter validation are outside this bounded release.
 
 A Zenodo deposit is still a public archival release, with accurate files,
 provenance, license scope, and limitations. The [source repository](https://github.com/sutton-signwriting/facial-diacritics-analysis)
 and [inspection website](https://www.sutton-signwriting.io/facial-diacritics-analysis/)
-are public. No DOI, GitHub Release, or journal submission has been created yet.
+are public. No archival DOI or journal submission has been created.
 
 ## Objects and versions
 
 | Object | Role and current version |
 | --- | --- |
-| Software/browser | **0.6.0**, with the frozen inspection website published on GitHub Pages. |
+| Software/package | **0.6.1** release candidate; the public inspection website remains at **0.6.0** with the same research data. |
 | Primary facial selection | **facial-subset-v0.3.0**: 154,755 occurrences, 152 included collections, at least two retained diacritics. |
 | Eye-gaze selection | **eye-gaze-fills-2-3-v0.1**: 632 occurrences, 30 collections with results, no diacritic threshold. |
 | Unicode mapping | **direct-symbol-order-v0.1**, unchanged. |
@@ -129,10 +131,10 @@ local candidate is not the unmodified base commit.
 
 Prepare these files under `artifacts/`:
 
-- `facial-diacritics-data-v0.6.0.zip`: CSVs, row provenance, reports, original
+- `facial-diacritics-data-v0.6.1.zip`: CSVs, row provenance, reports, original
   source-manifest bytes, code/tests/docs, assets and licenses, publication
   metadata, rights scope, and source-file checksums.
-- `facial-diacritics-site-v0.6.0.zip`: the exact static browser, included data,
+- `facial-diacritics-site-v0.6.1.zip`: the frozen static browser, included data,
   bundled fonts, methods, and licensing page.
 - `SHA256SUMS.txt`: hashes identifying both frozen packages.
 
@@ -142,7 +144,7 @@ emitted records. Repeating the full extraction requires the matching preserved
 SPML snapshot; the live directory may change. Do not claim full-corpus
 re-extraction from the ZIP alone.
 
-## 4. Prepare a Zenodo Dataset record
+## 4. Optional Zenodo Dataset record — deferred
 
 Use one **Dataset** record for the data-and-method release and upload both ZIPs
 and checksums. A separate software DOI is optional. Automatic GitHub archiving
@@ -158,7 +160,7 @@ material following the platform-record information pattern:
 | Title | Facial Diacritics Analysis: Source-linked SignPuddle Compositions and Single-Eye Gaze |
 | Creator | Steve Slevinski; ORCID copied from the existing project citation file. Confirm final creator/contributor roles. |
 | Resource type | Dataset. |
-| Version | 0.6.0 for the coordinated package; retain separate analysis and mapping identifiers. |
+| Version | 0.6.1 for the coordinated package; retain separate analysis and mapping identifiers. |
 | Description | Source snapshot, counts, methods, limitations, reuse, attribution, and license layers. |
 | License | CC BY 4.0 for publisher-held compilation contributions, with applicable source terms explicitly retained. Document final source coverage. |
 | Keywords | SignWriting, SignPuddle, facial composition, gaze, Unicode, provenance, writing systems, research data. |
@@ -177,6 +179,15 @@ Remove the description's local preparation note after resolving its open fields.
 
 ## 5. Publish only the reviewed release
 
+The current publication target is the GitHub release, not a Zenodo deposit. Attach
+both reviewed ZIPs and `SHA256SUMS.txt` to the tag identifying their frozen source.
+Keep the website as the inspection interface. Paper-specific controlled tests,
+annotations and implementation measurements remain separate and may accompany
+the journal submission as supplementary material. The broader dataset archive
+must not be described as containing those separate materials.
+
+For a later optional archival deposit:
+
 The user authorized the source repository and Pages deployment, both now public.
 Preserve the deployed artifact and its source commit while updating publication
 status in `main`; status edits do not replace the frozen website. Once source
@@ -184,9 +195,10 @@ scope and metadata are ready, obtain direction for the concrete archival release
 files and Zenodo record. Publish the reviewed packages and dataset record, then
 verify returned public URLs and deposited files.
 
-Cite the **specific dataset version DOI** in the manuscript and data availability
-statement. The browser URL supplies convenient inspection; it does not fix the
-evidence version. The manuscript's curated cases and controlled comparison
+Cite the **specific GitHub release URL**, version and source commit in the
+manuscript and data availability statement. If a Zenodo record is later
+published, add its version DOI. The browser URL supplies convenient inspection;
+it does not fix the evidence version. The manuscript's curated cases and controlled comparison
 remain separately identified evidence, not validation of every browser record.
 
 Future data or mapping changes receive a new release and archival version;

@@ -1,5 +1,5 @@
 {
-  "status": "local preparation; not uploaded or published",
+  "status": "optional Zenodo deposit deferred; not uploaded or published",
   "release_model": {
     "id": "layered-full",
     "status": "selected",
@@ -18,7 +18,7 @@
       }
     ],
     "publisher": "Zenodo",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "publication_date": null,
     "doi": null,
     "description_file": "publication/zenodo-description.html",
@@ -93,8 +93,8 @@
     "article_examples": "https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/examples/"
   },
   "proposed_uploads": [
-    "facial-diacritics-data-v0.6.0.zip",
-    "facial-diacritics-site-v0.6.0.zip",
+    "facial-diacritics-data-v0.6.1.zip",
+    "facial-diacritics-site-v0.6.1.zip",
     "SHA256SUMS.txt"
   ],
   "remaining_decisions": [

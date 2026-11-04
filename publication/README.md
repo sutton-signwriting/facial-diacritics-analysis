@@ -1,7 +1,8 @@
 # Publication preparation
 
-This folder contains source material for a future release, not evidence that a
-record has been uploaded or published.
+This folder contains preparation material for an optional Zenodo deposit, which
+is currently deferred. Versioned data and website packages are published through
+GitHub releases. No Zenodo record has been uploaded or published.
 
 - [Zenodo field draft](zenodo-draft.json): title, creator, resource type, desired
   license, source snapshot, versions, keywords, relationships, and open fields.
