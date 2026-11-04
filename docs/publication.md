@@ -1,6 +1,6 @@
 # Zenodo-first publication plan
 
-Status: source repository published; archival release preparation, 4 November
+Status: source repository and inspection website published; archival release preparation, 4 November
 2026. The intended output is a citable
 release of the **current exploratory research resource**. A separate data-paper
 submission is deferred. Comprehensive face curation, segmentation, alternative
@@ -8,14 +8,14 @@ fill search, and converter validation are outside this bounded release.
 
 A Zenodo deposit is still a public archival release, with accurate files,
 provenance, license scope, and limitations. The [source repository](https://github.com/sutton-signwriting/facial-diacritics-analysis)
-is public. No DOI, GitHub Release, Pages deployment, or journal submission has
-been created yet.
+and [inspection website](https://www.sutton-signwriting.io/facial-diacritics-analysis/)
+are public. No DOI, GitHub Release, or journal submission has been created yet.
 
 ## Objects and versions
 
 | Object | Role and current version |
 | --- | --- |
-| Software/browser | Local candidate **0.5.0**, including presentation and publication preparation. |
+| Software/browser | **0.5.0**, with the frozen inspection website published on GitHub Pages. |
 | Primary facial selection | **facial-subset-v0.3.0**: 154,755 occurrences, 152 included collections, at least two retained diacritics. |
 | Eye-gaze selection | **eye-gaze-fills-2-3-v0.1**: 632 occurrences, 30 collections with results, no diacritic threshold. |
 | Unicode mapping | **direct-symbol-order-v0.1**, unchanged. |
@@ -60,8 +60,8 @@ terms with source-derived writing while licensing the new compilation separately
 No exclusive claim is made over individual lexical signs or linguistic forms.
 CC BY does not replace applicable ShareAlike conditions.
 
-Before public release, state the notice's coverage for the legacy contributions,
-source attribution to retain, and any exceptions. A missing SPML license field
+For the archival deposit, finish documenting the notice's coverage for legacy
+contributions, source attribution to retain, and any exceptions. A missing SPML license field
 is not proof that no license exists; a site notice is also not treated as a grant
 from every contributor whose terms were unrecorded.
 
@@ -78,11 +78,28 @@ selection and counts.
 ## 3. Freeze data, source, and website packages
 
 Public source repository: [sutton-signwriting/facial-diacritics-analysis](https://github.com/sutton-signwriting/facial-diacritics-analysis).
-Proposed browser: `https://sutton-signwriting.github.io/facial-diacritics-analysis/`.
-The browser address remains a proposed target until deployment is verified.
+Public browser: [Facial Diacritics Analysis](https://www.sutton-signwriting.io/facial-diacritics-analysis/).
+The GitHub-hosted address redirects to the organization's existing Pages domain.
 
-Keep bulk generated CSVs and sidecars outside Git history, but include them
-explicitly in the data archive. Source manifests, publication metadata,
+The 4 November 2026 deployment publishes the exact 935 files in the reviewed
+`facial-diacritics-site-v0.5.0.zip`, including `.nojekyll`, on `gh-pages` at `/`:
+
+- Frozen site source commit: `73b6b65aeb1d7a53a9821b69103a79576d9c7d18`.
+- Deployment commit: `8dfc841a8fa6cfe65032a5f1846854f3528d5379`.
+- Site ZIP SHA-256: `e4c92a579b90faf91109e007453dc416f1d176f2850308dcfa001b26f70887a0`.
+- [Successful deployment](https://github.com/sutton-signwriting/facial-diacritics-analysis/actions/runs/41904453635).
+
+GitHub enabled branch publishing automatically on the first push. Subsequent
+deployments should replace that branch's site with a newly reviewed artifact
+and use a normal push. To roll back after a later update, republish the earlier
+reviewed artifact as a new commit; do not rewrite branch history. Disabling Pages
+is the available rollback for this first deployment, which has no earlier site.
+The release-asset workflow in `main` remains an alternative requiring a future
+GitHub Release and a deliberate change of Pages source to GitHub Actions.
+
+Keep bulk processing outputs outside the `main` source branch, but include them
+explicitly in the data archive. The `gh-pages` distribution branch contains the
+reviewed website's public CSVs and sidecars. Source manifests, publication metadata,
 licenses, docs, scripts, tests, and asset provenance remain trackable.
 `.gitignore` names specific eye-gaze output paths so future source documents
 there are not silently hidden.
@@ -135,7 +152,7 @@ material following the platform-record information pattern:
 | Publisher | Zenodo. |
 | Publication date | Actual public release date, not snapshot or draft date. Currently unset. |
 | DOI | Reserve only in an actual Zenodo draft. Currently unset; a reservation is not a published identifier. |
-| Related identifiers | Source directory as derived-from; Formal SignWriting and platform DOI as references. Repository URL verified; verify the website link after deployment. |
+| Related identifiers | Source directory as derived-from; Formal SignWriting and platform DOI as references. Repository and website URLs verified. |
 | Funding/contributors | Unset until supplied accurately; no affiliation or absence-of-funding assurance is invented. |
 | Files | The exact reviewed packages and checksums. |
 
@@ -147,11 +164,12 @@ Remove the description's local preparation note after resolving its open fields.
 
 ## 5. Publish only the reviewed release
 
-The user authorized the public source repository, which is now published. Once
-source scope and metadata are ready, obtain direction for the concrete release
-files, Pages target, and Zenodo record. Publish the
-reviewed packages, deploy the same frozen site artifact, publish the dataset
-record, and verify returned public URLs and deposited files.
+The user authorized the source repository and Pages deployment, both now public.
+Preserve the deployed artifact and its source commit while updating publication
+status in `main`; status edits do not replace the frozen website. Once source
+scope and metadata are ready, obtain direction for the concrete archival release
+files and Zenodo record. Publish the reviewed packages and dataset record, then
+verify returned public URLs and deposited files.
 
 Cite the **specific dataset version DOI** in the manuscript and data availability
 statement. The browser URL supplies convenient inspection; it does not fix the
@@ -177,4 +195,5 @@ curation now. The main journal article remains a separate argument.
 - [Create a deposit and reserve a DOI](https://help.zenodo.org/docs/deposit/create-new-upload/).
 - [Versioned records](https://help.zenodo.org/docs/deposit/manage-versions/).
 - [GitHub Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
+- [GitHub Pages branch publishing](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 - [Creative Commons licensing guidance](https://creativecommons.org/faq/).

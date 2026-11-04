@@ -5,7 +5,8 @@ __pycache__/
 *.pyc
 # Original SPML includes source prose and account metadata; retain locally.
 /data/source/
-# Regenerable bulk data go in reviewed release archives, not Git history.
+# Keep bulk processing outputs out of the source branch.
+# Reviewed static distributions, including public data, live on gh-pages.
 /data/raw/
 /data/metadata/
 /data/report.json

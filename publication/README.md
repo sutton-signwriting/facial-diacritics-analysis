@@ -28,4 +28,5 @@ silently added to the frozen eight-series platform release.
 
 DOI and publication date stay unset until an actual deposit and publication
 exist. Funding and contributor information must be supplied accurately rather
-than inferred. Proposed repository and website URLs remain marked as proposed.
+than inferred. The public repository and inspection website URLs are verified;
+the archival deposit remains in preparation.

@@ -88,10 +88,8 @@
     "sha256": "1da27fe7b8e959efaf338818f2a6c1aa2c02ff97cf60c34c6d0825675ebc53fb"
   },
   "verified_links": {
-    "repository": "https://github.com/sutton-signwriting/facial-diacritics-analysis"
-  },
-  "proposed_links": {
-    "website": "https://sutton-signwriting.github.io/facial-diacritics-analysis/"
+    "repository": "https://github.com/sutton-signwriting/facial-diacritics-analysis",
+    "website": "https://www.sutton-signwriting.io/facial-diacritics-analysis/"
   },
   "proposed_uploads": [
     "facial-diacritics-data-v0.5.0.zip",
@@ -103,7 +101,6 @@
     "Confirm final creators/contributors, ORCID, and any funding information without inventing institutional affiliation.",
     "Choose actual publication date and reserve a DOI only in a real Zenodo draft.",
     "Finalize and commit the reviewed release; record the actual commit and final archive checksums.",
-    "Verify the public website destination after the authorized Pages deployment.",
     "Remove the local preparation note from the description and review the final license scope before publication."
   ],
   "deferred": "A peer-reviewed data/resource paper is optional and is not part of the current release work."

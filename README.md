@@ -4,9 +4,9 @@ An exploratory SignPuddle data pipeline and static browser for comparing origina
 FSW signboxes, normalized facial subsets, and a direct mapping to official Unicode.
 
 Source repository: [sutton-signwriting/facial-diacritics-analysis](https://github.com/sutton-signwriting/facial-diacritics-analysis), public as of 4 November 2026.
-The public inspection website and archival dataset release are being prepared.
-The proposed Pages URL is `https://sutton-signwriting.github.io/facial-diacritics-analysis/`;
-the live address will be verified after deployment.
+Public website: [Facial Diacritics Analysis](https://www.sutton-signwriting.io/facial-diacritics-analysis/),
+version **0.5.0**, published on 4 November 2026. The archival dataset deposit is
+being prepared separately.
 
 ## Local use
 
@@ -36,7 +36,7 @@ all matching records on one page and renders FSW images as they enter view.
 
 ## Separate eye gaze listing
 
-[Eye gaze with fills 2 and 3](http://192.168.0.87:7094/eye-gaze/) selects source
+[Eye gaze with fills 2 and 3](https://www.sutton-signwriting.io/facial-diacritics-analysis/eye-gaze/) selects source
 signs containing at least one positioned S321–S329 symbol with fill 2 or 3, at any
 rotation and any diacritic count. It has its own collection index, record pages,
 and combined CSV download. Exact matching keys and original coordinates appear
@@ -134,24 +134,31 @@ eye-gaze analysis without that cutoff, matching the LAN browser.
 ```
 
 This creates a public site ZIP and a reproducibility ZIP under `artifacts/`.
-Review the output before creating a public repository/release. Source snapshots
+Review the output before publishing a new site version or archival release. Source snapshots
 remain local; the reproducibility ZIP includes derived CSVs, row provenance,
 source hashes/URLs, mapping assets, scripts, tests, and documentation. Preserve
 the original source snapshot separately for exact future reanalysis: live
 SignPuddle URLs can change after this download.
 
-Upload `facial-diacritics-site-v0.5.0.zip` as a GitHub Release asset, then run
-the prepared `Deploy GitHub Pages` workflow with that release tag. Set the
-repository's Pages source to **GitHub Actions**. The workflow downloads the
-frozen site artifact from the same repository, validates its relative paths,
-and deploys it. It never silently downloads a newer SignPuddle corpus.
+The active Pages publishing source is **`gh-pages`, root `/`**. That branch holds
+the exact files from the reviewed site ZIP, including `.nojekyll`, the fonts,
+and public CSVs. GitHub automatically deploys branch updates. `main` retains
+the editable project source and ignores bulk processing outputs. Site updates
+must publish a newly reviewed frozen artifact; they do not download a newer
+SignPuddle corpus. The [publication plan](docs/publication.md) records the deployed
+source commit, deployment commit, and artifact checksum.
+
+The manual `Deploy GitHub Pages` workflow is an optional alternative for future
+GitHub Release assets. Using it requires a matching site ZIP on a release and
+switching the Pages source to GitHub Actions; it is not the active branch-based
+publication method.
 
 The [Zenodo-first publication plan](docs/publication.md) and [prepared metadata](publication/README.md)
 describe the frozen data-and-method release and its relationship to *Standardizing
 the Record*. A separate peer-reviewed data/resource paper is deferred;
 [venue options](docs/data-publications.md) are retained for later consideration. The source
-repository is public; no archival DOI, GitHub Release, journal submission, or public
-website deployment has been created yet.
+repository and inspection website are public. No archival DOI, GitHub Release,
+or journal submission has been created yet.
 
 ## Layout
 
@@ -177,7 +184,9 @@ their own licenses. See [LICENSING.md](LICENSING.md) for the recorded source not
 the selected layered full release and remaining source coverage/attribution
 documentation. Term-only and collection-specific alternatives are deferred.
 
-Bulk generated CSVs and sidecars remain Git-ignored intentionally. The release
+Bulk generated CSVs and sidecars remain Git-ignored on `main` intentionally;
+the `gh-pages` distribution branch includes the frozen website's public data.
+The release
 packager explicitly includes them, the exact source manifest, licenses, metadata,
 and source-file checksums. Publication documents and source manifests remain
 trackable; a blanket eye-gaze-folder ignore has been replaced with precise output
