@@ -1,0 +1,88 @@
+name: Publish reviewed v0.6.0 release
+
+on:
+  push:
+    branches: [publish-v0.6.0]
+    paths:
+      - .github/workflows/publish-v0.6.0.yml
+      - publication/releases/v0.6.0/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-reviewed-v0.6.0
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      RELEASE_TAG: v0.6.0
+      SOURCE_COMMIT: cc530141f1aa40e15a58edf40676464c3a890c8d
+    steps:
+      - name: Check out release instructions
+        uses: actions/checkout@v4
+        with:
+          path: release-job
+          persist-credentials: false
+      - name: Check out frozen source
+        uses: actions/checkout@v4
+        with:
+          ref: cc530141f1aa40e15a58edf40676464c3a890c8d
+          path: snapshot
+          persist-credentials: false
+      - name: Check out reviewed public website
+        uses: actions/checkout@v4
+        with:
+          ref: 5a5f1ba0b07cac17934419f526fd54f27e6eb553
+          path: frozen-site
+          persist-credentials: false
+      - name: Copy public website files without Git metadata
+        run: |
+          python3 - <<'PY'
+          import shutil
+          shutil.copytree('frozen-site', 'snapshot/dist', ignore=shutil.ignore_patterns('.git'))
+          PY
+      - name: Assemble packages from frozen public inputs
+        working-directory: snapshot
+        run: |
+          mkdir -p artifacts
+          cp ../release-job/publication/releases/v0.6.0/browser-normalization-check.json artifacts/
+          python3 scripts/package_release.py
+      - name: Verify contents and restore reviewed ZIP metadata
+        run: |
+          python3 release-job/publication/releases/v0.6.0/restore_reviewed_archives.py \
+            --artifacts snapshot/artifacts \
+            --plan release-job/publication/releases/v0.6.0/archive-plan.json
+          cd snapshot/artifacts
+          sha256sum --check SHA256SUMS.txt
+      - name: Create draft release and attach verified packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'Release already exists; refusing to replace it.' >&2
+            exit 1
+          fi
+          gh release create "$RELEASE_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$SOURCE_COMMIT" \
+            --title 'Facial Diacritics Analysis v0.6.0' \
+            --notes-file release-job/publication/releases/v0.6.0/notes.md \
+            --draft \
+            snapshot/artifacts/facial-diacritics-data-v0.6.0.zip \
+            snapshot/artifacts/facial-diacritics-site-v0.6.0.zip \
+            snapshot/artifacts/SHA256SUMS.txt
+      - name: Verify uploaded assets and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir verified-assets
+          cd verified-assets
+          sha256sum --check SHA256SUMS.txt
+          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest
