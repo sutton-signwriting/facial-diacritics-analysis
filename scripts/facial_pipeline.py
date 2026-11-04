@@ -58,7 +58,7 @@ def symbols(fsw: str) -> list[Symbol]:
 
 
 def normalize_face(items: list[Symbol], box: str, sizes: dict) -> str:
-    """Match font-ttf.signNormalize on this all-head/face subset.
+    """Use font-ttf's centering rule with the pinned symbol-size table.
 
     Bounds include glyph width/height, not just stored anchors. Apply one
     integer translation to all anchors, preserving order and relative geometry.

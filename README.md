@@ -1,7 +1,7 @@
 # Facial Diacritics Analysis
 
 An exploratory SignPuddle data pipeline and static browser for comparing original
-FSW signboxes, normalized facial subsets, and provisional official Unicode faces.
+FSW signboxes, normalized facial subsets, and a direct mapping to official Unicode.
 
 Intended repository: `sutton-signwriting/facial-diacritics-analysis`.
 Intended Pages URL: `https://sutton-signwriting.github.io/facial-diacritics-analysis/`.
@@ -23,7 +23,10 @@ standard library only; the virtual environment needs no pip dependencies.
 The JavaScript package and fonts are bundled into the build, so the website does
 not rely on a runtime CDN. The browser has a collection index, individual file
 pages, three rendering columns, diacritic-count and HEAD filters, pagination,
-record provenance, copyable strings, and CSV downloads.
+record provenance, copyable strings, and CSV downloads. Both indexes default to
+**With facial records**; All collections remains available. The Unicode view
+identifies its direct-mapping limits, and HEAD labels count explicit S2ff resources
+rather than visually distinct faces.
 
 Record links preserve rows per page (`rows=25`, `50`, `100`, or `all`), diacritic
 and HEAD filters. A `#row-N` target automatically selects its containing page,
@@ -113,7 +116,9 @@ The browser check uses Playwright. If a browser is already installed, set
 installs the pinned version used by Playwright. Tests check the pipeline's
 range boundaries, exclusions, duplicate preservation, geometry, modifier
 mapping, arbitrary filenames, browser filters, downloads, rendering, mobile
-widths, and normalization against the independent font-ttf implementation.
+widths, pinned geometry invariants, and an independent font-ttf comparison whose
+live-metric differences are recorded separately. The report accompanies release
+archives; it is not a face-equivalence assessment.
 
 ## GitHub Pages and archived data
 
@@ -134,14 +139,16 @@ source hashes/URLs, mapping assets, scripts, tests, and documentation. Preserve
 the original source snapshot separately for exact future reanalysis: live
 SignPuddle URLs can change after this download.
 
-Upload `facial-diacritics-site-v0.4.1.zip` as a GitHub Release asset, then run
+Upload `facial-diacritics-site-v0.5.0.zip` as a GitHub Release asset, then run
 the prepared `Deploy GitHub Pages` workflow with that release tag. Set the
 repository's Pages source to **GitHub Actions**. The workflow downloads the
 frozen site artifact from the same repository, validates its relative paths,
 and deploys it. It never silently downloads a newer SignPuddle corpus.
 
-The separate [publication note](docs/publication.md) describes a dataset-first
-release and its relationship to *Standardizing the Record*. No DOI, release,
+The [Zenodo-first publication plan](docs/publication.md) and [prepared metadata](publication/README.md)
+describe the frozen data-and-method release and its relationship to *Standardizing
+the Record*. A separate peer-reviewed data/resource paper is deferred;
+[venue options](docs/data-publications.md) are retained for later consideration. No DOI, release,
 submission, public repository, or public deployment has been created by this setup.
 
 ## Layout
@@ -159,7 +166,26 @@ submission, public repository, or public deployment has been created by this set
 | `dist/` | Generated portable website; ignored by Git |
 | `artifacts/` | Generated release ZIPs and QA screenshots; ignored by Git |
 
-Project code is MIT-licensed. Bundled fonts and third-party assets retain their
-own licenses. Source-derived writing is credited to its SignPuddle contributors;
-the code license does not relicense their data. Resolve dataset redistribution
-terms and source credit before an archival public release.
+Project code is MIT-licensed. Original research documentation and publisher-created
+compilation and annotation contributions use CC BY 4.0 within rights held by their
+author. Applicable source terms, including the public CC BY-SA 3.0 notice where it
+applies, remain with source writing and its derived views. No exclusive claim is
+made over individual lexical signs or linguistic forms. Bundled assets retain
+their own licenses. See [LICENSING.md](LICENSING.md) for the recorded source notice,
+the selected layered full release and remaining source coverage/attribution
+documentation. Term-only and collection-specific alternatives are deferred.
+
+Bulk generated CSVs and sidecars remain Git-ignored intentionally. The release
+packager explicitly includes them, the exact source manifest, licenses, metadata,
+and source-file checksums. Publication documents and source manifests remain
+trackable; a blanket eye-gaze-folder ignore has been replaced with precise output
+paths. The site identifies a dirty source tree, and packaging rejects stale builds.
+
+To regenerate the storage-context audit without changing the dataset:
+
+```bash
+.venv/bin/python scripts/audit_source_context.py
+```
+
+The audit distinguishes single-signbox and multi-signbox source fields, not legal
+status or linguistic significance. It includes no source prose or account data.

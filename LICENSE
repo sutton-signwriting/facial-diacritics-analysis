@@ -20,5 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-This license covers project code and documentation. Source-derived SignPuddle
-writing and bundled third-party fonts/assets retain their own rights and licenses.
+This license covers project source code, including the processing and build
+scripts, tests, and website implementation. Original research documentation,
+publisher-created data contributions, source writing, and bundled third-party
+assets are described separately in LICENSING.md.

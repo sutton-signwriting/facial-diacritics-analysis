@@ -1,0 +1,37 @@
+{
+  "checked_date": "2026-11-04",
+  "release_model": {
+    "id": "layered-full",
+    "status": "selected",
+    "selected_date": "2026-11-04",
+    "scope": "Retain the current research selection; license publisher-held contributions separately and preserve applicable source terms.",
+    "note": "Selection of the release model does not establish missing contributor grants or authorize public publication."
+  },
+  "code": {
+    "license": "MIT",
+    "file": "LICENSE"
+  },
+  "original_documentation": {
+    "license": "CC-BY-4.0",
+    "file": "LICENSE-CC-BY-4.0.txt"
+  },
+  "publisher_created_data_contributions": {
+    "license": "CC-BY-4.0",
+    "scope": "Selection, arrangement, compilation, normalization metadata and annotations, to the extent rights are held by Steve Slevinski."
+  },
+  "source_writing": {
+    "status": "public-notice-recorded-scope-review-pending",
+    "basis": {
+      "url": "https://www.signwriting.org/",
+      "notice_license": "CC-BY-SA-3.0",
+      "checked_date": "2026-11-04",
+      "scope": "Public site statement covering its content and related Sutton Movement Writing material; coverage of legacy contributed collections and attribution remains to be documented."
+    },
+    "license": null,
+    "attribution": "SignPuddle contributors and the Sutton SignWriting community; retain collection IDs, entry IDs, source links, hashes and mapping profile.",
+    "note": "No exclusive claim is made over individual lexical signs or linguistic forms. No blanket CC BY 4.0 relicensing of third-party writing is asserted. Storage-field categories are not legal determinations.",
+    "applicable_source_license_notice": "CC-BY-SA-3.0",
+    "release_posture": "CC BY 4.0 for the compilation and publisher-created contributions; applicable source terms retained for source-derived fields."
+  },
+  "third_party_assets": "Retain their supplied licenses and provenance."
+}

@@ -13,6 +13,7 @@ import subprocess
 
 from facial_pipeline import ROOT, PROFILE, MIN_DIACRITICS, EXCLUDED_FACE_BASES, EXCLUDED_COLLECTION_IDS
 from process_eye_gaze import ANALYSIS_ID, SELECTION, csv_record
+from release_inputs import source_checksums
 
 VERSION = json.loads((ROOT / 'package.json').read_text())['version']
 
@@ -29,7 +30,7 @@ def page(title, prefix='', file_id=None, analysis=None):
 <body{file_attr}{analysis_attr} data-prefix="{prefix}"><header class="masthead"><a class="brand" href="{prefix}index.html"><img src="{prefix}assets/icon.svg" width="32" height="32" alt="">Sutton SignWriting <span>/ Research tools</span></a>
 <nav aria-label="Main"><a href="{prefix}index.html">Datasets</a><a href="{prefix}eye-gaze/">Eye gaze</a><a href="{prefix}methods.html">Methods &amp; provenance</a></nav></header>
 <main id="app" aria-busy="true"><p class="loading" role="status">Loading the corpus…</p></main>
-<footer><span>Facial diacritics analysis <b>v{VERSION}</b></span><span>Source preserved. Transformations explicit.</span></footer>
+<footer><span>Facial diacritics analysis <b>v{VERSION}</b></span><span><a href="{prefix}licensing.html">Data &amp; licenses</a> · Source preserved. Transformations explicit.</span></footer>
 <noscript>This browser needs JavaScript. Download the CSVs from the data directory to inspect the records directly.</noscript>
 <script type="module" src="{prefix}assets/app.js"></script></body></html>'''
 
@@ -105,7 +106,7 @@ def build(output: Path, public: bool = False):
         raise ValueError('The generated output directory must be this project\'s dist/.')
     if output.exists():
         shutil.rmtree(output)
-    for folder in ('assets/fonts', 'data/files', 'data/raw', 'files'):
+    for folder in ('assets/fonts', 'data/files', 'data/raw', 'files', 'licenses'):
         (output / folder).mkdir(parents=True, exist_ok=True)
     for name in ('app.js', 'style.css', 'icon.svg'):
         shutil.copyfile(ROOT / 'web' / name, output / 'assets' / name)
@@ -119,6 +120,10 @@ def build(output: Path, public: bool = False):
     for path in (ROOT / 'assets/fonts').iterdir():
         if path.is_file():
             shutil.copyfile(path, output / 'assets/fonts' / path.name)
+    for source_name, target_name in [('LICENSE', 'MIT.txt'),
+                                     ('LICENSE-CC-BY-4.0.txt', 'CC-BY-4.0.txt')]:
+        shutil.copyfile(ROOT / source_name, output / 'licenses' / target_name)
+    shutil.copyfile(ROOT / 'publication/rights.json', output / 'data/rights.json')
     included, held = [], []
     for info in report['files']:
         if info['id'] in EXCLUDED_COLLECTION_IDS or info['publication_review_required']:
@@ -155,6 +160,10 @@ def build(output: Path, public: bool = False):
                     assets=json.loads((ROOT / 'assets/manifest.json').read_text()))
     revision = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True, text=True)
     manifest['software_commit'] = revision.stdout.strip() if revision.returncode == 0 else None
+    status = subprocess.run(['git', 'status', '--porcelain'], cwd=ROOT, capture_output=True, text=True)
+    manifest['software_dirty'] = bool(status.stdout.strip()) if status.returncode == 0 else None
+    manifest['rights'] = json.loads((ROOT / 'publication/rights.json').read_text())
+    manifest['source_files_sha256'] = source_checksums()
     source_manifest = ROOT / 'data/source-manifest.json'
     manifest['source_snapshot'] = json.loads(source_manifest.read_text()) if source_manifest.exists() else None
     (output / 'data/manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
@@ -163,6 +172,10 @@ def build(output: Path, public: bool = False):
         '<main id="app" aria-busy="true"><p class="loading" role="status">Loading the corpus…</p></main>',
         '<main id="methods">' + (ROOT / 'web/methods.html').read_text() + '</main>')
     (output / 'methods.html').write_text(methods, encoding='utf-8')
+    licensing = page('Data & licenses').replace(
+        '<main id="app" aria-busy="true"><p class="loading" role="status">Loading the corpus…</p></main>',
+        '<main id="methods">' + (ROOT / 'web/licensing.html').read_text() + '</main>')
+    (output / 'licensing.html').write_text(licensing, encoding='utf-8')
     (output / '.nojekyll').touch()
     checksums = {str(p.relative_to(output)): sha256(p.read_bytes()).hexdigest()
                  for p in sorted((output / 'data/raw').glob('*.csv'))}

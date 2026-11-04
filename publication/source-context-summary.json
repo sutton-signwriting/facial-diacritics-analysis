@@ -1,0 +1,2206 @@
+{
+  "source_snapshot": "data/source-manifest.json",
+  "method": "Regex field intervals and counts of complete source signboxes; recorded offsets and source hashes are verified.",
+  "interpretation": "Source-field categories describe storage context, not lexicality, authorship, copyright, licensing, or permission. A single-signbox field is not a legal clearance.",
+  "data_changed": false,
+  "analyses": {
+    "facial": {
+      "rows": 154755,
+      "contexts": {
+        "term:single-signbox": 100108,
+        "text:multiple-signboxes": 54172,
+        "text:single-signbox": 424,
+        "unlocated-field": 51
+      },
+      "sgn114_entry1920": {
+        "text:multiple-signboxes": 84
+      },
+      "files": [
+        {
+          "source_file": "sgn0.spml",
+          "source_sha256": "b6fbe396b6408027cfa4c1999083b14bfafdcc8a79f3611fc1e46f536dfd5f3a",
+          "rows": 32,
+          "contexts": {
+            "text:multiple-signboxes": 32
+          }
+        },
+        {
+          "source_file": "sgn1.spml",
+          "source_sha256": "25804f8402267fbe1757e0c0e659d6443ec94103999ecdaa1739006935c54a34",
+          "rows": 25,
+          "contexts": {
+            "text:multiple-signboxes": 25
+          }
+        },
+        {
+          "source_file": "sgn10.spml",
+          "source_sha256": "6bb55e47458b55faf6d068ad5e04735f417a191cc982b0925947ebbca9ceed79",
+          "rows": 6,
+          "contexts": {
+            "term:single-signbox": 6
+          }
+        },
+        {
+          "source_file": "sgn100.spml",
+          "source_sha256": "700b22e768ffb1be9793883794efdc12ca7248fb1671a1d89b353e1bcf71641d",
+          "rows": 2,
+          "contexts": {
+            "text:multiple-signboxes": 2
+          }
+        },
+        {
+          "source_file": "sgn101.spml",
+          "source_sha256": "05b972e905104509b046ed609c92de9d5670adf49ba81976bf2cab770c98d372",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn102.spml",
+          "source_sha256": "fac0d0e5988e51200d92a46a6e34edf6aab1bd238a507bcab130bc0ec5dc5b1d",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn104.spml",
+          "source_sha256": "7db7e032f49cdc444a398466212c4c2172bebb1b57337f1e2217d6ce41dad563",
+          "rows": 1555,
+          "contexts": {
+            "term:single-signbox": 818,
+            "text:multiple-signboxes": 734,
+            "text:single-signbox": 3
+          }
+        },
+        {
+          "source_file": "sgn106.spml",
+          "source_sha256": "1764ef812c69157b269dfd3e9b66ea5863ce4a045b7a99067e8fd2672e7527d2",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn107.spml",
+          "source_sha256": "347cb856a31b8e96650535812b93cb3584c0dc286196f2e39d9927e5d567858a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn108.spml",
+          "source_sha256": "6753ef886e9e784a0ae7fbcc842a55a6e0f1d0b1d0b1d03e693c4c3271dd2493",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn109.spml",
+          "source_sha256": "145b931590c532476565c8e183af86a33d97af69f56bc3c7d5024f6c8977e83c",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn11.spml",
+          "source_sha256": "db1f433dfb221b6f05855381e48f46969d7e4d1159da9296481b856e71333605",
+          "rows": 61,
+          "contexts": {
+            "term:single-signbox": 61
+          }
+        },
+        {
+          "source_file": "sgn110.spml",
+          "source_sha256": "7e395746c2d2533ddeb7ae7e8077aa3faf13d64810a785a11c2699bb095dfad6",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn111.spml",
+          "source_sha256": "658af074ae32be770559fba501133c0d5f81df53e300bd67d954aeff1b9262d1",
+          "rows": 5,
+          "contexts": {
+            "term:single-signbox": 3,
+            "text:multiple-signboxes": 2
+          }
+        },
+        {
+          "source_file": "sgn112.spml",
+          "source_sha256": "f9abb399c03a1dc3fa5a135f893a042737c0008f1bc336a33fb2b1c1852a2594",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn113.spml",
+          "source_sha256": "c007b9a377f5deeb2301a4a22cae291abd3f26eb11ca8e6982bd7efc586d98f8",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn114.spml",
+          "source_sha256": "f23f2c4211914d6cd34a743e889f3036b67e536393535e9ba673fae7d5514b38",
+          "rows": 7747,
+          "contexts": {
+            "term:single-signbox": 222,
+            "text:multiple-signboxes": 7491,
+            "text:single-signbox": 34
+          }
+        },
+        {
+          "source_file": "sgn115.spml",
+          "source_sha256": "9bfa8d100d38b607a46b8a36c44e29aa34ff6cb3ebb49e5336fa4c59ef05581c",
+          "rows": 715,
+          "contexts": {
+            "text:multiple-signboxes": 715
+          }
+        },
+        {
+          "source_file": "sgn116.spml",
+          "source_sha256": "18b70d3cc4d96473667c7967c13c52f0e6a032d76c35240846bd618966c8975f",
+          "rows": 4377,
+          "contexts": {
+            "term:single-signbox": 2395,
+            "text:multiple-signboxes": 1887,
+            "text:single-signbox": 44,
+            "unlocated-field": 51
+          }
+        },
+        {
+          "source_file": "sgn117.spml",
+          "source_sha256": "b4babd256b8626efe037b786cd0b7ac9f41e9cda9be4694c114cc1251a1e1a79",
+          "rows": 2,
+          "contexts": {
+            "term:single-signbox": 1,
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn118.spml",
+          "source_sha256": "b5c7525007fb80b0b92d329841ad7c7d5de20c6541124aeb6d561dc855415337",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn119.spml",
+          "source_sha256": "447853bc4c298a427aeeb79212a496a1f0f730b58a1228417db0c3a91d7fa307",
+          "rows": 768,
+          "contexts": {
+            "text:multiple-signboxes": 768
+          }
+        },
+        {
+          "source_file": "sgn12.spml",
+          "source_sha256": "34396b9ea75990c99367568667a29e1df2bbd4b16265e954631fdac2f542b3af",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn120.spml",
+          "source_sha256": "fea8e7a92f2d6dc9449ed5fe3626f3140d40bdfb69ed3806ff70e9979a42a5ac",
+          "rows": 518,
+          "contexts": {
+            "term:single-signbox": 518
+          }
+        },
+        {
+          "source_file": "sgn121.spml",
+          "source_sha256": "5245dc20d88220d691fb6d84a5a918c57c677d1122dbe3ca0a8d02ad38c30f4d",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn122.spml",
+          "source_sha256": "fa3233aea035797a1bd7e4dceb2dd46b43db2a260108b463068bd132105c4d84",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn123.spml",
+          "source_sha256": "771923f4a9a9c32cffb45ba09cb29a2899fa656a2910156c6c4c6dd02102bb14",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn124.spml",
+          "source_sha256": "8d1a9aa47af9e4cafc6aaaf4be53870510c54b106f6d43e48ab6534e95d5f28b",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn125.spml",
+          "source_sha256": "50ce2c5e9d42d616d297bb1930735a571708d4eeabab1369df41bc7592f6d3d5",
+          "rows": 103,
+          "contexts": {
+            "text:multiple-signboxes": 103
+          }
+        },
+        {
+          "source_file": "sgn126.spml",
+          "source_sha256": "80ece41251f1988c99fedf834462e8a3b33708e8971b709b02706296c0d6c5cd",
+          "rows": 4094,
+          "contexts": {
+            "term:single-signbox": 1,
+            "text:multiple-signboxes": 4093
+          }
+        },
+        {
+          "source_file": "sgn127.spml",
+          "source_sha256": "41f371f5dc46ad6407cbd63f3f3bbb7dcbde51e5d25dcb647dec1eb11f09ae68",
+          "rows": 1576,
+          "contexts": {
+            "term:single-signbox": 18,
+            "text:multiple-signboxes": 1553,
+            "text:single-signbox": 5
+          }
+        },
+        {
+          "source_file": "sgn128.spml",
+          "source_sha256": "dd2d547086743e3b02c03d2a51049036b12587019c11a95a762c13e03a8e587a",
+          "rows": 5,
+          "contexts": {
+            "term:single-signbox": 5
+          }
+        },
+        {
+          "source_file": "sgn129.spml",
+          "source_sha256": "d0aa5d9af7d36592ca2cd8f689f836a87cfaf6a45ef335fc2d7f742f04d065a5",
+          "rows": 545,
+          "contexts": {
+            "term:single-signbox": 545
+          }
+        },
+        {
+          "source_file": "sgn13.spml",
+          "source_sha256": "d5fd9a8cba9e7d8d4879b7eedbadee38a38722eb38afd1b0c969969d3e8fefff",
+          "rows": 3,
+          "contexts": {
+            "text:multiple-signboxes": 3
+          }
+        },
+        {
+          "source_file": "sgn130.spml",
+          "source_sha256": "805692ce915d2016ed18636b58fbee2b554af34e3e7178e37cd5716b5f8dc270",
+          "rows": 2,
+          "contexts": {
+            "term:single-signbox": 2
+          }
+        },
+        {
+          "source_file": "sgn131.spml",
+          "source_sha256": "bbef6b428e6d25c387df582d77e46dc58139d8ccdf41c1a0f6347a2378ff3716",
+          "rows": 5,
+          "contexts": {
+            "term:single-signbox": 5
+          }
+        },
+        {
+          "source_file": "sgn132.spml",
+          "source_sha256": "a702d431f8c0e02da91c0871970a4d688430f7897bbf666d6144f2494da91f6a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn133.spml",
+          "source_sha256": "b537140123be13439203bb009af6d7e311e43721e986beea38434be2c5307cc4",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn134.spml",
+          "source_sha256": "ca52cdbf58d38164b2f284db8c6bee07da5e02e60bf2b6e4b2fa195fb6319772",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn135.spml",
+          "source_sha256": "92dd1671e7c65fa1ec51ba9b68b1c2e0c1e81b4341595b6e0e8ebd8cbf719477",
+          "rows": 5,
+          "contexts": {
+            "term:single-signbox": 5
+          }
+        },
+        {
+          "source_file": "sgn136.spml",
+          "source_sha256": "6b8a5815420b3478e3d7cda338504c8e9044de6dc43ac3382cc37222d631f50a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn137.spml",
+          "source_sha256": "b8b973a99b89ce3072f4f9f210582616138f0c2b7027bd42d1453270a3a86833",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn138.spml",
+          "source_sha256": "2f0cc5b6ec20e95478cc483afcb40bc682da7adf134a74008d1cb64be30af009",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn139.spml",
+          "source_sha256": "9986288119e98a37a614a8b1c05b170ed7f1d7f7be0ad7a2d8accbd4e4616844",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn14.spml",
+          "source_sha256": "9a4351681cd2accdbc94215b69ec2b3fcd0d36e8ca0191bea52fa4ff151078b5",
+          "rows": 53,
+          "contexts": {
+            "text:multiple-signboxes": 53
+          }
+        },
+        {
+          "source_file": "sgn140.spml",
+          "source_sha256": "f4d72e155d807a00a77fde9d40c74737cb0a8471a8890c420f829819bcee8a2e",
+          "rows": 1,
+          "contexts": {
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn141.spml",
+          "source_sha256": "9684d421e4c6b4ca711f36bfca930386cdfe2430380b84b5ff90715f2c7bde74",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn142.spml",
+          "source_sha256": "3a18751acf301dbe81c6aab35e46e08c2b37b105b823ee212631eb4250e5976c",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn143.spml",
+          "source_sha256": "abc9ae652452c38952392f664355fa21390241633bf3917ef4970eeed8a59da5",
+          "rows": 242,
+          "contexts": {
+            "term:single-signbox": 242
+          }
+        },
+        {
+          "source_file": "sgn144.spml",
+          "source_sha256": "41791fec4b17131db897674f44072ba0c5bb379324397630179dab06f2a4ec8f",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn145.spml",
+          "source_sha256": "787bcaf34b173bfc3355ef0b578f2b170f483405be94fa4b8c9163a591881267",
+          "rows": 27,
+          "contexts": {
+            "text:multiple-signboxes": 27
+          }
+        },
+        {
+          "source_file": "sgn146.spml",
+          "source_sha256": "7c8ab422df8eee694478aa52271be7aac7667c9c7e63037e3841dbd033c0d120",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn147.spml",
+          "source_sha256": "b291df34de91ac5d3466c2f7acfbfa99ea09a0044b0852d2fbb6b2c4f230f7a7",
+          "rows": 1521,
+          "contexts": {
+            "term:single-signbox": 14,
+            "text:multiple-signboxes": 1503,
+            "text:single-signbox": 4
+          }
+        },
+        {
+          "source_file": "sgn148.spml",
+          "source_sha256": "74b6c44e04f5405ee787d534da8ee196100ece94bcc2d1fca640edb6909b2e90",
+          "rows": 6,
+          "contexts": {
+            "text:multiple-signboxes": 6
+          }
+        },
+        {
+          "source_file": "sgn149.spml",
+          "source_sha256": "2ff1feaea4a0db949835c6ffe67dedbfc7db73dedc1f2a16bcfcb21ad50a110b",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn15.spml",
+          "source_sha256": "22a97fbf411e1868a9a26ec1fe86c58e62c9b1c5147d6f4993e6e45ba36b9bb6",
+          "rows": 9,
+          "contexts": {
+            "term:single-signbox": 9
+          }
+        },
+        {
+          "source_file": "sgn150.spml",
+          "source_sha256": "25889c7ad770b0daf03ac4c60fc64434e492d687ecca9bdd823a63fba25051c1",
+          "rows": 7,
+          "contexts": {
+            "text:multiple-signboxes": 7
+          }
+        },
+        {
+          "source_file": "sgn151.spml",
+          "source_sha256": "65e4e3cdad156576b6ab511667099982a3a575e37a789ca6f966bc16cd4e3540",
+          "rows": 5755,
+          "contexts": {
+            "text:multiple-signboxes": 5755
+          }
+        },
+        {
+          "source_file": "sgn152.spml",
+          "source_sha256": "ea964788cfac127352caefe2d10de9605ceb498feb06f4011d2e4be562c20a38",
+          "rows": 2840,
+          "contexts": {
+            "text:multiple-signboxes": 2840
+          }
+        },
+        {
+          "source_file": "sgn153.spml",
+          "source_sha256": "b7a67247db23553d3dde18041cac41a6437c086f4df1b628650635712904ea11",
+          "rows": 65,
+          "contexts": {
+            "term:single-signbox": 65
+          }
+        },
+        {
+          "source_file": "sgn154.spml",
+          "source_sha256": "4e5b245069979b633854ed7ea7115d0cb92876493d300a32e652e4549291ac12",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn155.spml",
+          "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+          "rows": 29818,
+          "contexts": {
+            "term:single-signbox": 29818
+          }
+        },
+        {
+          "source_file": "sgn16.spml",
+          "source_sha256": "f0a64ecf8a67719c64f7c0967efa00ac551d576b7d880cd0dea291f2c5a4da6d",
+          "rows": 290,
+          "contexts": {
+            "term:single-signbox": 290
+          }
+        },
+        {
+          "source_file": "sgn17.spml",
+          "source_sha256": "e14292c987c0f71e389cda8bcfc4143b433713c5b335979f2a0c542e19749a96",
+          "rows": 160,
+          "contexts": {
+            "text:multiple-signboxes": 160
+          }
+        },
+        {
+          "source_file": "sgn18.spml",
+          "source_sha256": "df23bd8f3f15b07820760158c42d1c4cf672e7e1a4813ef23d11b854a4c41f12",
+          "rows": 7,
+          "contexts": {
+            "term:single-signbox": 7
+          }
+        },
+        {
+          "source_file": "sgn19.spml",
+          "source_sha256": "b2afe620de957846a7279130a1f22615d6372e836132a2932d0da0ad0bd02780",
+          "rows": 191,
+          "contexts": {
+            "term:single-signbox": 191
+          }
+        },
+        {
+          "source_file": "sgn2.spml",
+          "source_sha256": "5d0b13dbf2068fff7eb15390f451802d8c8ca00cca456dff0d48ae7431303fd9",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn20.spml",
+          "source_sha256": "477cffb44c4f45f78f7735459d639ca6e84989d43400d8a9f8021b6a3144ef9a",
+          "rows": 24,
+          "contexts": {
+            "term:single-signbox": 6,
+            "text:multiple-signboxes": 18
+          }
+        },
+        {
+          "source_file": "sgn21.spml",
+          "source_sha256": "d0b7d4d795083a8ed2bd7c6b41fb9894c39ed208ca51b9c4028cbd7ded18c882",
+          "rows": 88,
+          "contexts": {
+            "term:single-signbox": 1,
+            "text:multiple-signboxes": 87
+          }
+        },
+        {
+          "source_file": "sgn22.spml",
+          "source_sha256": "7e9516e61e871db324a906ab848a4db524f211f82cb03b767e72cef5a458541e",
+          "rows": 2,
+          "contexts": {
+            "text:multiple-signboxes": 2
+          }
+        },
+        {
+          "source_file": "sgn23.spml",
+          "source_sha256": "0ccc6840837b245f96ed9e8e13aa044f6ad6a19198c7457eaa172bb8e4ec784c",
+          "rows": 231,
+          "contexts": {
+            "term:single-signbox": 3,
+            "text:multiple-signboxes": 228
+          }
+        },
+        {
+          "source_file": "sgn24.spml",
+          "source_sha256": "5dba9d7b453926e55b4dfbb11dcfcd041333469e0398d41db65764d9a905616e",
+          "rows": 2,
+          "contexts": {
+            "term:single-signbox": 2
+          }
+        },
+        {
+          "source_file": "sgn25.spml",
+          "source_sha256": "cdc7628bf81cb39e2d910f26e4ded43b1eee006ad68821ad895ca6a19c0ed986",
+          "rows": 342,
+          "contexts": {
+            "term:single-signbox": 342
+          }
+        },
+        {
+          "source_file": "sgn26.spml",
+          "source_sha256": "fa4c99fcb2c2fcda1207e0e8d1bce2bee76f2293bb8734125fa18dc082c07714",
+          "rows": 4522,
+          "contexts": {
+            "term:single-signbox": 5,
+            "text:multiple-signboxes": 4517
+          }
+        },
+        {
+          "source_file": "sgn27.spml",
+          "source_sha256": "718e01870ab52d16e7972df349c3c4fba337d11c61cdc38cfe695aa4a063e79e",
+          "rows": 65,
+          "contexts": {
+            "term:single-signbox": 5,
+            "text:multiple-signboxes": 60
+          }
+        },
+        {
+          "source_file": "sgn28.spml",
+          "source_sha256": "2eae9e001ccd2d4165410a5d627060a4e1b25bf4e91d4b6b9ee6f39a5dc3b54e",
+          "rows": 302,
+          "contexts": {
+            "term:single-signbox": 286,
+            "text:multiple-signboxes": 16
+          }
+        },
+        {
+          "source_file": "sgn29.spml",
+          "source_sha256": "1884f49d8167699ee7c726268362b6cf7ef2f2ddbde2e9a8d19c926f75f06435",
+          "rows": 3,
+          "contexts": {
+            "term:single-signbox": 3
+          }
+        },
+        {
+          "source_file": "sgn30.spml",
+          "source_sha256": "b953c8228b2b98e9d1b1cafe9c2926950ccbddc8f33c3c8f08291914e069eed6",
+          "rows": 3,
+          "contexts": {
+            "term:single-signbox": 2,
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn31.spml",
+          "source_sha256": "0e7aa7d7dae7b6cf98d45b03cee623d6014b2e04c2b98c1242c9e17df4359c71",
+          "rows": 180,
+          "contexts": {
+            "term:single-signbox": 121,
+            "text:multiple-signboxes": 53,
+            "text:single-signbox": 6
+          }
+        },
+        {
+          "source_file": "sgn32.spml",
+          "source_sha256": "1aec6fe0b7e5b454c3171cf4bcef5a50ac83d751fcbd79e92b4bbf7aaf1dd067",
+          "rows": 2,
+          "contexts": {
+            "text:multiple-signboxes": 2
+          }
+        },
+        {
+          "source_file": "sgn33.spml",
+          "source_sha256": "b2b22b13819a54dc4aefa5ac688c4adc07f086bef94cb69d3c2dc534b9cf5c8b",
+          "rows": 34,
+          "contexts": {
+            "term:single-signbox": 34
+          }
+        },
+        {
+          "source_file": "sgn34.spml",
+          "source_sha256": "62372c27b64ae1d5a0c2d5a8c42d663178a70a03a8e07894f6def9660d36066d",
+          "rows": 120,
+          "contexts": {
+            "term:single-signbox": 84,
+            "text:multiple-signboxes": 5,
+            "text:single-signbox": 31
+          }
+        },
+        {
+          "source_file": "sgn35.spml",
+          "source_sha256": "2aecc3dfe69955abfc3a1b30f796ae47a849f62debe24c85ac729c79a65275fc",
+          "rows": 18,
+          "contexts": {
+            "term:single-signbox": 14,
+            "text:multiple-signboxes": 4
+          }
+        },
+        {
+          "source_file": "sgn36.spml",
+          "source_sha256": "4371c372bd3504043048c698b2b139f918fa0210f92d7bc9c748e669de615b27",
+          "rows": 1610,
+          "contexts": {
+            "term:single-signbox": 5,
+            "text:multiple-signboxes": 1605
+          }
+        },
+        {
+          "source_file": "sgn37.spml",
+          "source_sha256": "a5094b24e7fce5568918eef3165dbe02cd8d7689d9255ebcf69032ac7eef9762",
+          "rows": 216,
+          "contexts": {
+            "text:multiple-signboxes": 216
+          }
+        },
+        {
+          "source_file": "sgn38.spml",
+          "source_sha256": "5d299c1c264f2420155e07f767070960d4110af134253b6184d9f888a445a72e",
+          "rows": 13,
+          "contexts": {
+            "text:multiple-signboxes": 13
+          }
+        },
+        {
+          "source_file": "sgn39.spml",
+          "source_sha256": "8fbaae8dcc431b03d623f8eac71440eb5fa1f20d21c181ad4a9f5df97f39fd43",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn4.spml",
+          "source_sha256": "bfb1bbc99fa878669f2ac5c5560f9ad7474f80a173ba35d47c4ce188d4bcbd52",
+          "rows": 1203,
+          "contexts": {
+            "term:single-signbox": 825,
+            "text:multiple-signboxes": 370,
+            "text:single-signbox": 8
+          }
+        },
+        {
+          "source_file": "sgn40.spml",
+          "source_sha256": "88f5fcf1a95501c9e83817f4add438bd92fcd88ebab727d885b067218344f369",
+          "rows": 14,
+          "contexts": {
+            "term:single-signbox": 10,
+            "text:multiple-signboxes": 4
+          }
+        },
+        {
+          "source_file": "sgn41.spml",
+          "source_sha256": "b62931d70f9eeac1b89e94455f528bdc6115f7c4ad618602cdebffd627aa5186",
+          "rows": 180,
+          "contexts": {
+            "term:single-signbox": 180
+          }
+        },
+        {
+          "source_file": "sgn42.spml",
+          "source_sha256": "098872b93d79ae57ddf2b553485eee43bf9c669380ccfae6654407978bd16fc1",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn43.spml",
+          "source_sha256": "68bccd22c0a27230363a2d375567f666e485ea80d23cfdb26e823d7426684f13",
+          "rows": 178,
+          "contexts": {
+            "term:single-signbox": 178
+          }
+        },
+        {
+          "source_file": "sgn44.spml",
+          "source_sha256": "8e0e156148a8c0a73503968ecd3b3936ed0b10719e14a0d717e5196c38c0fefc",
+          "rows": 1155,
+          "contexts": {
+            "term:single-signbox": 1128,
+            "text:multiple-signboxes": 27
+          }
+        },
+        {
+          "source_file": "sgn45.spml",
+          "source_sha256": "8b8b87f3e91f398b5f22e547ede9c238f615d12e351c799824ae92f75bc42eca",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn46.spml",
+          "source_sha256": "0d273dad7e0a559b538ce18526cbc739bbb68b9e334ea097a90526ced41fbebe",
+          "rows": 20542,
+          "contexts": {
+            "term:single-signbox": 6534,
+            "text:multiple-signboxes": 13760,
+            "text:single-signbox": 248
+          }
+        },
+        {
+          "source_file": "sgn47.spml",
+          "source_sha256": "f38733197841531dc258bb4aadf028151203fb7818961e80ffd3bb85ee4c9af8",
+          "rows": 1094,
+          "contexts": {
+            "term:single-signbox": 1080,
+            "text:multiple-signboxes": 1,
+            "text:single-signbox": 13
+          }
+        },
+        {
+          "source_file": "sgn48.spml",
+          "source_sha256": "a47e04cda93e78ea5a0908070edfd6bb8d1a89896b6cc6fb25676aeaea0eab51",
+          "rows": 95,
+          "contexts": {
+            "term:single-signbox": 95
+          }
+        },
+        {
+          "source_file": "sgn49.spml",
+          "source_sha256": "82e22e9779840fa48fa0c8ec50ef498e5fc110426743eb22203c002d3eca005c",
+          "rows": 557,
+          "contexts": {
+            "term:single-signbox": 514,
+            "text:multiple-signboxes": 43
+          }
+        },
+        {
+          "source_file": "sgn5.spml",
+          "source_sha256": "dc853fcda4e12340307701ebe78ed6f5a55adaee5f496e9d692bf3f704380d7d",
+          "rows": 3119,
+          "contexts": {
+            "term:single-signbox": 12,
+            "text:multiple-signboxes": 3099,
+            "text:single-signbox": 8
+          }
+        },
+        {
+          "source_file": "sgn50.spml",
+          "source_sha256": "bb6f8920044633ac07722af0e072420ed874c1ce8779f61173dceb33e272caec",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn51.spml",
+          "source_sha256": "3887699dcbb4b55db8e7abeab116786638a42d7d913c0d8b401e047cba96bce7",
+          "rows": 160,
+          "contexts": {
+            "term:single-signbox": 130,
+            "text:multiple-signboxes": 30
+          }
+        },
+        {
+          "source_file": "sgn52.spml",
+          "source_sha256": "f346cbebc0a87738a80c256f65ceb979aac5270c1f54b01870c9d746bd4affef",
+          "rows": 642,
+          "contexts": {
+            "term:single-signbox": 545,
+            "text:multiple-signboxes": 92,
+            "text:single-signbox": 5
+          }
+        },
+        {
+          "source_file": "sgn53.spml",
+          "source_sha256": "3fa48486f6fcaacb115ef922b7d7d06c892c44e2de03dff425b3cff8bc6cec8a",
+          "rows": 20492,
+          "contexts": {
+            "term:single-signbox": 20427,
+            "text:multiple-signboxes": 65
+          }
+        },
+        {
+          "source_file": "sgn54.spml",
+          "source_sha256": "c95e9cd2456fc42bb098c16e13e90d4f34a1d833c1259503697a9754afb3abf1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn55.spml",
+          "source_sha256": "606c4b813341a8bdee15e8db958d5149540b3570d04410805751456f4e4731d1",
+          "rows": 175,
+          "contexts": {
+            "term:single-signbox": 175
+          }
+        },
+        {
+          "source_file": "sgn56.spml",
+          "source_sha256": "424c18a54335de5e08fa2718d12bd43add3835287432ae4c60b4073863d1eaee",
+          "rows": 109,
+          "contexts": {
+            "term:single-signbox": 109
+          }
+        },
+        {
+          "source_file": "sgn57.spml",
+          "source_sha256": "97f297f50e4aeee17d6d546a4c0110a9ae47e384d8bedaa1713a739e14b616ed",
+          "rows": 48,
+          "contexts": {
+            "term:single-signbox": 23,
+            "text:multiple-signboxes": 25
+          }
+        },
+        {
+          "source_file": "sgn58.spml",
+          "source_sha256": "ba42f9136dddc29d8c75d2b3c39a3a7ab856326e2b98bdbdbd81b93cb646fe92",
+          "rows": 411,
+          "contexts": {
+            "term:single-signbox": 401,
+            "text:multiple-signboxes": 10
+          }
+        },
+        {
+          "source_file": "sgn59.spml",
+          "source_sha256": "e54e3f6e29f8352bb821a85d156fc3f62bc863ceacabdfc9ffce56c523e2c70a",
+          "rows": 78,
+          "contexts": {
+            "term:single-signbox": 60,
+            "text:multiple-signboxes": 18
+          }
+        },
+        {
+          "source_file": "sgn6.spml",
+          "source_sha256": "19eb534cc5f8bda04dfb520b2be713ceab511a054fed8b0c3463e18d36e5ef82",
+          "rows": 11,
+          "contexts": {
+            "term:single-signbox": 11
+          }
+        },
+        {
+          "source_file": "sgn60.spml",
+          "source_sha256": "0b7710e718bb5096168c75a4568a39aeba7002c62fb626b4ae964d6bea9503dd",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn61.spml",
+          "source_sha256": "ba370098f7b7a724cb721b0634ac29d7d36080d2c3db5cdf260e3c1515500e73",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn62.spml",
+          "source_sha256": "a150954470224ba147f12f820930f18fcc9098531d2375017d05c99796210444",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn63.spml",
+          "source_sha256": "ff249ebc7e7351589c6962e624de5dbbdbf8036a89ca20753a7e0092a9dacd86",
+          "rows": 499,
+          "contexts": {
+            "term:single-signbox": 463,
+            "text:multiple-signboxes": 26,
+            "text:single-signbox": 10
+          }
+        },
+        {
+          "source_file": "sgn64.spml",
+          "source_sha256": "05587000f0ffbe16dfde97051d96662c3a55e9f4741a7ef056ed3c7b73246b86",
+          "rows": 30,
+          "contexts": {
+            "term:single-signbox": 20,
+            "text:multiple-signboxes": 10
+          }
+        },
+        {
+          "source_file": "sgn65.spml",
+          "source_sha256": "38ded06c5a4a656eb3dec79646881a269ef2d4b5e794c350e9763eb36a6f1cf8",
+          "rows": 449,
+          "contexts": {
+            "term:single-signbox": 416,
+            "text:multiple-signboxes": 33
+          }
+        },
+        {
+          "source_file": "sgn66.spml",
+          "source_sha256": "bdc3af9f393b0bba11a633e0622d46dca76b59a93e9a87a6169123ffb58b8d5f",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn67.spml",
+          "source_sha256": "8d8ba2e4f02e541386f2bd67ef87014974073490e87f61df60431299f6c63a97",
+          "rows": 154,
+          "contexts": {
+            "term:single-signbox": 145,
+            "text:multiple-signboxes": 9
+          }
+        },
+        {
+          "source_file": "sgn68.spml",
+          "source_sha256": "a5a9ce7691f6c1f9b4ec1550e9f0cdfe165b3a449278455fce0a075988cc92d4",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn69.spml",
+          "source_sha256": "9a0b0f7adab54e05b81d901e6a66aa01a1d38d79cf83341ce696fc080e1b504f",
+          "rows": 232,
+          "contexts": {
+            "term:single-signbox": 225,
+            "text:multiple-signboxes": 7
+          }
+        },
+        {
+          "source_file": "sgn7.spml",
+          "source_sha256": "f83f4ad26917637fa0f499205b4495c77292e0031a6f5fc86523e057137550a9",
+          "rows": 1735,
+          "contexts": {
+            "term:single-signbox": 1735
+          }
+        },
+        {
+          "source_file": "sgn70.spml",
+          "source_sha256": "ec6d7a0f290bd2dd1f3aa153bee86ede091a7189a4aa87af20e57afc66b68be4",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn71.spml",
+          "source_sha256": "f094717c30854c90795a5db35e11513e5559a0c16aa841568d87cfe07fd544e6",
+          "rows": 88,
+          "contexts": {
+            "term:single-signbox": 88
+          }
+        },
+        {
+          "source_file": "sgn72.spml",
+          "source_sha256": "63188ccd0ae9d656f415d712023446d3f6c63c8bc5b228c747a6831cb8b407f1",
+          "rows": 16,
+          "contexts": {
+            "term:single-signbox": 16
+          }
+        },
+        {
+          "source_file": "sgn73.spml",
+          "source_sha256": "69343b7d026ca52dd52c7098a5833f1da47f9edaf42af6b58bf09f89921f41ab",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn74.spml",
+          "source_sha256": "43dd6eb89f46f015bfee7a1d58b9a3981431efef303d8675f76d6f2250740e87",
+          "rows": 158,
+          "contexts": {
+            "term:single-signbox": 158
+          }
+        },
+        {
+          "source_file": "sgn75.spml",
+          "source_sha256": "66b4fdf126c6a4e083900df68c62a907da3c2308787942f4b5a0b1804b3bca57",
+          "rows": 5,
+          "contexts": {
+            "term:single-signbox": 5
+          }
+        },
+        {
+          "source_file": "sgn76.spml",
+          "source_sha256": "6fe885c4e25119e6303306508b83d9eb2958a2de96559c880235e011cae3ddbd",
+          "rows": 4,
+          "contexts": {
+            "term:single-signbox": 4
+          }
+        },
+        {
+          "source_file": "sgn77.spml",
+          "source_sha256": "5d3296a3fdbfc83c3360d0c7b6349d811341bf82e89125c5e1b2a4b86290b280",
+          "rows": 12,
+          "contexts": {
+            "term:single-signbox": 12
+          }
+        },
+        {
+          "source_file": "sgn78.spml",
+          "source_sha256": "a294c644ca7e03cb9960b664d220dbe1567ff5633f6b75601732e1da92b41c9a",
+          "rows": 26952,
+          "contexts": {
+            "term:single-signbox": 26936,
+            "text:multiple-signboxes": 16
+          }
+        },
+        {
+          "source_file": "sgn79.spml",
+          "source_sha256": "a4fd14ce5587d8b39433460637102f62ab6b1a0ccc2adc58257ed467a66d99c1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn8.spml",
+          "source_sha256": "7b0f84f2edf41566e6a686f07a941d4e1972cc790cbf8b43c20091dda1ab56d4",
+          "rows": 502,
+          "contexts": {
+            "term:single-signbox": 502
+          }
+        },
+        {
+          "source_file": "sgn80.spml",
+          "source_sha256": "91cd2590c8f249bb2d8b2b9e4da4da488b4ebea1d0e9571ca05e38129277b45c",
+          "rows": 417,
+          "contexts": {
+            "term:single-signbox": 392,
+            "text:multiple-signboxes": 24,
+            "text:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn81.spml",
+          "source_sha256": "6329dd145639db5a651480ca5a6e3f7e17b149f755ce4c7c9d0b00cbaa6e1704",
+          "rows": 699,
+          "contexts": {
+            "term:single-signbox": 6,
+            "text:multiple-signboxes": 690,
+            "text:single-signbox": 3
+          }
+        },
+        {
+          "source_file": "sgn82.spml",
+          "source_sha256": "f5f762be65134cdf66024ceef0de809ccc5b4a463a1734306398c11dce4ffa5b",
+          "rows": 82,
+          "contexts": {
+            "term:single-signbox": 82
+          }
+        },
+        {
+          "source_file": "sgn83.spml",
+          "source_sha256": "83e01707a20556a92423795e6fa61c4ff78072b2da1a1f1db1969d48210edfca",
+          "rows": 6,
+          "contexts": {
+            "term:single-signbox": 6
+          }
+        },
+        {
+          "source_file": "sgn84.spml",
+          "source_sha256": "71810ed17850d03b6ffaeaa733f53eb6beca75cbdd513ba54a2721b67cfe64a6",
+          "rows": 2,
+          "contexts": {
+            "term:single-signbox": 2
+          }
+        },
+        {
+          "source_file": "sgn85.spml",
+          "source_sha256": "bb32808ca136220686555e232f85afb933544386585badaa248de3f173de4cc3",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn86.spml",
+          "source_sha256": "60b7cd37360c402b7b6599ac3bc5689f7a710218f2b0eabf1fd7c56997c8fb65",
+          "rows": 2,
+          "contexts": {
+            "term:single-signbox": 2
+          }
+        },
+        {
+          "source_file": "sgn87.spml",
+          "source_sha256": "e7f397ab54f553443ae751b3c7e31048076f68b1893762861881b94b4ca75a59",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn88.spml",
+          "source_sha256": "a405937a85330733be75dd0e58057909e576d2af8282eab7b04585702433b71a",
+          "rows": 14,
+          "contexts": {
+            "term:single-signbox": 14
+          }
+        },
+        {
+          "source_file": "sgn89.spml",
+          "source_sha256": "3b45cb4dcb08bd9f8df9d79ddace0207346be25a0b5056b83d65d822dbc386b3",
+          "rows": 5,
+          "contexts": {
+            "term:single-signbox": 4,
+            "text:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn9.spml",
+          "source_sha256": "663c52b0859490c3c087c5166a8d3e3195257d12814fa04b8583a043a36457f7",
+          "rows": 261,
+          "contexts": {
+            "term:single-signbox": 261
+          }
+        },
+        {
+          "source_file": "sgn90.spml",
+          "source_sha256": "e506e1d09f2a184f560cd7b7c1a8de6bb914024a811be0b7fc078c5bb020278a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn91.spml",
+          "source_sha256": "792fec8130c24be4c279a8a9cb5a882f1b00486b7f76feebbc5723c82e9e2ab8",
+          "rows": 1,
+          "contexts": {
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn92.spml",
+          "source_sha256": "f915bf7245a56e169da8a451c606a3bef5695e984a95e8d691b8516a367fcaec",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn93.spml",
+          "source_sha256": "d584154c510e25e6655b1d2ac857f11e97f0e8bd093c68739ecce2d30f108d73",
+          "rows": 915,
+          "contexts": {
+            "term:single-signbox": 2,
+            "text:multiple-signboxes": 913
+          }
+        },
+        {
+          "source_file": "sgn94.spml",
+          "source_sha256": "95eed9dfca227f3973cdc5750adb39c6e557d840de513eca0bba0d273b0b6f5c",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn95.spml",
+          "source_sha256": "20cb7ca7241966ab679c0faecf04fd1caecc60bc5761d2d275d371c8bf0d341f",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn96.spml",
+          "source_sha256": "72400deb0aac2c925a5578598504f344d58966b942c0c1b23c2c924480994f3a",
+          "rows": 91,
+          "contexts": {
+            "text:multiple-signboxes": 91
+          }
+        },
+        {
+          "source_file": "sgn98.spml",
+          "source_sha256": "caf96a0dab49038dff4088efd39b5962b4b6ec5488508818d870d5d1f86ff0e2",
+          "rows": 133,
+          "contexts": {
+            "term:single-signbox": 12,
+            "text:multiple-signboxes": 121
+          }
+        },
+        {
+          "source_file": "sgn99.spml",
+          "source_sha256": "4572e3bdfd7e45d8fc15c4b246cfb3e3b79a4e7b33da414ade6faa39fafedb70",
+          "rows": 99,
+          "contexts": {
+            "text:multiple-signboxes": 99
+          }
+        }
+      ]
+    },
+    "eye_gaze": {
+      "rows": 632,
+      "contexts": {
+        "term:single-signbox": 226,
+        "text:multiple-signboxes": 405,
+        "text:single-signbox": 1
+      },
+      "sgn114_entry1920": {
+        "text:multiple-signboxes": 3
+      },
+      "files": [
+        {
+          "source_file": "sgn0.spml",
+          "source_sha256": "b6fbe396b6408027cfa4c1999083b14bfafdcc8a79f3611fc1e46f536dfd5f3a",
+          "rows": 2,
+          "contexts": {
+            "text:multiple-signboxes": 2
+          }
+        },
+        {
+          "source_file": "sgn1.spml",
+          "source_sha256": "25804f8402267fbe1757e0c0e659d6443ec94103999ecdaa1739006935c54a34",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn10.spml",
+          "source_sha256": "6bb55e47458b55faf6d068ad5e04735f417a191cc982b0925947ebbca9ceed79",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn100.spml",
+          "source_sha256": "700b22e768ffb1be9793883794efdc12ca7248fb1671a1d89b353e1bcf71641d",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn101.spml",
+          "source_sha256": "05b972e905104509b046ed609c92de9d5670adf49ba81976bf2cab770c98d372",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn102.spml",
+          "source_sha256": "fac0d0e5988e51200d92a46a6e34edf6aab1bd238a507bcab130bc0ec5dc5b1d",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn104.spml",
+          "source_sha256": "7db7e032f49cdc444a398466212c4c2172bebb1b57337f1e2217d6ce41dad563",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn106.spml",
+          "source_sha256": "1764ef812c69157b269dfd3e9b66ea5863ce4a045b7a99067e8fd2672e7527d2",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn107.spml",
+          "source_sha256": "347cb856a31b8e96650535812b93cb3584c0dc286196f2e39d9927e5d567858a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn108.spml",
+          "source_sha256": "6753ef886e9e784a0ae7fbcc842a55a6e0f1d0b1d0b1d03e693c4c3271dd2493",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn109.spml",
+          "source_sha256": "145b931590c532476565c8e183af86a33d97af69f56bc3c7d5024f6c8977e83c",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn11.spml",
+          "source_sha256": "db1f433dfb221b6f05855381e48f46969d7e4d1159da9296481b856e71333605",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn110.spml",
+          "source_sha256": "7e395746c2d2533ddeb7ae7e8077aa3faf13d64810a785a11c2699bb095dfad6",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn111.spml",
+          "source_sha256": "658af074ae32be770559fba501133c0d5f81df53e300bd67d954aeff1b9262d1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn112.spml",
+          "source_sha256": "f9abb399c03a1dc3fa5a135f893a042737c0008f1bc336a33fb2b1c1852a2594",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn113.spml",
+          "source_sha256": "c007b9a377f5deeb2301a4a22cae291abd3f26eb11ca8e6982bd7efc586d98f8",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn114.spml",
+          "source_sha256": "f23f2c4211914d6cd34a743e889f3036b67e536393535e9ba673fae7d5514b38",
+          "rows": 56,
+          "contexts": {
+            "text:multiple-signboxes": 56
+          }
+        },
+        {
+          "source_file": "sgn115.spml",
+          "source_sha256": "9bfa8d100d38b607a46b8a36c44e29aa34ff6cb3ebb49e5336fa4c59ef05581c",
+          "rows": 3,
+          "contexts": {
+            "text:multiple-signboxes": 3
+          }
+        },
+        {
+          "source_file": "sgn116.spml",
+          "source_sha256": "18b70d3cc4d96473667c7967c13c52f0e6a032d76c35240846bd618966c8975f",
+          "rows": 4,
+          "contexts": {
+            "term:single-signbox": 4
+          }
+        },
+        {
+          "source_file": "sgn117.spml",
+          "source_sha256": "b4babd256b8626efe037b786cd0b7ac9f41e9cda9be4694c114cc1251a1e1a79",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn118.spml",
+          "source_sha256": "b5c7525007fb80b0b92d329841ad7c7d5de20c6541124aeb6d561dc855415337",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn119.spml",
+          "source_sha256": "447853bc4c298a427aeeb79212a496a1f0f730b58a1228417db0c3a91d7fa307",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn12.spml",
+          "source_sha256": "34396b9ea75990c99367568667a29e1df2bbd4b16265e954631fdac2f542b3af",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn120.spml",
+          "source_sha256": "fea8e7a92f2d6dc9449ed5fe3626f3140d40bdfb69ed3806ff70e9979a42a5ac",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn121.spml",
+          "source_sha256": "5245dc20d88220d691fb6d84a5a918c57c677d1122dbe3ca0a8d02ad38c30f4d",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn122.spml",
+          "source_sha256": "fa3233aea035797a1bd7e4dceb2dd46b43db2a260108b463068bd132105c4d84",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn123.spml",
+          "source_sha256": "771923f4a9a9c32cffb45ba09cb29a2899fa656a2910156c6c4c6dd02102bb14",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn124.spml",
+          "source_sha256": "8d1a9aa47af9e4cafc6aaaf4be53870510c54b106f6d43e48ab6534e95d5f28b",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn125.spml",
+          "source_sha256": "50ce2c5e9d42d616d297bb1930735a571708d4eeabab1369df41bc7592f6d3d5",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn126.spml",
+          "source_sha256": "80ece41251f1988c99fedf834462e8a3b33708e8971b709b02706296c0d6c5cd",
+          "rows": 1,
+          "contexts": {
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn127.spml",
+          "source_sha256": "41f371f5dc46ad6407cbd63f3f3bbb7dcbde51e5d25dcb647dec1eb11f09ae68",
+          "rows": 3,
+          "contexts": {
+            "text:multiple-signboxes": 3
+          }
+        },
+        {
+          "source_file": "sgn128.spml",
+          "source_sha256": "dd2d547086743e3b02c03d2a51049036b12587019c11a95a762c13e03a8e587a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn129.spml",
+          "source_sha256": "d0aa5d9af7d36592ca2cd8f689f836a87cfaf6a45ef335fc2d7f742f04d065a5",
+          "rows": 5,
+          "contexts": {
+            "term:single-signbox": 5
+          }
+        },
+        {
+          "source_file": "sgn13.spml",
+          "source_sha256": "d5fd9a8cba9e7d8d4879b7eedbadee38a38722eb38afd1b0c969969d3e8fefff",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn130.spml",
+          "source_sha256": "805692ce915d2016ed18636b58fbee2b554af34e3e7178e37cd5716b5f8dc270",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn131.spml",
+          "source_sha256": "bbef6b428e6d25c387df582d77e46dc58139d8ccdf41c1a0f6347a2378ff3716",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn132.spml",
+          "source_sha256": "a702d431f8c0e02da91c0871970a4d688430f7897bbf666d6144f2494da91f6a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn133.spml",
+          "source_sha256": "b537140123be13439203bb009af6d7e311e43721e986beea38434be2c5307cc4",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn134.spml",
+          "source_sha256": "ca52cdbf58d38164b2f284db8c6bee07da5e02e60bf2b6e4b2fa195fb6319772",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn135.spml",
+          "source_sha256": "92dd1671e7c65fa1ec51ba9b68b1c2e0c1e81b4341595b6e0e8ebd8cbf719477",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn136.spml",
+          "source_sha256": "6b8a5815420b3478e3d7cda338504c8e9044de6dc43ac3382cc37222d631f50a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn137.spml",
+          "source_sha256": "b8b973a99b89ce3072f4f9f210582616138f0c2b7027bd42d1453270a3a86833",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn138.spml",
+          "source_sha256": "2f0cc5b6ec20e95478cc483afcb40bc682da7adf134a74008d1cb64be30af009",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn139.spml",
+          "source_sha256": "9986288119e98a37a614a8b1c05b170ed7f1d7f7be0ad7a2d8accbd4e4616844",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn14.spml",
+          "source_sha256": "9a4351681cd2accdbc94215b69ec2b3fcd0d36e8ca0191bea52fa4ff151078b5",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn140.spml",
+          "source_sha256": "f4d72e155d807a00a77fde9d40c74737cb0a8471a8890c420f829819bcee8a2e",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn141.spml",
+          "source_sha256": "9684d421e4c6b4ca711f36bfca930386cdfe2430380b84b5ff90715f2c7bde74",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn142.spml",
+          "source_sha256": "3a18751acf301dbe81c6aab35e46e08c2b37b105b823ee212631eb4250e5976c",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn143.spml",
+          "source_sha256": "abc9ae652452c38952392f664355fa21390241633bf3917ef4970eeed8a59da5",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn144.spml",
+          "source_sha256": "41791fec4b17131db897674f44072ba0c5bb379324397630179dab06f2a4ec8f",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn145.spml",
+          "source_sha256": "787bcaf34b173bfc3355ef0b578f2b170f483405be94fa4b8c9163a591881267",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn146.spml",
+          "source_sha256": "7c8ab422df8eee694478aa52271be7aac7667c9c7e63037e3841dbd033c0d120",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn147.spml",
+          "source_sha256": "b291df34de91ac5d3466c2f7acfbfa99ea09a0044b0852d2fbb6b2c4f230f7a7",
+          "rows": 3,
+          "contexts": {
+            "text:multiple-signboxes": 3
+          }
+        },
+        {
+          "source_file": "sgn148.spml",
+          "source_sha256": "74b6c44e04f5405ee787d534da8ee196100ece94bcc2d1fca640edb6909b2e90",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn149.spml",
+          "source_sha256": "2ff1feaea4a0db949835c6ffe67dedbfc7db73dedc1f2a16bcfcb21ad50a110b",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn15.spml",
+          "source_sha256": "22a97fbf411e1868a9a26ec1fe86c58e62c9b1c5147d6f4993e6e45ba36b9bb6",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn150.spml",
+          "source_sha256": "25889c7ad770b0daf03ac4c60fc64434e492d687ecca9bdd823a63fba25051c1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn151.spml",
+          "source_sha256": "65e4e3cdad156576b6ab511667099982a3a575e37a789ca6f966bc16cd4e3540",
+          "rows": 2,
+          "contexts": {
+            "text:multiple-signboxes": 2
+          }
+        },
+        {
+          "source_file": "sgn152.spml",
+          "source_sha256": "ea964788cfac127352caefe2d10de9605ceb498feb06f4011d2e4be562c20a38",
+          "rows": 1,
+          "contexts": {
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn153.spml",
+          "source_sha256": "b7a67247db23553d3dde18041cac41a6437c086f4df1b628650635712904ea11",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn154.spml",
+          "source_sha256": "4e5b245069979b633854ed7ea7115d0cb92876493d300a32e652e4549291ac12",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn155.spml",
+          "source_sha256": "88a83a564b86bf1a0f36143aa919e48ea750819e19320fdeacc12e6de43fda19",
+          "rows": 70,
+          "contexts": {
+            "term:single-signbox": 70
+          }
+        },
+        {
+          "source_file": "sgn16.spml",
+          "source_sha256": "f0a64ecf8a67719c64f7c0967efa00ac551d576b7d880cd0dea291f2c5a4da6d",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn17.spml",
+          "source_sha256": "e14292c987c0f71e389cda8bcfc4143b433713c5b335979f2a0c542e19749a96",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn18.spml",
+          "source_sha256": "df23bd8f3f15b07820760158c42d1c4cf672e7e1a4813ef23d11b854a4c41f12",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn19.spml",
+          "source_sha256": "b2afe620de957846a7279130a1f22615d6372e836132a2932d0da0ad0bd02780",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn2.spml",
+          "source_sha256": "5d0b13dbf2068fff7eb15390f451802d8c8ca00cca456dff0d48ae7431303fd9",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn20.spml",
+          "source_sha256": "477cffb44c4f45f78f7735459d639ca6e84989d43400d8a9f8021b6a3144ef9a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn21.spml",
+          "source_sha256": "d0b7d4d795083a8ed2bd7c6b41fb9894c39ed208ca51b9c4028cbd7ded18c882",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn22.spml",
+          "source_sha256": "7e9516e61e871db324a906ab848a4db524f211f82cb03b767e72cef5a458541e",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn23.spml",
+          "source_sha256": "0ccc6840837b245f96ed9e8e13aa044f6ad6a19198c7457eaa172bb8e4ec784c",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn24.spml",
+          "source_sha256": "5dba9d7b453926e55b4dfbb11dcfcd041333469e0398d41db65764d9a905616e",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn25.spml",
+          "source_sha256": "cdc7628bf81cb39e2d910f26e4ded43b1eee006ad68821ad895ca6a19c0ed986",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn26.spml",
+          "source_sha256": "fa4c99fcb2c2fcda1207e0e8d1bce2bee76f2293bb8734125fa18dc082c07714",
+          "rows": 5,
+          "contexts": {
+            "text:multiple-signboxes": 5
+          }
+        },
+        {
+          "source_file": "sgn27.spml",
+          "source_sha256": "718e01870ab52d16e7972df349c3c4fba337d11c61cdc38cfe695aa4a063e79e",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn28.spml",
+          "source_sha256": "2eae9e001ccd2d4165410a5d627060a4e1b25bf4e91d4b6b9ee6f39a5dc3b54e",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn29.spml",
+          "source_sha256": "1884f49d8167699ee7c726268362b6cf7ef2f2ddbde2e9a8d19c926f75f06435",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn30.spml",
+          "source_sha256": "b953c8228b2b98e9d1b1cafe9c2926950ccbddc8f33c3c8f08291914e069eed6",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn31.spml",
+          "source_sha256": "0e7aa7d7dae7b6cf98d45b03cee623d6014b2e04c2b98c1242c9e17df4359c71",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn32.spml",
+          "source_sha256": "1aec6fe0b7e5b454c3171cf4bcef5a50ac83d751fcbd79e92b4bbf7aaf1dd067",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn33.spml",
+          "source_sha256": "b2b22b13819a54dc4aefa5ac688c4adc07f086bef94cb69d3c2dc534b9cf5c8b",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn34.spml",
+          "source_sha256": "62372c27b64ae1d5a0c2d5a8c42d663178a70a03a8e07894f6def9660d36066d",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn35.spml",
+          "source_sha256": "2aecc3dfe69955abfc3a1b30f796ae47a849f62debe24c85ac729c79a65275fc",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn36.spml",
+          "source_sha256": "4371c372bd3504043048c698b2b139f918fa0210f92d7bc9c748e669de615b27",
+          "rows": 35,
+          "contexts": {
+            "text:multiple-signboxes": 35
+          }
+        },
+        {
+          "source_file": "sgn37.spml",
+          "source_sha256": "a5094b24e7fce5568918eef3165dbe02cd8d7689d9255ebcf69032ac7eef9762",
+          "rows": 1,
+          "contexts": {
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn38.spml",
+          "source_sha256": "5d299c1c264f2420155e07f767070960d4110af134253b6184d9f888a445a72e",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn39.spml",
+          "source_sha256": "8fbaae8dcc431b03d623f8eac71440eb5fa1f20d21c181ad4a9f5df97f39fd43",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn4.spml",
+          "source_sha256": "bfb1bbc99fa878669f2ac5c5560f9ad7474f80a173ba35d47c4ce188d4bcbd52",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn40.spml",
+          "source_sha256": "88f5fcf1a95501c9e83817f4add438bd92fcd88ebab727d885b067218344f369",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn41.spml",
+          "source_sha256": "b62931d70f9eeac1b89e94455f528bdc6115f7c4ad618602cdebffd627aa5186",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn42.spml",
+          "source_sha256": "098872b93d79ae57ddf2b553485eee43bf9c669380ccfae6654407978bd16fc1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn43.spml",
+          "source_sha256": "68bccd22c0a27230363a2d375567f666e485ea80d23cfdb26e823d7426684f13",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn44.spml",
+          "source_sha256": "8e0e156148a8c0a73503968ecd3b3936ed0b10719e14a0d717e5196c38c0fefc",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn45.spml",
+          "source_sha256": "8b8b87f3e91f398b5f22e547ede9c238f615d12e351c799824ae92f75bc42eca",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn46.spml",
+          "source_sha256": "0d273dad7e0a559b538ce18526cbc739bbb68b9e334ea097a90526ced41fbebe",
+          "rows": 223,
+          "contexts": {
+            "term:single-signbox": 22,
+            "text:multiple-signboxes": 200,
+            "text:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn47.spml",
+          "source_sha256": "f38733197841531dc258bb4aadf028151203fb7818961e80ffd3bb85ee4c9af8",
+          "rows": 54,
+          "contexts": {
+            "term:single-signbox": 54
+          }
+        },
+        {
+          "source_file": "sgn48.spml",
+          "source_sha256": "a47e04cda93e78ea5a0908070edfd6bb8d1a89896b6cc6fb25676aeaea0eab51",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn49.spml",
+          "source_sha256": "82e22e9779840fa48fa0c8ec50ef498e5fc110426743eb22203c002d3eca005c",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn5.spml",
+          "source_sha256": "dc853fcda4e12340307701ebe78ed6f5a55adaee5f496e9d692bf3f704380d7d",
+          "rows": 7,
+          "contexts": {
+            "text:multiple-signboxes": 7
+          }
+        },
+        {
+          "source_file": "sgn50.spml",
+          "source_sha256": "bb6f8920044633ac07722af0e072420ed874c1ce8779f61173dceb33e272caec",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn51.spml",
+          "source_sha256": "3887699dcbb4b55db8e7abeab116786638a42d7d913c0d8b401e047cba96bce7",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn52.spml",
+          "source_sha256": "f346cbebc0a87738a80c256f65ceb979aac5270c1f54b01870c9d746bd4affef",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn53.spml",
+          "source_sha256": "3fa48486f6fcaacb115ef922b7d7d06c892c44e2de03dff425b3cff8bc6cec8a",
+          "rows": 8,
+          "contexts": {
+            "term:single-signbox": 8
+          }
+        },
+        {
+          "source_file": "sgn54.spml",
+          "source_sha256": "c95e9cd2456fc42bb098c16e13e90d4f34a1d833c1259503697a9754afb3abf1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn55.spml",
+          "source_sha256": "606c4b813341a8bdee15e8db958d5149540b3570d04410805751456f4e4731d1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn56.spml",
+          "source_sha256": "424c18a54335de5e08fa2718d12bd43add3835287432ae4c60b4073863d1eaee",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn57.spml",
+          "source_sha256": "97f297f50e4aeee17d6d546a4c0110a9ae47e384d8bedaa1713a739e14b616ed",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn58.spml",
+          "source_sha256": "ba42f9136dddc29d8c75d2b3c39a3a7ab856326e2b98bdbdbd81b93cb646fe92",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn59.spml",
+          "source_sha256": "e54e3f6e29f8352bb821a85d156fc3f62bc863ceacabdfc9ffce56c523e2c70a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn6.spml",
+          "source_sha256": "19eb534cc5f8bda04dfb520b2be713ceab511a054fed8b0c3463e18d36e5ef82",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn60.spml",
+          "source_sha256": "0b7710e718bb5096168c75a4568a39aeba7002c62fb626b4ae964d6bea9503dd",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn61.spml",
+          "source_sha256": "ba370098f7b7a724cb721b0634ac29d7d36080d2c3db5cdf260e3c1515500e73",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn62.spml",
+          "source_sha256": "a150954470224ba147f12f820930f18fcc9098531d2375017d05c99796210444",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn63.spml",
+          "source_sha256": "ff249ebc7e7351589c6962e624de5dbbdbf8036a89ca20753a7e0092a9dacd86",
+          "rows": 2,
+          "contexts": {
+            "term:single-signbox": 2
+          }
+        },
+        {
+          "source_file": "sgn64.spml",
+          "source_sha256": "05587000f0ffbe16dfde97051d96662c3a55e9f4741a7ef056ed3c7b73246b86",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn65.spml",
+          "source_sha256": "38ded06c5a4a656eb3dec79646881a269ef2d4b5e794c350e9763eb36a6f1cf8",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn66.spml",
+          "source_sha256": "bdc3af9f393b0bba11a633e0622d46dca76b59a93e9a87a6169123ffb58b8d5f",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn67.spml",
+          "source_sha256": "8d8ba2e4f02e541386f2bd67ef87014974073490e87f61df60431299f6c63a97",
+          "rows": 2,
+          "contexts": {
+            "term:single-signbox": 2
+          }
+        },
+        {
+          "source_file": "sgn68.spml",
+          "source_sha256": "a5a9ce7691f6c1f9b4ec1550e9f0cdfe165b3a449278455fce0a075988cc92d4",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn69.spml",
+          "source_sha256": "9a0b0f7adab54e05b81d901e6a66aa01a1d38d79cf83341ce696fc080e1b504f",
+          "rows": 1,
+          "contexts": {
+            "term:single-signbox": 1
+          }
+        },
+        {
+          "source_file": "sgn7.spml",
+          "source_sha256": "f83f4ad26917637fa0f499205b4495c77292e0031a6f5fc86523e057137550a9",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn70.spml",
+          "source_sha256": "ec6d7a0f290bd2dd1f3aa153bee86ede091a7189a4aa87af20e57afc66b68be4",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn71.spml",
+          "source_sha256": "f094717c30854c90795a5db35e11513e5559a0c16aa841568d87cfe07fd544e6",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn72.spml",
+          "source_sha256": "63188ccd0ae9d656f415d712023446d3f6c63c8bc5b228c747a6831cb8b407f1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn73.spml",
+          "source_sha256": "69343b7d026ca52dd52c7098a5833f1da47f9edaf42af6b58bf09f89921f41ab",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn74.spml",
+          "source_sha256": "43dd6eb89f46f015bfee7a1d58b9a3981431efef303d8675f76d6f2250740e87",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn75.spml",
+          "source_sha256": "66b4fdf126c6a4e083900df68c62a907da3c2308787942f4b5a0b1804b3bca57",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn76.spml",
+          "source_sha256": "6fe885c4e25119e6303306508b83d9eb2958a2de96559c880235e011cae3ddbd",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn77.spml",
+          "source_sha256": "5d3296a3fdbfc83c3360d0c7b6349d811341bf82e89125c5e1b2a4b86290b280",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn78.spml",
+          "source_sha256": "a294c644ca7e03cb9960b664d220dbe1567ff5633f6b75601732e1da92b41c9a",
+          "rows": 54,
+          "contexts": {
+            "term:single-signbox": 54
+          }
+        },
+        {
+          "source_file": "sgn79.spml",
+          "source_sha256": "a4fd14ce5587d8b39433460637102f62ab6b1a0ccc2adc58257ed467a66d99c1",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn8.spml",
+          "source_sha256": "7b0f84f2edf41566e6a686f07a941d4e1972cc790cbf8b43c20091dda1ab56d4",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn80.spml",
+          "source_sha256": "91cd2590c8f249bb2d8b2b9e4da4da488b4ebea1d0e9571ca05e38129277b45c",
+          "rows": 1,
+          "contexts": {
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn81.spml",
+          "source_sha256": "6329dd145639db5a651480ca5a6e3f7e17b149f755ce4c7c9d0b00cbaa6e1704",
+          "rows": 76,
+          "contexts": {
+            "text:multiple-signboxes": 76
+          }
+        },
+        {
+          "source_file": "sgn82.spml",
+          "source_sha256": "f5f762be65134cdf66024ceef0de809ccc5b4a463a1734306398c11dce4ffa5b",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn83.spml",
+          "source_sha256": "83e01707a20556a92423795e6fa61c4ff78072b2da1a1f1db1969d48210edfca",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn84.spml",
+          "source_sha256": "71810ed17850d03b6ffaeaa733f53eb6beca75cbdd513ba54a2721b67cfe64a6",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn85.spml",
+          "source_sha256": "bb32808ca136220686555e232f85afb933544386585badaa248de3f173de4cc3",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn86.spml",
+          "source_sha256": "60b7cd37360c402b7b6599ac3bc5689f7a710218f2b0eabf1fd7c56997c8fb65",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn87.spml",
+          "source_sha256": "e7f397ab54f553443ae751b3c7e31048076f68b1893762861881b94b4ca75a59",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn88.spml",
+          "source_sha256": "a405937a85330733be75dd0e58057909e576d2af8282eab7b04585702433b71a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn89.spml",
+          "source_sha256": "3b45cb4dcb08bd9f8df9d79ddace0207346be25a0b5056b83d65d822dbc386b3",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn9.spml",
+          "source_sha256": "663c52b0859490c3c087c5166a8d3e3195257d12814fa04b8583a043a36457f7",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn90.spml",
+          "source_sha256": "e506e1d09f2a184f560cd7b7c1a8de6bb914024a811be0b7fc078c5bb020278a",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn91.spml",
+          "source_sha256": "792fec8130c24be4c279a8a9cb5a882f1b00486b7f76feebbc5723c82e9e2ab8",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn92.spml",
+          "source_sha256": "f915bf7245a56e169da8a451c606a3bef5695e984a95e8d691b8516a367fcaec",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn93.spml",
+          "source_sha256": "d584154c510e25e6655b1d2ac857f11e97f0e8bd093c68739ecce2d30f108d73",
+          "rows": 8,
+          "contexts": {
+            "text:multiple-signboxes": 8
+          }
+        },
+        {
+          "source_file": "sgn94.spml",
+          "source_sha256": "95eed9dfca227f3973cdc5750adb39c6e557d840de513eca0bba0d273b0b6f5c",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn95.spml",
+          "source_sha256": "20cb7ca7241966ab679c0faecf04fd1caecc60bc5761d2d275d371c8bf0d341f",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn96.spml",
+          "source_sha256": "72400deb0aac2c925a5578598504f344d58966b942c0c1b23c2c924480994f3a",
+          "rows": 1,
+          "contexts": {
+            "text:multiple-signboxes": 1
+          }
+        },
+        {
+          "source_file": "sgn98.spml",
+          "source_sha256": "caf96a0dab49038dff4088efd39b5962b4b6ec5488508818d870d5d1f86ff0e2",
+          "rows": 0,
+          "contexts": {}
+        },
+        {
+          "source_file": "sgn99.spml",
+          "source_sha256": "4572e3bdfd7e45d8fc15c4b246cfb3e3b79a4e7b33da414ade6faa39fafedb70",
+          "rows": 0,
+          "contexts": {}
+        }
+      ]
+    }
+  }
+}

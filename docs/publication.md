@@ -1,119 +1,177 @@
-# Dataset release and article relationship
+# Zenodo-first publication plan
 
-The first useful publication is a versioned, citable data-and-method release.
-Keep it distinct from the journal article's argument and conclusions.
+Status: local preparation, 4 November 2026. The intended output is a citable
+release of the **current exploratory research resource**. A separate data-paper
+submission is deferred. Comprehensive face curation, segmentation, alternative
+fill search, and converter validation are outside this bounded release.
 
-## Recommended sequence
+A Zenodo deposit is still a public archival release, with accurate files,
+provenance, license scope, and limitations. No DOI, public repository, Pages
+deployment, or journal submission has been created by this preparation.
 
-1. Inspect the source snapshot, invalid-resource failures, mapping flags,
-   attribution/redistribution terms, and collections still labelled private.
-2. Stabilize and document the intended initial mapping. The baseline intentionally
-   exposes unresolved decomposition and head-association questions.
-3. Publish a frozen repository/release and its static browser after author review.
-   Preserve the source snapshot, manifests, scripts, CSVs, sidecars, asset hashes,
-   and checksums for the exact version used in research.
-4. Archive the dataset in Zenodo as a dataset with its own DOI. Software can have
-   a separate software record when that distinction is useful. Link related
-   records instead of using the journal article's DOI for the data.
-5. Cite the exact dataset version in *Standardizing the Record*, describe the
-   selection/mapping in Methods, and identify the release in Data Availability.
-   The browser URL supplies reader access; the archived version fixes the
-   evidence used for the analysis.
+## Objects and versions
 
-[Zenodo upload guidance](https://help.zenodo.org/docs/deposit/create-new-upload/)
-explicitly distinguishes a supporting dataset DOI from an article DOI and allows
-dataset/software resource types. Its
-[versioning guidance](https://zenodo.org/help/versioning) explains version DOIs.
-GitHub releases can also be archived through the
-[Zenodo GitHub integration](https://help.zenodo.org/docs/github/enable-repository/).
+| Object | Role and current version |
+| --- | --- |
+| Software/browser | Local candidate **0.5.0**, including presentation and publication preparation. |
+| Primary facial selection | **facial-subset-v0.3.0**: 154,755 occurrences, 152 included collections, at least two retained diacritics. |
+| Eye-gaze selection | **eye-gaze-fills-2-3-v0.1**: 632 occurrences, 30 collections with results, no diacritic threshold. |
+| Unicode mapping | **direct-symbol-order-v0.1**, unchanged. |
+| Source snapshot | Retrieved **1 November 2026**; 155 preserved SPML files, with three private collections excluded from outputs. |
+| Noto font | **2.005**, identified by SHA-256; browser shaping is environment-dependent. |
 
-An archival dataset release is already an independent citable research output;
-it need not wait for a separate peer-reviewed data paper. A later data/resource
-paper could be justified by reusable curation, validation, provenance, and
-documented research utility. Its contribution would describe the resource and
-its quality. The planned journal article would use the resource to investigate
-preservation and the evidential consequences of representation. Avoid duplicating
-the same argument across both articles, and disclose public antecedents to the
-selected journal.
+The source-derived CSVs, provenance sidecars, normalization, and mapping remain
+unchanged by this cleanup. [Historical candidates](release-history.md) are
+separate from the active publication plan.
 
-Publishing this baseline does not validate the Unicode mapping. Labeling it
-provisional is part of making the next investigation reproducible. In particular,
-retained occurrences are not independent words, writers, or demonstrated
-orthographic contrasts.
+## 1. Finish the local candidate
 
-## Current subset (dataset v0.3.0)
+The browser defaults to **With facial records** on both indexes, retains All
+collections, and keeps zero-result pages directly accessible. The third view is
+labelled **Direct Unicode mapping**. The comparison note explains why a display
+difference alone does not diagnose a mapping, font, or encoding limitation.
+Explicit S2ff counts are distinguished from visual face counts, and a prepended
+HEAD is distinguished from a visually headless source.
 
-This selection removes every fill and rotation of S337–S33a (Air Blow Small
-Rotations, Air Suck Small Rotations, Breath Inhale, Breath Exhale) before counting
-diacritics or normalizing geometry. Original source signboxes retain them.
-Private collections and faces with fewer than two retained diacritics remain
-excluded. The symbol-to-Unicode mapping is still `direct-symbol-order-v0.1`.
+Retain source links, deep links, page-size choices, All rows, CSVs, and the
+independent gaze selection. Publish the [data dictionary](data-dictionary.md),
+license scope, source notice, and reproducibility instructions. Any future
+face-aware transformation receives a separate mapping profile.
 
-- 152 included collections; 154,755 rows emitted.
-- 1,394 air/breath symbol occurrences removed across broad-query candidates.
-- 84,996 zero-diacritic and 185,419 single-diacritic candidates excluded.
-- 142,713 rows require a default HEAD; 1,589 retain multiple S2ff resources.
-- No retained rows contain a mapped spacing resource.
-- One retained-scope candidate still has an invalid ISWA key and is logged.
+Verify with `npm test`, a public-filtered build, browser/deep-link/gaze checks,
+and archive inspection. Canonical normalization is checked against pinned
+metrics; the independent live-canvas comparison is retained separately in the
+release verification report, including measured metric differences. Compare source and derived-data hashes with the
+pre-cleanup state. Do not change source snapshots or extraction outputs.
 
-Compared with v0.2.0, 897 retained rows contained an air/breath symbol. After
-removal, 452 fail the two-diacritic threshold and 445 remain with revised faces.
-All 155 original SPML snapshots remain intact. The report and generated CSVs
-describe this selection; v0.1.0 and v0.2.0 artifacts are historical local candidates.
+## 2. Record the license layers
 
-## Additional eye gaze analysis in software v0.4.1
+The user's choices are **MIT for code** and **CC BY 4.0 for original research
+documentation and publisher-created compilation/annotation contributions**.
+[LICENSING.md](../LICENSING.md) defines those grants.
 
-The corrected `eye-gaze-fills-2-3-v0.1` selection requires a positioned
-`S32[1-9][23][0-9a-f]` symbol. It contains 632 occurrences from 30 collections
-with results, including 39 one-diacritic signs. Of these occurrences, 228 also
-contain other gaze fills; filtering to gaze fills 2 and 3 only leaves 404.
-There is no diacritic-count threshold. Fills 0 and 1 do not qualify a sign;
-Steve clarified that both are paired-eye forms. The source snapshot and primary
-facial analysis remain unchanged.
+The user also identified SignWriting.org's existing **CC BY-SA 3.0** notice.
+The [source notice record](../publication/source-licensing-notice.md) documents
+its source and limits. The publisher selected the layered full release on
+4 November 2026. This model carries applicable source
+terms with source-derived writing while licensing the new compilation separately.
+No exclusive claim is made over individual lexical signs or linguistic forms.
+CC BY does not replace applicable ShareAlike conditions.
 
-## Initial eye gaze query in software v0.4.0 historical
+Before public release, state the notice's coverage for the legacy contributions,
+source attribution to retain, and any exceptions. A missing SPML license field
+is not proof that no license exists; a site notice is also not treated as a grant
+from every contributor whose terms were unrecorded.
 
-A separate source scan, `eye-gaze-nonzero-fill-v0.1`, selects any sign with a
-positioned S321–S329 symbol at fill 1–5, without a diacritic-count threshold.
-It produced 12,356 occurrences from 50 collections with results, including 454
-one-diacritic signs absent from the primary dataset. There are 835 mixed-fill
-signs; excluding them leaves 11,521 occurrences. The selection is recorded
-separately. These are historical counts for the broader query, superseded by
-the fill-2/3 selection above. Counts are source occurrences,
-including repeats, rather than a rendering success rate or a claim about eye
-association. See [the eye-gaze method](eye-gaze.md).
+The [context audit](../publication/source-context-summary.json) informs the
+alternatives: 54,172 primary and 405 eye-gaze occurrences come from multi-signbox
+`text` fields; 100,108 primary and 226 eye-gaze occurrences come from single-signbox
+`term` fields. These are storage categories, not legal clearances. A term-only
+release would omit the golf-passage examples and change the research coverage.
+The full release is the selected model; term-only and collection-specific
+alternatives are deferred. No such narrowing is applied. Any later
+collection-specific or field-specific changes would need an explicit new
+selection and counts.
 
-The original facial CSVs, metadata, and report remain byte-for-byte unchanged
-from the v0.3.0 subset. Site/software v0.4.0 packages both analyses.
+## 3. Freeze data, source, and website packages
 
-## Previous subset (dataset v0.2.0; historical)
+Proposed repository: `sutton-signwriting/facial-diacritics-analysis`.
+Proposed browser: `https://sutton-signwriting.github.io/facial-diacritics-analysis/`.
+These are targets, not claims that either has been published.
 
-The November 1 selection excludes private collections and retains faces with at
-least two non-S2ff resources. HEADs and fill/rotation modifiers do not count.
-The Unicode mapping profile remains `direct-symbol-order-v0.1`.
+Keep bulk generated CSVs and sidecars outside Git history, but include them
+explicitly in the data archive. Source manifests, publication metadata,
+licenses, docs, scripts, tests, and asset provenance remain trackable.
+`.gitignore` names specific eye-gaze output paths so future source documents
+there are not silently hidden.
 
-- 152 included collections; `sgn97`, `sgn103`, and `sgn105` are excluded.
-- 155,207 rows emitted.
-- 84,959 zero-diacritic and 185,004 single-diacritic candidates excluded.
-- One retained-scope candidate has an invalid ISWA key and is logged as a failure.
-- 143,140 rows require a default HEAD under the baseline mapping.
-- 1,590 rows retain multiple S2ff resources.
-- 897 rows contain a mapped spacing resource.
+The site records its base Git commit, whether the tree is dirty, and exact
+source-file checksums. Packaging rejects a site built from different source
+bytes. Finalize a reviewed commit before an authorized public release; a dirty
+local candidate is not the unmodified base commit.
 
-## Initial baseline observations (v0.1.0; historical)
+```bash
+.venv/bin/python scripts/build_site.py --public
+.venv/bin/python scripts/package_release.py
+```
 
-- 155 sources; 174,251,204 downloaded bytes.
-- 933,548 signbox occurrences scanned.
-- 428,018 occurrences contain the requested spatial range.
-- 83,213 single-S2ff cases excluded.
-- 344,803 rows emitted; two candidates recorded as normalization failures.
-- 316,597 rows require a default HEAD under the baseline mapping.
-- 4,745 rows retain multiple S2ff resources.
-- 923 rows contain a mapped spacing resource in the requested range.
+Prepare these files under `artifacts/`:
 
-These are full local-snapshot counts, including sources held from a public build.
-The machine-readable report is authoritative for regenerated counts. The two
-failures use keys S35120 (sgn4, entry 12380) and S33b01 (sgn46, entry 39371), which
-are absent from the valid ISWA size table. Their original strings are retained.
+- `facial-diacritics-data-v0.5.0.zip`: CSVs, row provenance, reports, original
+  source-manifest bytes, code/tests/docs, assets and licenses, publication
+  metadata, rights scope, and source-file checksums.
+- `facial-diacritics-site-v0.5.0.zip`: the exact static browser, included data,
+  bundled fonts, methods, and licensing page.
+- `SHA256SUMS.txt`: hashes identifying both frozen packages.
 
-Release status: local working project; no public release or DOI assigned.
+Whole SPML, source prose, profiles, emails, media, private-held data, and
+`node_modules` are excluded. The data package supports reuse and rebuilding from
+emitted records. Repeating the full extraction requires the matching preserved
+SPML snapshot; the live directory may change. Do not claim full-corpus
+re-extraction from the ZIP alone.
+
+## 4. Prepare a Zenodo Dataset record
+
+Use one **Dataset** record for the data-and-method release and upload both ZIPs
+and checksums. A separate software DOI is optional. Automatic GitHub archiving
+alone would miss Git-ignored datasets, so include the prepared data archive
+explicitly.
+
+The [field draft](../publication/zenodo-draft.json) and
+[description HTML](../publication/zenodo-description.html) provide reviewable
+material following the platform-record information pattern:
+
+| Field | Prepared value or remaining action |
+| --- | --- |
+| Title | Facial Diacritics Analysis: Source-linked SignPuddle Compositions and Single-Eye Gaze |
+| Creator | Steve Slevinski; ORCID copied from the existing project citation file. Confirm final creator/contributor roles. |
+| Resource type | Dataset. |
+| Version | 0.5.0 for the coordinated package; retain separate analysis and mapping identifiers. |
+| Description | Source snapshot, counts, methods, limitations, reuse, attribution, and license layers. |
+| License | CC BY 4.0 for publisher-held compilation contributions, with applicable source terms explicitly retained. Document final source coverage. |
+| Keywords | SignWriting, SignPuddle, facial composition, gaze, Unicode, provenance, writing systems, research data. |
+| Publisher | Zenodo. |
+| Publication date | Actual public release date, not snapshot or draft date. Currently unset. |
+| DOI | Reserve only in an actual Zenodo draft. Currently unset; a reservation is not a published identifier. |
+| Related identifiers | Source directory as derived-from; Formal SignWriting and platform DOI as references. Verify repository/site links once public. |
+| Funding/contributors | Unset until supplied accurately; no affiliation or absence-of-funding assurance is invented. |
+| Files | The exact reviewed packages and checksums. |
+
+The platform record and this resource are distinct objects. Use its DOI as a
+reference, not this dataset's identifier or evidence of inclusion in the frozen
+eight-series release. Add journal/article relationships only when those objects
+exist. The draft JSON is a local field record, not an upload-ready API payload.
+Remove the description's local preparation note after resolving its open fields.
+
+## 5. Publish only the reviewed release
+
+Once source scope and metadata are ready, obtain the user's direction for the
+concrete repository, release files, Pages target, and Zenodo record. Publish the
+reviewed packages, deploy the same frozen site artifact, publish the dataset
+record, and verify returned public URLs and deposited files.
+
+Cite the **specific dataset version DOI** in the manuscript and data availability
+statement. The browser URL supplies convenient inspection; it does not fix the
+evidence version. The manuscript's curated cases and controlled comparison
+remain separately identified evidence, not validation of every browser record.
+
+Future data or mapping changes receive a new release and archival version;
+corrections must not silently replace evidence used by a published analysis.
+The LAN inspection service can continue to serve the same source and public-safe
+selection locally while publication preparation remains separate.
+
+## Deferred peer review
+
+A Zenodo dataset is already a public, citable research output. A separate
+peer-reviewed data/resource paper may be considered if its benefit justifies the
+additional work. The sourced [venue comparison](data-publications.md) is retained
+for that decision; it is not a requirement for this release or a reason to expand
+curation now. The main journal article remains a separate argument.
+
+## Official guidance checked
+
+- [Zenodo deposit fields](https://help.zenodo.org/docs/deposit/describe-records/).
+- [Create a deposit and reserve a DOI](https://help.zenodo.org/docs/deposit/create-new-upload/).
+- [Versioned records](https://help.zenodo.org/docs/deposit/manage-versions/).
+- [GitHub Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
+- [Creative Commons licensing guidance](https://creativecommons.org/faq/).

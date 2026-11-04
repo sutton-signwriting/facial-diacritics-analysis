@@ -1,0 +1,108 @@
+{
+  "status": "local preparation; not uploaded or published",
+  "release_model": {
+    "id": "layered-full",
+    "status": "selected",
+    "selected_date": "2026-11-04",
+    "rights_record": "publication/rights.json"
+  },
+  "record": {
+    "title": "Facial Diacritics Analysis: Source-linked SignPuddle Compositions and Single-Eye Gaze",
+    "resource_type": "dataset",
+    "creators": [
+      {
+        "name": "Slevinski, Steve",
+        "given_name": "Steve",
+        "family_name": "Slevinski",
+        "orcid": "0009-0007-7051-1374"
+      }
+    ],
+    "publisher": "Zenodo",
+    "version": "0.5.0",
+    "publication_date": null,
+    "doi": null,
+    "description_file": "publication/zenodo-description.html",
+    "keywords": [
+      "Sutton SignWriting",
+      "SignPuddle",
+      "Formal SignWriting",
+      "facial composition",
+      "facial diacritics",
+      "eye gaze",
+      "Unicode",
+      "writing systems",
+      "source provenance",
+      "research data"
+    ],
+    "requested_access": "open",
+    "license": {
+      "id": "cc-by-4.0",
+      "scope": "Publisher-held compilation, original documentation and annotations; applicable source terms remain with included source writing and derived views."
+    },
+    "rights_record": "publication/rights.json",
+    "related_identifiers": [
+      {
+        "identifier": "http://signbank.org/signpuddle2.0/data/spml/",
+        "scheme": "url",
+        "relation": "IsDerivedFrom"
+      },
+      {
+        "identifier": "10.5281/zenodo.20074767",
+        "scheme": "doi",
+        "relation": "References"
+      },
+      {
+        "identifier": "10.5281/zenodo.20041043",
+        "scheme": "doi",
+        "relation": "References"
+      }
+    ],
+    "funding": null,
+    "contributors": null,
+    "source_acknowledgement": "SignPuddle contributors and the Sutton SignWriting community; retain source collections, entry IDs, URLs and hashes."
+  },
+  "source_snapshot": {
+    "retrieved_at": "2026-11-01T17:41:20.207010+00:00",
+    "manifest": "data/source-manifest.json",
+    "manifest_sha256": "85644e1292511632b741342dc5147ae6de6ebfc13b00b60231ff54d7d128ff80",
+    "whole_spml_included": false
+  },
+  "analyses": [
+    {
+      "id": "facial-subset-v0.3.0",
+      "rows": 154755,
+      "included_source_collections": 152,
+      "minimum_diacritics": 2
+    },
+    {
+      "id": "eye-gaze-fills-2-3-v0.1",
+      "rows": 632,
+      "collections_with_results": 30,
+      "minimum_diacritics": null
+    }
+  ],
+  "mapping_profile": "direct-symbol-order-v0.1",
+  "font": {
+    "name": "Noto Sans SignWriting",
+    "version": "2.005",
+    "sha256": "1da27fe7b8e959efaf338818f2a6c1aa2c02ff97cf60c34c6d0825675ebc53fb"
+  },
+  "proposed_links": {
+    "repository": "https://github.com/sutton-signwriting/facial-diacritics-analysis",
+    "website": "https://sutton-signwriting.github.io/facial-diacritics-analysis/"
+  },
+  "proposed_uploads": [
+    "facial-diacritics-data-v0.5.0.zip",
+    "facial-diacritics-site-v0.5.0.zip",
+    "SHA256SUMS.txt"
+  ],
+  "remaining_decisions": [
+    "Document the source-notice coverage, attribution and any collection-specific exceptions; do not infer a grant from every legacy contributor.",
+    "Confirm final creators/contributors, ORCID, and any funding information without inventing institutional affiliation.",
+    "Choose actual publication date and reserve a DOI only in a real Zenodo draft.",
+    "Finalize and commit the reviewed release; record the actual commit and final archive checksums.",
+    "Replace proposed links with verified public destinations after the authorized GitHub/Pages release.",
+    "Remove the local preparation note from the description and review the final license scope before publication."
+  ],
+  "deferred": "A peer-reviewed data/resource paper is optional and is not part of the current release work."
+}

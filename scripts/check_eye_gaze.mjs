@@ -24,7 +24,11 @@ try {
   await page.goto(base+'/');
   await page.locator('nav a').filter({hasText:'Eye gaze'}).click();
   await page.waitForSelector('.collections .file-link');
+  assert.equal(await page.locator('#collection-kind').inputValue(),'nonempty');
+  assert.equal(await page.locator('.collections tbody tr').count(),gaze.files.filter(file=>file.rows>0).length);
+  await page.locator('#collection-kind').selectOption('all');
   assert.equal(await page.locator('.collections tbody tr').count(),gaze.files.length);
+  await page.locator('#collection-kind').selectOption('nonempty');
   assert.ok((await page.locator('h1').textContent()).includes('fills 2 and 3'));
   const download = await page.locator('[download]').getAttribute('href');
   const csv = await (await fetch(new URL(download,page.url()))).text();

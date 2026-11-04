@@ -1,11 +1,18 @@
+# Local environments and caches.
 .venv/
 node_modules/
 __pycache__/
 *.pyc
+# Original SPML includes source prose and account metadata; retain locally.
 /data/source/
+# Regenerable bulk data go in reviewed release archives, not Git history.
 /data/raw/
 /data/metadata/
 /data/report.json
-/data/eye-gaze/
+/data/eye-gaze/raw/
+/data/eye-gaze/metadata/
+/data/eye-gaze/report.json
+/data/eye-gaze/all.csv
+# Publication metadata, source manifests, docs and licenses remain trackable.
 /dist/
 /artifacts/
